@@ -13,4 +13,8 @@ class ActivitiesFragment : InjectedFragment() {
         return inflater.inflate(R.layout.fragment_activities, null)
     }
 
+    companion object {
+        val TAG = ActivitiesFragment::class.java.simpleName
+    }
+
 }

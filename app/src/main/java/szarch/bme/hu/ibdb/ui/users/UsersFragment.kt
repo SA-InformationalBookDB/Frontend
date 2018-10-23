@@ -13,4 +13,8 @@ class UsersFragment : InjectedFragment() {
         return inflater.inflate(R.layout.fragment_users, null)
     }
 
+    companion object {
+        val TAG = UsersFragment::class.java.simpleName
+    }
+
 }

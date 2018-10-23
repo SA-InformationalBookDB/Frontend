@@ -13,4 +13,8 @@ class FavouritesFragment : InjectedFragment() {
         return inflater.inflate(R.layout.fragment_favourites, null)
     }
 
+    companion object {
+        val TAG = FavouritesFragment::class.java.simpleName
+    }
+
 }
