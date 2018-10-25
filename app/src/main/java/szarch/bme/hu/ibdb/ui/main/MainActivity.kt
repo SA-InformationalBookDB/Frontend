@@ -3,6 +3,8 @@ package szarch.bme.hu.ibdb.ui.main
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.view.Menu
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesFragment
@@ -10,6 +12,7 @@ import szarch.bme.hu.ibdb.ui.base.InjectedActivity
 import szarch.bme.hu.ibdb.ui.favourites.FavouritesFragment
 import szarch.bme.hu.ibdb.ui.upload.UploadFragment
 import szarch.bme.hu.ibdb.ui.users.UsersFragment
+import szarch.bme.hu.ibdb.util.Navigator
 
 class MainActivity : InjectedActivity() {
 
@@ -46,6 +49,28 @@ class MainActivity : InjectedActivity() {
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.menu_main_search -> {
+                Navigator.navigateToSearchActivity(this@MainActivity)
+                true
+            }
+            R.id.menu_main_account -> {
+                Navigator.navigateToAccountActivity(this@MainActivity)
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     override fun onBackPressed() {

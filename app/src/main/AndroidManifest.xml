@@ -8,7 +8,7 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
+            android:supportsRtl="false"
             android:theme="@style/AppTheme">
         <activity
                 android:name=".ui.main.MainActivity"
@@ -22,17 +22,23 @@
         <activity
                 android:name=".ui.settings.SettingsActivity"
                 android:label="@string/title_activity_settings"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:parentActivityName=".ui.account.AccountActivity"
+        >
         </activity>
         <activity
                 android:name=".ui.search.SearchActivity"
                 android:label="@string/title_activity_search"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:parentActivityName=".ui.main.MainActivity">
         </activity>
         <activity
                 android:name=".ui.detail.DetailActivity"
                 android:label="@string/title_activity_detail"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:parentActivityName=".ui.main.MainActivity">
+        </activity>
+        <activity
+                android:name=".ui.account.AccountActivity"
+                android:label="@string/title_activity_account"
+                android:parentActivityName=".ui.main.MainActivity">
         </activity>
     </application>
 
