@@ -2,6 +2,10 @@
     <string name="app_name">IBDB</string>
     <string name="title_home">Home</string>
     <string name="title_favourites">Favourites</string>
+    <string name="title_recommendations">Recommendations</string>
+    <string name="title_bestseller">Bestseller</string>
+    <string name="title_popular">Popular</string>
+    <string name="title_trending">Trending</string>
     <string name="title_upload">Upload</string>
     <string name="title_activities">Activities</string>
     <string name="title_users">Users</string>

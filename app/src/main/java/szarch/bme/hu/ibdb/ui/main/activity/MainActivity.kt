@@ -1,4 +1,4 @@
-package szarch.bme.hu.ibdb.ui.main
+package szarch.bme.hu.ibdb.ui.main.activity
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -10,6 +10,7 @@ import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesFragment
 import szarch.bme.hu.ibdb.ui.base.InjectedActivity
 import szarch.bme.hu.ibdb.ui.favourites.FavouritesFragment
+import szarch.bme.hu.ibdb.ui.main.fragment.MainFragment
 import szarch.bme.hu.ibdb.ui.upload.UploadFragment
 import szarch.bme.hu.ibdb.ui.users.UsersFragment
 import szarch.bme.hu.ibdb.util.Navigator
@@ -49,6 +50,7 @@ class MainActivity : InjectedActivity() {
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        showFragment(MainFragment.TAG)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -84,7 +86,8 @@ class MainActivity : InjectedActivity() {
     private fun showFragment(tag: String) {
         if (supportFragmentManager.findFragmentByTag(tag) == null) {
             when (tag) {
-                MainFragment.TAG -> fragment = MainFragment()
+                MainFragment.TAG -> fragment =
+                        MainFragment()
                 FavouritesFragment.TAG -> fragment = FavouritesFragment()
                 UploadFragment.TAG -> fragment = UploadFragment()
                 ActivitiesFragment.TAG -> fragment = ActivitiesFragment()
