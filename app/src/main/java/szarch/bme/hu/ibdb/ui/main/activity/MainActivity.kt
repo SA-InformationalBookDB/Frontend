@@ -10,6 +10,7 @@ import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
+import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesFragment
 import szarch.bme.hu.ibdb.ui.base.InjectedActivity
 import szarch.bme.hu.ibdb.ui.favourites.FavouritesFragment

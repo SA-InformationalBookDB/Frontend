@@ -6,12 +6,6 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -35,7 +29,6 @@ dependencies {
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
 
     //Support libraries
     implementation "com.android.support:appcompat-v7:$support_version"

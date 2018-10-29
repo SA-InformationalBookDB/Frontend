@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_favourites.*
+import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.Book
 import szarch.bme.hu.ibdb.ui.base.InjectedFragment
 
