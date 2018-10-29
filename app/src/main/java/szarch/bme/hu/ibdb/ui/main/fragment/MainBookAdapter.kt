@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.layout_main_book_item.view.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.Book
-import szarch.bme.hu.ibdb.ui.base.BookComparator
+import szarch.bme.hu.ibdb.ui.base.comparators.BookComparator
 
 class MainBookAdapter : ListAdapter<Book, MainBookAdapter.BookItemViewHolder>(BookComparator) {
 
