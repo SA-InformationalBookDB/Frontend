@@ -1,4 +1,4 @@
-package szarch.bme.hu.ibdb.ui.main.fragment
+package szarch.bme.hu.ibdb.ui.base
 
 import android.support.v7.util.DiffUtil
 import szarch.bme.hu.ibdb.domain.models.Book

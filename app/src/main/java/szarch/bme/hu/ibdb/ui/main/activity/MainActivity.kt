@@ -1,16 +1,20 @@
 package szarch.bme.hu.ibdb.ui.main.activity
 
+import android.app.SearchManager
+import android.content.ComponentName
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
-import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesFragment
 import szarch.bme.hu.ibdb.ui.base.InjectedActivity
 import szarch.bme.hu.ibdb.ui.favourites.FavouritesFragment
 import szarch.bme.hu.ibdb.ui.main.fragment.MainFragment
+import szarch.bme.hu.ibdb.ui.search.SearchActivity
 import szarch.bme.hu.ibdb.ui.upload.UploadFragment
 import szarch.bme.hu.ibdb.ui.users.UsersFragment
 import szarch.bme.hu.ibdb.util.Navigator
@@ -53,17 +57,23 @@ class MainActivity : InjectedActivity() {
         showFragment(MainFragment.TAG)
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        val searchView: SearchView = menu?.findItem(R.id.menu_main_search)?.actionView as SearchView
+        // Associate searchable configuration with the SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(ComponentName(this, SearchActivity::class.java)))
+        searchView.queryHint = resources.getString(R.string.search_hint)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.menu_main_search -> {
+            /*R.id.menu_main_search -> {
                 Navigator.navigateToSearchActivity(this@MainActivity)
                 true
-            }
+            }*/
             R.id.menu_main_account -> {
                 Navigator.navigateToAccountActivity(this@MainActivity)
                 true

@@ -21,4 +21,27 @@
         <item name="android:textColorPrimary">@android:color/black</item>
     </style>
 
+    <style name="MainCardViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="app:cardCornerRadius">3dp</item>
+        <item name="app:cardElevation">6dp</item>
+    </style>
+
+    <style name="MainCardViewTextViewStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="MainCardViewRecyclerViewViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:titleMarginTop">15dp</item>
+    </style>
+
 </resources>
