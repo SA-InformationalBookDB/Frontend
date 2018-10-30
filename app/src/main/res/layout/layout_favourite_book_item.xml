@@ -69,11 +69,12 @@
         />
 
 
-        <RatingBar
+        <android.support.v7.widget.AppCompatRatingBar
                 android:id="@+id/rt_favourite_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="?android:attr/ratingBarStyleSmall"
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                android:theme="@style/CustomRatingBarStyle"
                 app:layout_constraintTop_toBottomOf="@id/tv_favourites_book_author"
                 app:layout_constraintBottom_toBottomOf="@id/iv_favourites_book_item"
                 app:layout_constraintLeft_toRightOf="@id/iv_favourites_book_item"

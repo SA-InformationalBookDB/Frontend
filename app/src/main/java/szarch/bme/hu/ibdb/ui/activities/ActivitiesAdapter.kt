@@ -2,7 +2,6 @@ package szarch.bme.hu.ibdb.ui.activities
 
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,8 +21,7 @@ class ActivitiesAdapter : ListAdapter<Review, ActivitiesAdapter.ActivityItemView
     override fun onBindViewHolder(holder: ActivityItemViewHolder, position: Int) {
         val item = getItem(position)
         holder.tvActivityBookTitle.text = item.book.title
-        Log.d("Testing", (item.book.views % 5.0).toFloat().toString())
-        holder.rtActivityRating.rating = (item.book.views % 5.0).toFloat()
+        holder.rtActivityRating.rating = item.points.toFloat()
         holder.tv_ActivityBookComment.text = item.comment
 
     }

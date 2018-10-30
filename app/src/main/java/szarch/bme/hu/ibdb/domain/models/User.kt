@@ -3,13 +3,13 @@ package szarch.bme.hu.ibdb.domain.models
 import java.time.OffsetDateTime
 
 data class User(
-    val id: String? = null,
-    val email: String? = null,
-    val password: String? = null,
-    val dateOfBirth: OffsetDateTime? = null,
-    val favourites: List<Favourite>? = null,
-    val categories: List<Category>? = null,
-    val reviews: List<Review>? = null,
-    val role: Role? = null,
-    val isEnabled: Boolean = false
+    val id: String,
+    val email: String,
+    val password: String,
+    val dateOfBirth: OffsetDateTime?,
+    val favourites: List<Favourite> = emptyList(),
+    val categories: List<Category> = emptyList(),
+    val reviews: List<Review> = emptyList(),
+    val role: Role = Role.USER,
+    val isEnabled: Boolean = true
 )

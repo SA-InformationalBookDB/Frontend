@@ -38,8 +38,14 @@ class ActivitiesPresenter : Presenter<ActivitiesScreen>() {
                 i,
                 Review(
                     id = i.toString(),
-                    user = User(),
+                    user = User(
+                        id = i.toString(),
+                        email = "dmeo@email.com",
+                        password = "pass",
+                        dateOfBirth = null
+                    ),
                     book = list[i],
+                    date = null,
                     points = 3.5,
                     comment = "This is the comment of this book"
                 )

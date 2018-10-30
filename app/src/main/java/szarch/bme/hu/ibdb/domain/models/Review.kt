@@ -7,6 +7,6 @@ data class Review(
     val user: User,
     val book: Book,
     val points: Double,
-    val date: OffsetDateTime? = null,
-    val comment: String? = null
+    val date: OffsetDateTime?,
+    val comment: String?
 )

@@ -40,17 +40,19 @@
                 android:textSize="16sp"
         />
 
-        <RatingBar
+        <android.support.v7.widget.AppCompatRatingBar
                 android:id="@+id/rt_activity_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="?android:attr/ratingBarStyleSmall"
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                android:theme="@style/CustomRatingBarStyle"
                 app:layout_constraintTop_toBottomOf="@id/tv_activity_book_title"
                 app:layout_constraintLeft_toRightOf="@id/iv_activity_book_item"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:numStars="5"
                 android:stepSize="0.1"
+
                 android:isIndicator="true"
                 tools:rating="4.0"/>
 
