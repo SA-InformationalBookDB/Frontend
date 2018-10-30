@@ -6,6 +6,7 @@ data class User(
     val id: String,
     val email: String,
     val password: String,
+    val nickName: String,
     val dateOfBirth: OffsetDateTime?,
     val favourites: List<Favourite> = emptyList(),
     val categories: List<Category> = emptyList(),

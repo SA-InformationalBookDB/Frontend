@@ -41,6 +41,7 @@ class ActivitiesPresenter : Presenter<ActivitiesScreen>() {
                     user = User(
                         id = i.toString(),
                         email = "dmeo@email.com",
+                        nickName = "Nickname $i",
                         password = "pass",
                         dateOfBirth = null
                     ),
