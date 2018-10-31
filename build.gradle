@@ -11,6 +11,7 @@ buildscript {
         jsr250_version = '1.0'
         multidex_version = '1.0.3'
         glide_version = '4.8.0'
+        kenburnsview_version = '1.0.7'
         junit_version = "4.12"
         test_runner_version = '1.0.2'
         espresso_version = "3.0.2"

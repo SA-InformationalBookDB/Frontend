@@ -17,4 +17,16 @@
     <string name="title_activity_account">AccountActivity</string>
     <string name="views_book_number_text">%1$d views</string>
     <string name="search_hint">Enter book name</string>
+    <string name="book_title">Title</string>
+    <string name="book_author">Author</string>
+    <string name="book_published">Published</string>
+    <string name="book_publisher">Publisher</string>
+    <string name="book_reviews">Reviews</string>
+    <string name="book_category">Category</string>
+    <string name="book_image">Select an image file</string>
+    <string name="book_summary">Summary</string>
+    <string name="book_page_number">Page number</string>
+    <string name="book_sold">Sold</string>
+    <string name="book_views">Views</string>
+
 </resources>

@@ -53,6 +53,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
+    //KenBurnsView
+    implementation "com.flaviofaria:kenburnsview:$kenburnsview_version"
+
     //Testing
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$test_runner_version"
