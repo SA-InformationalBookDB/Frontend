@@ -28,5 +28,14 @@
     <string name="book_page_number">Page number</string>
     <string name="book_sold">Sold</string>
     <string name="book_views">Views</string>
+    <string name="logout_title">Logout</string>
+    <string name="disconnect_title">Disconnect</string>
+    <string name="account_signed_out_title">Sign up for the community!</string>
+    <string name="preference_personal_details_header">Personal details</string>
+    <string name="preference_email_address">Email address</string>
+    <string name="preference_nickname">Nickname</string>
+    <string name="preference_birth_year">Year of birth</string>
+    <string name="preference_favourite_categories">Favourite categories</string>
+    <string name="category_selection_text">Select your favourite categories</string>
 
 </resources>
