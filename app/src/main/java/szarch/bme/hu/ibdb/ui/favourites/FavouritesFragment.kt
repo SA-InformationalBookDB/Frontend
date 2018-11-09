@@ -1,6 +1,7 @@
 package szarch.bme.hu.ibdb.ui.favourites
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -9,12 +10,20 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_favourites.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.Book
-import szarch.bme.hu.ibdb.ui.base.InjectedFragment
+import szarch.bme.hu.ibdb.ui.base.BaseApplication
+import javax.inject.Inject
 
-class FavouritesFragment : InjectedFragment(), FavouriteAdapter.Listener, FavouriteScreen {
+class FavouritesFragment : Fragment(), FavouriteAdapter.Listener, FavouriteScreen {
+
+    @Inject
+    lateinit var favouritePresenter: FavouritePresenter
 
     private lateinit var favouriteAdapter: FavouriteAdapter
-    private lateinit var favouritePresenter: FavouritePresenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        injectFragment()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_favourites, null)
@@ -22,12 +31,17 @@ class FavouritesFragment : InjectedFragment(), FavouriteAdapter.Listener, Favour
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Dagger injection required
-        favouritePresenter = FavouritePresenter()
         favouritePresenter.attachScreen(this)
         setupRecyclerViewAdapter()
         setupRecyclerView()
         getBooks()
+    }
+
+    private fun injectFragment() {
+        (context?.applicationContext as? BaseApplication)
+            ?.injector
+            ?.inject(this)
+            ?: throw IllegalStateException("InjectedFragment should not be used without an Application that inherits from BaseApplication")
     }
 
     private fun setupRecyclerViewAdapter() {

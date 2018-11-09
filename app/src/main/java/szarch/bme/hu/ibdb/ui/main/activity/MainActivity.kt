@@ -6,13 +6,14 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesFragment
-import szarch.bme.hu.ibdb.ui.base.InjectedActivity
+import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.ui.favourites.FavouritesFragment
 import szarch.bme.hu.ibdb.ui.main.fragment.MainFragment
 import szarch.bme.hu.ibdb.ui.search.SearchActivity
@@ -20,7 +21,7 @@ import szarch.bme.hu.ibdb.ui.upload.UploadFragment
 import szarch.bme.hu.ibdb.ui.users.UsersFragment
 import szarch.bme.hu.ibdb.util.Navigator
 
-class MainActivity : InjectedActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var fragment: Fragment
 
@@ -52,6 +53,7 @@ class MainActivity : InjectedActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        injectActivity()
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -92,6 +94,13 @@ class MainActivity : InjectedActivity() {
         } else {
             navigation.selectedItemId = R.id.navigation_main
         }
+    }
+
+    private fun injectActivity() {
+        (applicationContext as? BaseApplication)
+            ?.injector
+            ?.inject(this)
+            ?: throw IllegalStateException("InjectedActivity should not be used without an Application that inherits from BaseApplication")
     }
 
     private fun showFragment(tag: String) {

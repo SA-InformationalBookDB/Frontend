@@ -7,6 +7,7 @@ import android.support.v7.preference.EditTextPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import szarch.bme.hu.ibdb.R
+import szarch.bme.hu.ibdb.ui.base.BaseApplication
 
 
 class SettingsPreferenceFragment : PreferenceFragmentCompat() {
@@ -19,6 +20,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        injectFragment()
         initializeEditTextPreferences()
         setEditTextPreferencesSummaries()
         setEditTextOnClickListeners()
@@ -35,6 +37,13 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
         } else {
             super.onPreferenceTreeClick(preference)
         }
+    }
+
+    private fun injectFragment() {
+        (context?.applicationContext as? BaseApplication)
+            ?.injector
+            ?.inject(this)
+            ?: throw IllegalStateException("InjectedFragment should not be used without an Application that inherits from BaseApplication")
     }
 
     private fun initializeEditTextPreferences() {
