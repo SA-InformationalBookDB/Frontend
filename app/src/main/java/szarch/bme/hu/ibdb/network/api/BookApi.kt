@@ -9,7 +9,10 @@ import szarch.bme.hu.ibdb.network.models.book.BookResponse
 interface BookApi {
 
     @GET("/book/popular")
-    fun getPopularBooks()
+    fun getPopularBooks(
+        @Field("page") page: Int,
+        @Field("size") size: Int
+    ): Call<PageResponseBase<BookResponse>>
 
     @GET("/book/bestseller")
     fun getBestsellerBooks(
@@ -35,7 +38,8 @@ interface BookApi {
     @POST("/book/find")
     fun findBooks(
         @Field("page") page: Int,
-        @Field("size") size: Int
+        @Field("size") size: Int,
+        @Field("queryString") queryString: String
     ): Call<PageResponseBase<BookResponse>>
 
     @POST("/admin/book")
@@ -45,6 +49,6 @@ interface BookApi {
     fun updateBook(@Path("id") id: String, @Body bookRequest: BookRequest): Call<Void>
 
     @DELETE("/admin/book/{id}")
-    fun deleteBook(@Path("id") id: String, @Body bookRequest: BookRequest): Call<Void>
+    fun deleteBook(@Path("id") id: String): Call<Void>
 
 }

@@ -1,6 +1,11 @@
 package szarch.bme.hu.ibdb.domain.interactors
 
-class UserInteractor() {
+import szarch.bme.hu.ibdb.network.repository.UserRepository
+import javax.inject.Inject
+
+class UserInteractor @Inject constructor(
+    private val userRepository: UserRepository
+) {
 
 
 }

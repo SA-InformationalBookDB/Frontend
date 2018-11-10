@@ -21,4 +21,23 @@ class OauthRepository @Inject constructor(
             null
         }
     }
+
+    suspend fun sendLogout() = withContext(Contexts.NETWORK) {
+
+    }
+
+    /*
+    suspend fun registrate():RegistrationResponse = withContext(Contexts.NETWORK){
+
+    }
+
+    suspend fun refreshToken(
+        grantType:String,
+        client_id:String,
+        redirect_uri:String,
+        code:String,
+        refresh_token:String
+    ):AccessTokenResponse = withContext(Contexts.NETWORK){
+
+    }*/
 }

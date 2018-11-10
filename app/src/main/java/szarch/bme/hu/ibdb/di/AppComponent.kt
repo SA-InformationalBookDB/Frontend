@@ -10,6 +10,7 @@ import javax.inject.Singleton
         ApplicationModule::class,
         InteractorModule::class,
         NetworkModule::class,
+        ProviderModule::class,
         UIModule::class
     ]
 )
