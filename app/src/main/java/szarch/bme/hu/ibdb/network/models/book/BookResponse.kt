@@ -8,14 +8,14 @@ data class BookResponse(
     val id: String,
     val title: String,
     val author: String,
-    val published: Date,
-    val publisher: String,
-    val reviews: List<ReviewResponse>,
+    val published: Date?,
+    val publisher: String?,
+    val reviews: List<ReviewResponse>?,
     val categories: List<CategoryResponse>,
-    val imageUrl: String,
+    val imageUrl: String?,
     val summary: String,
     val pageNumber: Int,
-    val sold: Int,
-    val views: Int,
-    val averageRating: Double
+    val sold: Int?,
+    val views: Int?,
+    val averageRating: Double?
 )

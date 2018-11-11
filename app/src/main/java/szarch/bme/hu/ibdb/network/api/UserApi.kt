@@ -8,6 +8,9 @@ import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 
 interface UserApi {
 
+    @GET("/user/favourite")
+    fun getFavourites()
+
     @PUT("/user/category")
     fun updateCategories(
         @Field("userId") userId: String,

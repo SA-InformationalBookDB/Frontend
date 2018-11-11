@@ -6,5 +6,5 @@ data class ReviewResponse(
     val id: String,
     val points: Double,
     val date: Date,
-    val comment: String
+    val comment: String?
 )

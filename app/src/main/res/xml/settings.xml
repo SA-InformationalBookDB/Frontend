@@ -21,7 +21,6 @@
                 android:key="pref_category"
                 android:title="@string/preference_favourite_categories"/>
 
-
     </PreferenceCategory>
 
 
