@@ -2,6 +2,8 @@ package szarch.bme.hu.ibdb.ui.main.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
+import android.support.v7.view.ContextThemeWrapper
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_main.*
 import szarch.bme.hu.ibdb.R
+import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.domain.models.Book
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
@@ -17,6 +20,9 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
 
     @Inject
     lateinit var mainScreenPresenter: MainScreenPresenter
+
+    @Inject
+    lateinit var sharedPreferencesProvider: SharedPreferencesProvider
 
     private lateinit var favouriteAdapter: MainBookAdapter
     private lateinit var recommendationAdapter: MainBookAdapter
@@ -40,6 +46,7 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
         setupRecyclerViewAdapter()
         setupRecyclerView()
         getBooks()
+        shouldShowLoginDialog()
     }
 
     override fun onDestroy() {
@@ -88,6 +95,21 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
         mainScreenPresenter.getPopularBooks()
         mainScreenPresenter.getTrendingBooks()
     }
+
+    private fun shouldShowLoginDialog() {
+        if (sharedPreferencesProvider.getIsClientFirstStarting()) {
+            val alertDialogBuilder =
+                AlertDialog.Builder(ContextThemeWrapper(requireContext(), R.style.PreferenceScreen))
+            alertDialogBuilder.setTitle(R.string.first_starting_information_title)
+                .setMessage(R.string.first_starting_information_text)
+                .setPositiveButton(R.string.dialog_ok_text) { dialogInterface, i ->
+                    sharedPreferencesProvider.setClientFirstStarting(false)
+                    dialogInterface.dismiss()
+                }
+                .show()
+        }
+    }
+
 
     override fun showFavouriteBooks(bookList: List<Book>) {
         favouriteAdapter.submitList(bookList)

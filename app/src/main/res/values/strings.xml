@@ -1,5 +1,19 @@
 <resources>
+    <!--General-->
     <string name="app_name">IBDB</string>
+    <string name="dialog_ok_text">OK</string>
+    <string name="login_text">Login</string>
+    <string name="logout_text">Logout</string>
+    <string name="disconnect_text">Disconnect</string>
+    <string name="sign_up_text">Sign up</string>
+    <string name="email_hint_text">Email address</string>
+    <string name="password_hint_text">Password</string>
+    <string name="confirm_password_hint_text">Confirm password</string>
+    <string name="loading_text">Loading ...</string>
+    <string name="account_signed_out_title">Join our community!</string>
+    <string name="account_signed_in_title">Your are already part of our team community!</string>
+
+    <!--View spceific-->
     <string name="title_home">Home</string>
     <string name="title_favourites">Favourites</string>
     <string name="title_recommendations">Recommendations</string>
@@ -28,14 +42,16 @@
     <string name="book_page_number">Page number</string>
     <string name="book_sold">Sold</string>
     <string name="book_views">Views</string>
-    <string name="logout_title">Logout</string>
-    <string name="disconnect_title">Disconnect</string>
-    <string name="account_signed_out_title">Sign up for the community!</string>
     <string name="preference_personal_details_header">Personal details</string>
     <string name="preference_email_address">Email address</string>
     <string name="preference_nickname">Nickname</string>
     <string name="preference_birth_year">Year of birth</string>
     <string name="preference_favourite_categories">Favourite categories</string>
     <string name="category_selection_text">Select your favourite categories</string>
+    <string name="first_starting_information_title">Welcome</string>
+    <string name="first_starting_information_text">We are happy to choose our IBDB application. If you want to enjoy all
+        available feature of our service please create an account or login with your existing one(s). Your current
+        account settings are available at the top right account icon.
+    </string>
 
 </resources>

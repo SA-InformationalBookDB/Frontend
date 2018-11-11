@@ -6,7 +6,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SharedPreferencesProvider @Inject constructor(
-    private val context: Context
+    context: Context
 ) {
 
     private val CLIENT_DATA_STRING = "ibdb_client"
@@ -16,60 +16,56 @@ class SharedPreferencesProvider @Inject constructor(
     private val CLIENT_ACCESS_TOKEN_STRING = "client_access_token"
     private val CLIENT_REFRESH_TOKEN_STRING = "client_refresh_token"
     private val CLIENT_REDIRECT_URI_STRING = "client_redirect_uri"
+    private val CLIENT_FIRST_STARTING = "client_first_starting"
+    private val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
 
-    private fun setClientId(clientId: String) {
-        val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
+    fun setClientId(clientId: String) {
         sharedPreferences.edit().putString(CLIENT_ID_STRING, clientId).apply()
     }
 
-    private fun getClientId() {
-        context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE).getString(CLIENT_ID_STRING, "")
-    }
+    fun getClientId(): String = sharedPreferences.getString(CLIENT_ID_STRING, "")!!
 
-    private fun setClientCode(clientCode: String) {
-        val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
+
+    fun setClientCode(clientCode: String) {
         sharedPreferences.edit().putString(CLIENT_CODE_STRING, clientCode).apply()
     }
 
-    private fun getClientCode() {
-        context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE).getString(CLIENT_CODE_STRING, "")
-    }
+    fun getClientCode(): String = sharedPreferences.getString(CLIENT_CODE_STRING, "")!!
 
-    private fun setClientEmail(clientEmail: String) {
-        val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
+
+    fun setClientEmail(clientEmail: String) {
         sharedPreferences.edit().putString(CLIENT_EMAIL_STRING, clientEmail).apply()
     }
 
-    private fun getClientEmail() {
-        context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE).getString(CLIENT_EMAIL_STRING, "")
-    }
+    fun getClientEmail(): String = sharedPreferences.getString(CLIENT_EMAIL_STRING, "")!!
 
-    private fun setClientRefreshToken(refreshToken: String) {
-        val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
+
+    fun setClientRefreshToken(refreshToken: String) {
         sharedPreferences.edit().putString(CLIENT_REFRESH_TOKEN_STRING, refreshToken).apply()
     }
 
-    private fun getClientRefreshToken() {
-        context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
-            .getString(CLIENT_REFRESH_TOKEN_STRING, "")
-    }
+    fun getClientRefreshToken(): String = sharedPreferences.getString(CLIENT_REFRESH_TOKEN_STRING, "")!!
 
-    private fun setClientAccessToken(redirectUri: String) {
-        val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
+
+    fun setClientAccessToken(redirectUri: String) {
         sharedPreferences.edit().putString(CLIENT_ACCESS_TOKEN_STRING, redirectUri).apply()
     }
 
-    private fun getClientAccessToken() {
-        context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE).getString(CLIENT_ACCESS_TOKEN_STRING, "")
-    }
+    fun getClientAccessToken(): String = sharedPreferences.getString(CLIENT_ACCESS_TOKEN_STRING, "")!!
 
-    private fun setClientRedirectUri(redirectUri: String) {
-        val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
+
+    fun setClientRedirectUri(redirectUri: String) {
         sharedPreferences.edit().putString(CLIENT_REDIRECT_URI_STRING, redirectUri).apply()
     }
 
-    private fun getClientRedirectUri() {
-        context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE).getString(CLIENT_REDIRECT_URI_STRING, "")
+    fun getClientRedirectUri(): String = sharedPreferences.getString(CLIENT_REDIRECT_URI_STRING, "")!!
+
+
+    fun setClientFirstStarting(isFirstStarting: Boolean) {
+        sharedPreferences.edit().putBoolean(CLIENT_FIRST_STARTING, isFirstStarting).apply()
     }
+
+    fun getIsClientFirstStarting(): Boolean = sharedPreferences.getBoolean(CLIENT_FIRST_STARTING, true)
+
 
 }
