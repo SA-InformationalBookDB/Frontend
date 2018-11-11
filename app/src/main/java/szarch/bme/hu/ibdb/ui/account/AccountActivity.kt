@@ -9,6 +9,7 @@ import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.ViewFlipper
 import kotlinx.android.synthetic.main.activity_account.*
 import szarch.bme.hu.ibdb.R
@@ -26,7 +27,6 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     private var dialogState: DialogState = DialogState.INPUT
     private lateinit var dialogView: View
     private lateinit var dialog: AlertDialog
-    private var isRegistration: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,17 +70,15 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
         }
 
         btn_sign_out.setOnClickListener {
-
+            accountPresenter.logoutUser()
         }
     }
 
     private fun showLoginDialog() {
-        isRegistration = true
         dialogView = layoutInflater.inflate(R.layout.layout_login_dialog, null)
         dialog = AlertDialog.Builder(ContextThemeWrapper(this, R.style.PreferenceScreen))
             .setView(dialogView)
             .setTitle(R.string.login_text)
-            .setCancelable(false)
             .setPositiveButton(R.string.login_text, null)
             .create()
         dialog.setOnShowListener {
@@ -101,6 +99,11 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
                             isValid = false
                         }
                         if (isValid) {
+                            dialogState = DialogState.LOADING
+                            accountPresenter.loginUser(
+                                emailAddress.text.toString(),
+                                password.text.toString()
+                            )
                             dialogView.findViewById<ViewFlipper>(R.id.vf_login).displayedChild = 1
                             b.setText(R.string.cancel_text)
                         }
@@ -122,12 +125,10 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     }
 
     private fun showSignInDialog() {
-        isRegistration = true
         dialogView = layoutInflater.inflate(R.layout.layout_registration_dialog, null)
-        dialog = AlertDialog.Builder(ContextThemeWrapper(this, R.style.PreferenceScreen))
+        dialog = AlertDialog.Builder(this)
             .setView(dialogView)
             .setTitle(R.string.sign_up_text)
-            .setCancelable(false)
             .setPositiveButton(R.string.sign_up_text, null)
             .create()
         dialog.setOnShowListener {
@@ -159,7 +160,13 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
                             }
                         }
                         if (isValid) {
-                            dialogView.findViewById<ViewFlipper>(R.id.vf_login).displayedChild = 1
+                            dialogState = DialogState.LOADING
+                            accountPresenter.registerUser(
+                                emailAddress.text.toString(),
+                                password.text.toString(),
+                                confirmPassword.text.toString()
+                            )
+                            dialogView.findViewById<ViewFlipper>(R.id.vf_registration).displayedChild = 1
                             b.setText(R.string.cancel_text)
                         }
                     }
@@ -180,8 +187,9 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     }
 
     override fun showRegistrationResult(authenticationResult: AuthenticationResult) {
+        dialogState = DialogState.RESULT
         dialogView.findViewById<ViewFlipper>(R.id.vf_registration).displayedChild = 2
-        dialogView.findViewById<EditText>(R.id.tv_registration_result).setText(authenticationResult.message)
+        dialogView.findViewById<TextView>(R.id.tv_registration_result).text = authenticationResult.message
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).text = resources.getText(R.string.close_text)
         if (authenticationResult.isSuccessful) {
             dialogView.findViewById<ImageView>(R.id.iv_registration_result)
@@ -189,15 +197,15 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
         } else {
             dialogView.findViewById<ImageView>(R.id.iv_registration_result)
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_error))
-            dialogView.findViewById<EditText>(R.id.tv_registration_error_reason).visibility = View.VISIBLE
-            dialogView.findViewById<EditText>(R.id.tv_registration_error_reason)
-                .setText(authenticationResult.message)
+            dialogView.findViewById<TextView>(R.id.tv_registration_error_reason).visibility = View.VISIBLE
+            dialogView.findViewById<TextView>(R.id.tv_registration_error_reason).text = authenticationResult.message
         }
     }
 
     override fun showLoginResult(authenticationResult: AuthenticationResult) {
+        dialogState = DialogState.RESULT
         dialogView.findViewById<ViewFlipper>(R.id.vf_login).displayedChild = 2
-        dialogView.findViewById<EditText>(R.id.tv_login_result).setText(authenticationResult.message)
+        dialogView.findViewById<TextView>(R.id.tv_login_result).setText(authenticationResult.message)
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).text = resources.getText(R.string.close_text)
         if (authenticationResult.isSuccessful) {
             dialogView.findViewById<ImageView>(R.id.iv_login_result)
@@ -205,8 +213,8 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
         } else {
             dialogView.findViewById<ImageView>(R.id.iv_login_result)
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_error))
-            dialogView.findViewById<EditText>(R.id.tv_login_error_reason).visibility = View.VISIBLE
-            dialogView.findViewById<EditText>(R.id.tv_login_error_reason).setText(authenticationResult.message)
+            dialogView.findViewById<TextView>(R.id.tv_login_error_reason).visibility = View.VISIBLE
+            dialogView.findViewById<TextView>(R.id.tv_login_error_reason).setText(authenticationResult.message)
         }
     }
 

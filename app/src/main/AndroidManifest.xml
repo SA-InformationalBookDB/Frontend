@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="szarch.bme.hu.ibdb">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name=".IBDBApplication"
             android:allowBackup="true"

@@ -4,7 +4,6 @@ import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.Book
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
@@ -44,7 +43,6 @@ class SearchActivity : AppCompatActivity(), SearchScreen {
     }
 
     private fun doSearch(query: String) {
-        Log.d("Testing", query)
         searchPresenter.searchBooks(query)
     }
 

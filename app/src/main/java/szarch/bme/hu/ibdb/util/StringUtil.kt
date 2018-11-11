@@ -8,11 +8,11 @@ object StringUtil {
         Regex.fromLiteral("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!\\-_?&])(?=\\S+$).{8,}")
 
     fun checkEmailValidity(email: String): Boolean {
-        return email.matches(emailPattern)
+        return true//email.matches(emailPattern)
     }
 
     fun checkPasswordValidatity(password: String): Boolean {
-        return password.matches(passwordPattern)
+        return true//password.matches(passwordPattern)
     }
 
     fun checkIsTextAreEqual(firstText: String, secondText: String): Boolean {
