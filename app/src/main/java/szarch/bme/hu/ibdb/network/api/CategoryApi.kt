@@ -10,7 +10,7 @@ interface CategoryApi {
     fun getCategories(): Call<List<CategoryResponse>>
 
     @POST("/admin/category")
-    fun addCategory(@Field("name") name: String)
+    fun addCategory(@Query("name") name: String)
 
     @DELETE("/admin/category/{id}")
     fun removeCategory(@Path("id") id: String)

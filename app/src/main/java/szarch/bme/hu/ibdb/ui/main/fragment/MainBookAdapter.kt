@@ -5,12 +5,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.layout_main_book_item.view.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.Book
+import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.comparators.BookComparator
 
-class MainBookAdapter : ListAdapter<Book, MainBookAdapter.BookItemViewHolder>(BookComparator) {
+class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHolder>(BookComparator) {
 
     var listener: Listener? = null
 
@@ -23,6 +25,11 @@ class MainBookAdapter : ListAdapter<Book, MainBookAdapter.BookItemViewHolder>(Bo
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
         val item = getItem(position)
         holder.tvBookTitle.text = item.title
+        item.imageUrl?.let {
+            Glide.with(holder.itemView.context)
+                .load(it)
+                .into(holder.ivBookImage)
+        }
     }
 
     inner class BookItemViewHolder(bookItemView: View) : RecyclerView.ViewHolder(bookItemView) {

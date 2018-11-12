@@ -1,51 +1,40 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
-import szarch.bme.hu.ibdb.domain.models.Book
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import szarch.bme.hu.ibdb.network.repository.BookRepository
 import szarch.bme.hu.ibdb.ui.base.Presenter
+import szarch.bme.hu.ibdb.util.Contexts
+import javax.inject.Inject
 
-class MainScreenPresenter : Presenter<MainScreen>() {
+class MainScreenPresenter @Inject constructor(
+    private val bookRepository: BookRepository
+) : Presenter<MainScreen>() {
 
-    fun getFavouriteBooks() {
-        screen?.showFavouriteBooks(getDemoBookList())
-    }
 
     fun getRecommendationBooks() {
-        screen?.showRecommendationBooks(getDemoBookList())
+        GlobalScope.launch(Contexts.UI) {
+            screen?.showRecommendationBooks(bookRepository.getOfferBooks())
+        }
     }
 
     fun getBestsellerBooks() {
-        screen?.showBestsellerBooks(getDemoBookList())
+        GlobalScope.launch(Contexts.UI) {
+            screen?.showBestsellerBooks(bookRepository.getBestsellerBooks())
+        }
     }
 
     fun getPopularBooks() {
-        screen?.showPopularBooks(getDemoBookList())
+        GlobalScope.launch(Contexts.UI) {
+            screen?.showPopularBooks(bookRepository.getPopularBooks())
+        }
     }
 
     fun getTrendingBooks() {
-        screen?.showTrendingBooks(getDemoBookList())
+        GlobalScope.launch(Contexts.UI) {
+            screen?.showTrendingBooks(bookRepository.getTrendingBooks())
+        }
     }
 
-    private fun getDemoBookList(): List<Book> {
-        val list: MutableList<Book> = arrayListOf()
-        for (i in 0..10) {
-            list.add(
-                i, Book(
-                    id = i.toString(),
-                    title = "Title",
-                    author = "Author",
-                    published = null,
-                    categories = emptyList(),
-                    imageUrl = "",
-                    pageNumber = 100,
-                    publisher = "",
-                    reviews = emptyList(),
-                    sold = 100,
-                    summary = "",
-                    views = 100
-                )
-            )
-        }
-        return list
-    }
 
 }

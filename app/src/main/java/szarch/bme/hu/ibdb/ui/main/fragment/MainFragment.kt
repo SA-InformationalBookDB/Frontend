@@ -12,7 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
-import szarch.bme.hu.ibdb.domain.models.Book
+import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
@@ -24,7 +24,6 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
     @Inject
     lateinit var sharedPreferencesProvider: SharedPreferencesProvider
 
-    private lateinit var favouriteAdapter: MainBookAdapter
     private lateinit var recommendationAdapter: MainBookAdapter
     private lateinit var bestSellerAdapter: MainBookAdapter
     private lateinit var popularAdapter: MainBookAdapter
@@ -62,21 +61,18 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
     }
 
     private fun setupRecyclerViewAdapter() {
-        favouriteAdapter = MainBookAdapter()
         recommendationAdapter = MainBookAdapter()
         bestSellerAdapter = MainBookAdapter()
         popularAdapter = MainBookAdapter()
         trendingAdapter = MainBookAdapter()
-        favouriteAdapter.listener = this
         recommendationAdapter.listener = this
         bestSellerAdapter.listener = this
         popularAdapter.listener = this
         trendingAdapter.listener = this
+
     }
 
     private fun setupRecyclerView() {
-        rv_main_favourites.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        rv_main_favourites.adapter = favouriteAdapter
         rv_main_recommendation.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rv_main_recommendation.adapter = recommendationAdapter
@@ -89,7 +85,6 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
     }
 
     private fun getBooks() {
-        mainScreenPresenter.getFavouriteBooks()
         mainScreenPresenter.getRecommendationBooks()
         mainScreenPresenter.getBestsellerBooks()
         mainScreenPresenter.getPopularBooks()
@@ -111,23 +106,19 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
     }
 
 
-    override fun showFavouriteBooks(bookList: List<Book>) {
-        favouriteAdapter.submitList(bookList)
-    }
-
-    override fun showRecommendationBooks(bookList: List<Book>) {
+    override fun showRecommendationBooks(bookList: List<BookResponse>) {
         recommendationAdapter.submitList(bookList)
     }
 
-    override fun showBestsellerBooks(bookList: List<Book>) {
+    override fun showBestsellerBooks(bookList: List<BookResponse>) {
         bestSellerAdapter.submitList(bookList)
     }
 
-    override fun showPopularBooks(bookList: List<Book>) {
+    override fun showPopularBooks(bookList: List<BookResponse>) {
         popularAdapter.submitList(bookList)
     }
 
-    override fun showTrendingBooks(bookList: List<Book>) {
+    override fun showTrendingBooks(bookList: List<BookResponse>) {
         trendingAdapter.submitList(bookList)
     }
 

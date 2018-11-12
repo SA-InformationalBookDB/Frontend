@@ -2,6 +2,9 @@ package szarch.bme.hu.ibdb.network.repository
 
 import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.network.api.CategoryApi
+import szarch.bme.hu.ibdb.network.exception.ForbiddenException
+import szarch.bme.hu.ibdb.network.exception.NotFoundException
+import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
 import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
@@ -12,7 +15,17 @@ class CategoryRepository @Inject constructor(
     private val categoryApi: CategoryApi
 ) {
     suspend fun getCategories(): List<CategoryResponse> = withContext(Contexts.NETWORK) {
-        return@withContext emptyList<CategoryResponse>()
+        val response = categoryApi.getCategories().execute()
+        if (response.isSuccessful) {
+            return@withContext response.body()!!
+        } else {
+            when (response.code()) {
+                401 -> throw UnauthorizedException("Unauthorized")
+                403 -> throw ForbiddenException("Forbidden")
+                404 -> throw NotFoundException("Not found")
+                else -> throw Exception(response.message())
+            }
+        }
     }
 
     suspend fun addCategory(categoryName: String) = withContext(Contexts.NETWORK) {

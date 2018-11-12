@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.domain.models.Book
+import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
@@ -46,7 +46,7 @@ class SearchActivity : AppCompatActivity(), SearchScreen {
         searchPresenter.searchBooks(query)
     }
 
-    override fun showBooks(bookList: List<Book>) {
+    override fun showBooks(bookList: List<BookResponse>) {
 
     }
 

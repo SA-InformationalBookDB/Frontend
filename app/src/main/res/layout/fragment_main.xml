@@ -10,36 +10,9 @@
             android:background="@android:color/darker_gray">
 
         <android.support.v7.widget.CardView
-                android:id="@+id/cv_favourites"
-                style="@style/MainCardViewStyle"
-                app:layout_constraintTop_toTopOf="parent">
-
-            <android.support.constraint.ConstraintLayout android:layout_width="wrap_content"
-                                                         android:layout_height="wrap_content"
-                                                         android:padding="15dp">
-
-                <TextView
-                        android:id="@+id/tv_main_title_favourites"
-                        android:text="@string/title_favourites"
-                        app:layout_constraintBottom_toTopOf="@id/rv_main_favourites"
-                        style="@style/MainCardViewTextViewStyle"
-                />
-
-                <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_main_favourites"
-                        app:layout_constraintTop_toBottomOf="@id/tv_main_title_favourites"
-                        style="@style/MainCardViewRecyclerViewViewStyle"
-                />
-
-            </android.support.constraint.ConstraintLayout>
-
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
                 android:id="@+id/cv_recommendations"
                 style="@style/MainCardViewStyle"
-                app:layout_constraintTop_toBottomOf="@id/cv_favourites">
+                app:layout_constraintTop_toTopOf="parent">
 
             <android.support.constraint.ConstraintLayout android:layout_width="wrap_content"
                                                          android:layout_height="wrap_content"

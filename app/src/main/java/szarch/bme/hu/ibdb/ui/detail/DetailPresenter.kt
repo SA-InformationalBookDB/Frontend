@@ -1,4 +1,4 @@
-package szarch.bme.hu.ibdb.ui.search
+package szarch.bme.hu.ibdb.ui.detail
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -7,13 +7,13 @@ import szarch.bme.hu.ibdb.ui.base.Presenter
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
-class SearchPresenter @Inject constructor(
+class DetailPresenter @Inject constructor(
     private val bookRepository: BookRepository
-) : Presenter<SearchScreen>() {
+) : Presenter<DetailScreen>() {
 
-    fun searchBooks(query: String) {
+    fun getBookDetails(bookId: String) {
         GlobalScope.launch(Contexts.UI) {
-            screen?.showBooks(bookRepository.findBooks(query))
+            bookRepository.getBook(bookId)
         }
     }
 

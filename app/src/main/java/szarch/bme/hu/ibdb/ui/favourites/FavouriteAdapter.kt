@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.layout_favourite_book_item.view.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.Book
+import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.comparators.BookComparator
 
-class FavouriteAdapter : ListAdapter<Book, FavouriteAdapter.BookItemViewHolder>(BookComparator) {
+class FavouriteAdapter : ListAdapter<BookResponse, FavouriteAdapter.BookItemViewHolder>(BookComparator) {
 
     var listener: Listener? = null
 
@@ -24,7 +25,7 @@ class FavouriteAdapter : ListAdapter<Book, FavouriteAdapter.BookItemViewHolder>(
         val item = getItem(position)
         holder.tvBookTitle.text = item.title
         holder.tvBookAuthor.text = item.author
-        holder.rtBookRating.rating = (item.views % 5.0).toFloat()
+        holder.rtBookRating.rating = (item.averageRating!! % 5.0).toFloat()
         holder.tvBookPosition.text = position.toString()
 
     }
