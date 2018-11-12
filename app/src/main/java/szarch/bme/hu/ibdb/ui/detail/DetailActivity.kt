@@ -1,8 +1,8 @@
 package szarch.bme.hu.ibdb.ui.detail
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_detail.*
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.content_detail.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
@@ -13,7 +13,6 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
         super.onCreate(savedInstanceState)
         injectActivity()
         setContentView(R.layout.activity_detail)
-        setSupportActionBar(toolbar)
     }
 
     private fun injectActivity() {
@@ -24,6 +23,15 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
     }
 
     override fun showBookDetail(bookResponse: BookResponse) {
+        bookResponse.imageUrl?.let {
+            /*GlideApp.with(this)
+                .load(it)
+                .into(iv_detail_book_image_url)*/
+
+        }
+
+        tv_detail_book_title.text = bookResponse.title
+
     }
 
 }

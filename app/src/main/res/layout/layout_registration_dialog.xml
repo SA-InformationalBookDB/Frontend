@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:padding="16dp">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:padding="16dp">
 
     <ViewFlipper
             android:id="@+id/vf_registration"
@@ -12,9 +12,9 @@
             android:measureAllChildren="false">
 
 
-        <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                     android:layout_height="wrap_content"
-                                                     android:padding="16dp">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                           android:layout_height="wrap_content"
+                                                           android:padding="16dp">
 
             <EditText
                     android:id="@+id/et_registration_user_name"
@@ -42,12 +42,12 @@
                     android:inputType="textPassword"
                     android:textColor="@android:color/black"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                     android:layout_height="wrap_content"
-                                                     android:padding="16dp">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                           android:layout_height="wrap_content"
+                                                           android:padding="16dp">
 
             <ProgressBar
                     android:id="@+id/pb_registration"
@@ -65,11 +65,11 @@
                       app:layout_constraintBottom_toBottomOf="parent"
                       android:layout_marginStart="16dp"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                     android:layout_height="wrap_content"
-                                                     android:padding="16dp">
+        <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                           android:layout_height="wrap_content"
+                                                           android:padding="16dp">
 
             <ImageView
                     android:id="@+id/iv_registration_result"
@@ -101,10 +101,10 @@
                     app:layout_constraintLeft_toLeftOf="@id/tv_registration_result"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:visibility="gone"/>
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ViewFlipper>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

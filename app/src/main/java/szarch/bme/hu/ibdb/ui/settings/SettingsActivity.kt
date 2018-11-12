@@ -1,7 +1,7 @@
 package szarch.bme.hu.ibdb.ui.settings
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 

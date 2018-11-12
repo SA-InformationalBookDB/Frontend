@@ -1,7 +1,6 @@
 package szarch.bme.hu.ibdb.ui.upload
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 
 
-class UploadFragment : Fragment() {
+class UploadFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

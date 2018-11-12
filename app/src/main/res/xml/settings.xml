@@ -11,10 +11,12 @@
         <EditTextPreference
                 android:key="pref_nickname"
                 android:title="@string/preference_nickname"/>
-        <Date
+
+        <EditTextPreference
                 android:inputType="date"
                 android:key="pref_birth_year"
                 android:title="@string/preference_birth_year"/>
+
         <Preference
                 android:persistent="true"
                 android:shouldDisableView="true"

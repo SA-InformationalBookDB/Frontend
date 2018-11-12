@@ -3,7 +3,7 @@ package szarch.bme.hu.ibdb.ui.search
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication

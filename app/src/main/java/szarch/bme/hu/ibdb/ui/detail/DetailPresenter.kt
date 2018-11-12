@@ -13,7 +13,7 @@ class DetailPresenter @Inject constructor(
 
     fun getBookDetails(bookId: String) {
         GlobalScope.launch(Contexts.UI) {
-            bookRepository.getBook(bookId)
+            screen?.showBookDetail(bookRepository.getBook(bookId))
         }
     }
 

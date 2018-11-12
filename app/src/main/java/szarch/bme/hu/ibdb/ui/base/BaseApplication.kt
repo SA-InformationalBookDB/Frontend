@@ -2,8 +2,8 @@ package szarch.bme.hu.ibdb.ui.base
 
 import android.app.Application
 import android.content.Context
-import android.support.annotation.CallSuper
-import android.support.multidex.MultiDex
+import androidx.annotation.CallSuper
+import androidx.multidex.MultiDex
 
 abstract class BaseApplication : Application() {
 

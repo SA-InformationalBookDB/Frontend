@@ -1,8 +1,6 @@
 package szarch.bme.hu.ibdb.ui.activities
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ import szarch.bme.hu.ibdb.domain.models.Review
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
-class ActivitiesFragment : Fragment(), ActivitiesScreen {
+class ActivitiesFragment : androidx.fragment.app.Fragment(), ActivitiesScreen {
 
     @Inject
     lateinit var activitiesPresenter: ActivitiesPresenter
@@ -53,7 +51,7 @@ class ActivitiesFragment : Fragment(), ActivitiesScreen {
     }
 
     private fun setupRecyclerView() {
-        rv_activities.layoutManager = LinearLayoutManager(requireContext())
+        rv_activities.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         rv_activities.adapter = activitiesAdapter
     }
 

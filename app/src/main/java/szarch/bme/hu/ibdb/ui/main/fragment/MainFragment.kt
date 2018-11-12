@@ -1,14 +1,13 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
-import android.support.v7.view.ContextThemeWrapper
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
@@ -16,7 +15,7 @@ import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
-class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
+class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener, MainScreen {
 
     @Inject
     lateinit var mainScreenPresenter: MainScreenPresenter
@@ -74,13 +73,29 @@ class MainFragment : Fragment(), MainBookAdapter.Listener, MainScreen {
 
     private fun setupRecyclerView() {
         rv_main_recommendation.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                androidx.recyclerview.widget.LinearLayoutManager(
+                    requireContext(),
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                    false
+                )
         rv_main_recommendation.adapter = recommendationAdapter
-        rv_main_bestsellers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rv_main_bestsellers.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            requireContext(),
+            androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+            false
+        )
         rv_main_bestsellers.adapter = bestSellerAdapter
-        rv_main_popular.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rv_main_popular.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            requireContext(),
+            androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+            false
+        )
         rv_main_popular.adapter = popularAdapter
-        rv_main_trending.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rv_main_trending.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            requireContext(),
+            androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+            false
+        )
         rv_main_trending.adapter = trendingAdapter
     }
 

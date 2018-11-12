@@ -2,15 +2,15 @@ package szarch.bme.hu.ibdb.ui.account
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.view.ContextThemeWrapper
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ViewFlipper
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_account.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.AuthenticationResult

@@ -1,10 +1,9 @@
 package szarch.bme.hu.ibdb.ui.users
 
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_user_item.view.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.User
@@ -27,7 +26,8 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UsersItemViewHolder>(UserCom
 
     }
 
-    inner class UsersItemViewHolder(userItemView: View) : RecyclerView.ViewHolder(userItemView) {
+    inner class UsersItemViewHolder(userItemView: View) :
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(userItemView) {
         val ivUserImage = userItemView.iv_users_user_item
         val tvUserName = userItemView.tv_users_user_name
         val tvUserRole = userItemView.tv_users_user_role

@@ -1,8 +1,6 @@
 package szarch.bme.hu.ibdb.ui.favourites
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +11,7 @@ import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
-class FavouritesFragment : Fragment(), FavouriteAdapter.Listener, FavouriteScreen {
+class FavouritesFragment : androidx.fragment.app.Fragment(), FavouriteAdapter.Listener, FavouriteScreen {
 
     @Inject
     lateinit var favouritePresenter: FavouritePresenter
@@ -50,7 +48,7 @@ class FavouritesFragment : Fragment(), FavouriteAdapter.Listener, FavouriteScree
     }
 
     private fun setupRecyclerView() {
-        rv_favourite_favourites.layoutManager = LinearLayoutManager(requireContext())
+        rv_favourite_favourites.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         rv_favourite_favourites.adapter = favouriteAdapter
     }
 

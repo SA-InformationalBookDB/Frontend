@@ -1,7 +1,7 @@
 package szarch.bme.hu.ibdb.util
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import szarch.bme.hu.ibdb.ui.account.AccountActivity
 import szarch.bme.hu.ibdb.ui.search.SearchActivity
 

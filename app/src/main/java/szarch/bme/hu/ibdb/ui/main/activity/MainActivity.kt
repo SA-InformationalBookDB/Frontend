@@ -4,12 +4,11 @@ import android.app.SearchManager
 import android.content.ComponentName
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesFragment
@@ -23,7 +22,7 @@ import szarch.bme.hu.ibdb.util.Navigator
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var fragment: Fragment
+    private lateinit var fragment: androidx.fragment.app.Fragment
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {

@@ -1,10 +1,9 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.layout_main_book_item.view.*
 import szarch.bme.hu.ibdb.R
@@ -32,7 +31,8 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
         }
     }
 
-    inner class BookItemViewHolder(bookItemView: View) : RecyclerView.ViewHolder(bookItemView) {
+    inner class BookItemViewHolder(bookItemView: View) :
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(bookItemView) {
         val tvBookTitle = bookItemView.tv_main_book_item
         val ivBookImage = bookItemView.iv_main_book_item
 

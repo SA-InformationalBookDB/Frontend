@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 xmlns:tools="http://schemas.android.com/tools"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:orientation="vertical">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     xmlns:tools="http://schemas.android.com/tools"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?android:attr/colorPrimary"
@@ -37,9 +37,9 @@
                     android:textSize="20sp"
                     android:textStyle="bold"/>
 
-            <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                         android:layout_height="wrap_content"
-                                                         android:layout_marginTop="180dp">
+            <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                               android:layout_height="wrap_content"
+                                                               android:layout_marginTop="180dp">
 
                 <Button
                         android:id="@+id/btn_sign_in"
@@ -61,10 +61,10 @@
                         app:layout_constraintLeft_toRightOf="@id/btn_sign_in"
                         app:layout_constraintRight_toRightOf="parent"/>
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="180dp"
@@ -80,13 +80,13 @@
                         android:textColor="@color/colorPrimaryDark"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"/>
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
