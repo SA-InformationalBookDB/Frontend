@@ -56,9 +56,8 @@ dependencies {
     //Multidex
     implementation 'androidx.multidex:multidex:2.0.0'
 
-    //Glide
-    implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    //Picasso
+    implementation "com.squareup.picasso:picasso:$picasso_version"
 
     //KenBurnsView
     implementation "com.flaviofaria:kenburnsview:$kenburnsview_version"

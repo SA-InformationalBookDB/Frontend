@@ -8,6 +8,8 @@
     <string name="sign_up_text">Sign up</string>
     <string name="cancel_text">Cancel</string>
     <string name="close_text">Close</string>
+
+    <!--Authentication-->
     <string name="email_hint_text">Email address</string>
     <string name="password_hint_text">Password</string>
     <string name="confirm_password_hint_text">Confirm password</string>
@@ -62,5 +64,6 @@
         available feature of our service please create an account or login with your existing one(s). Your current
         account settings are available at the top right account icon.
     </string>
+    <string name="no_data_text">Data is unavailable</string>
 
 </resources>

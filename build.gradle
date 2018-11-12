@@ -13,7 +13,7 @@ buildscript {
         dagger_version= '2.17'
         jsr250_version = '1.0'
         multidex_version = '1.0.3'
-        glide_version = '4.8.0'
+        picasso_version = '2.71828'
         kenburnsview_version = '1.0.7'
         junit_version = "4.12"
         test_runner_version = '1.0.2'
