@@ -1,6 +1,7 @@
 package szarch.bme.hu.ibdb.ui.account
 
 import android.content.res.Resources
+import android.util.Log
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.R
@@ -115,5 +116,13 @@ class AccountPresenter @Inject constructor(
             }
         }
     }
+
+    fun getUser() {
+        GlobalScope.launch(Contexts.UI) {
+            val user = userInteractor.getUserInfo()
+            Log.d("Testing", user.toString())
+        }
+    }
+
 
 }

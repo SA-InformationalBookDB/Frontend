@@ -9,7 +9,7 @@
     <ImageView
             android:id="@+id/iv_main_book_item"
             android:layout_width="80dp" android:layout_height="80dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/ic_book_image_url"
     />
 
     <TextView

@@ -1,10 +1,7 @@
 package szarch.bme.hu.ibdb.network.api
 
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 
 interface BookApi {
@@ -22,8 +19,7 @@ interface BookApi {
     ): Call<List<BookResponse>>
 
     @GET("/book/trending")
-    fun getTrendingBooks(
-    ): Call<List<BookResponse>>
+    fun getTrendingBooks(@Query("publishedAfter") publishedAfter: String): Call<List<BookResponse>>
 
     @GET("/book/{id}")
     fun getBook(@Path("id") bookId: String): Call<BookResponse>

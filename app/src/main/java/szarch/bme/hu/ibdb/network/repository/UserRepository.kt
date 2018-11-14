@@ -69,10 +69,10 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun getUserInfo(): UserInfoResponse? = withContext(Contexts.NETWORK) {
+    suspend fun getUserInfo(): UserInfoResponse = withContext(Contexts.NETWORK) {
         val response = userApi.getUserInfo().execute()
         if (response.isSuccessful) {
-            return@withContext response.body()
+            return@withContext response.body()!!
         } else {
             when (response.code()) {
                 401 -> throw UnauthorizedException("Unauthorized")

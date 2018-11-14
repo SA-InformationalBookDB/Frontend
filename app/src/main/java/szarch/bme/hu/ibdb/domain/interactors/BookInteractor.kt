@@ -30,8 +30,8 @@ class BookInteractor @Inject constructor(
         return@withContext bookRepository.getPublicPopularBooks()
     }
 
-    suspend fun getTrendingBooks(): List<BookResponse> = withContext(Contexts.UI) {
-        return@withContext bookRepository.getTrendingBooks()
+    suspend fun getTrendingBooks(publishedAfter: String): List<BookResponse> = withContext(Contexts.UI) {
+        return@withContext bookRepository.getTrendingBooks(publishedAfter)
     }
 
     suspend fun getPublicTrendingBooks(): List<BookResponse> = withContext(Contexts.UI) {

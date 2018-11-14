@@ -1,6 +1,5 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +28,7 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
             Picasso.get()
                 .load(it)
                 .fit()
+                .placeholder(R.drawable.ic_book_image_url)
                 .into(holder.ivBookImage)
         }
     }
@@ -42,7 +42,6 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
 
         init {
             bookItemView.setOnClickListener {
-                Log.d("Testing", (item == null).toString())
                 item?.let { item ->
                     listener?.onItemSelected(item.id)
                 }

@@ -3,7 +3,6 @@ package szarch.bme.hu.ibdb.ui.search
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import szarch.bme.hu.ibdb.R
@@ -42,7 +41,6 @@ class SearchActivity : AppCompatActivity(), SearchScreen {
         setIntent(intent)
         if (Intent.ACTION_SEARCH == intent.action) {
             intent.getStringExtra(SearchManager.QUERY)?.also { query ->
-                Log.d("Testing", query)
                 searchPresenter.searchBooks(query)
             }
         }

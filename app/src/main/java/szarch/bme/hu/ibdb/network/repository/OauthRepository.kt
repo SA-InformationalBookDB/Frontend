@@ -1,6 +1,5 @@
 package szarch.bme.hu.ibdb.network.repository
 
-import android.util.Log
 import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.network.api.OauthApi
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
@@ -45,7 +44,6 @@ class OauthRepository @Inject constructor(
 
     suspend fun registrate(registrationRequest: RegistrationRequest): RegistrationResponse =
         withContext(Contexts.NETWORK) {
-            Log.d("Testing", oauthApi.toString())
             val response = oauthApi.registrate(registrationRequest).execute()
             if (response.isSuccessful) {
                 return@withContext response.body()!!

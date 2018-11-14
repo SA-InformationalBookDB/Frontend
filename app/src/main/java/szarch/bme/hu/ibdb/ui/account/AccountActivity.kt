@@ -205,16 +205,17 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     override fun showLoginResult(authenticationResult: AuthenticationResult) {
         dialogState = DialogState.RESULT
         dialogView.findViewById<ViewFlipper>(R.id.vf_login).displayedChild = 2
-        dialogView.findViewById<TextView>(R.id.tv_login_result).setText(authenticationResult.message)
+        dialogView.findViewById<TextView>(R.id.tv_login_result).text = authenticationResult.message
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).text = resources.getText(R.string.close_text)
         if (authenticationResult.isSuccessful) {
             dialogView.findViewById<ImageView>(R.id.iv_login_result)
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_success))
+            accountPresenter.getUser()
         } else {
             dialogView.findViewById<ImageView>(R.id.iv_login_result)
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_error))
             dialogView.findViewById<TextView>(R.id.tv_login_error_reason).visibility = View.VISIBLE
-            dialogView.findViewById<TextView>(R.id.tv_login_error_reason).setText(authenticationResult.message)
+            dialogView.findViewById<TextView>(R.id.tv_login_error_reason).text = authenticationResult.message
         }
     }
 

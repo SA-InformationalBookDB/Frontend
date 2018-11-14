@@ -65,10 +65,10 @@ class MainScreenPresenter @Inject constructor(
         }
     }
 
-    fun getTrendingBooks() {
+    fun getTrendingBooks(publishedAfter: String) {
         GlobalScope.launch(Contexts.UI) {
             try {
-                screen?.showTrendingBooks(bookInteractor.getTrendingBooks())
+                screen?.showTrendingBooks(bookInteractor.getTrendingBooks(publishedAfter))
             } catch (e: UnauthorizedException) {
                 e.printStackTrace()
                 screen?.showTrendingBooks(bookInteractor.getPublicTrendingBooks())

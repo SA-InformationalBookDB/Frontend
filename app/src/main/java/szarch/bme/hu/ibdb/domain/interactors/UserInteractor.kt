@@ -4,6 +4,7 @@ import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
+import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.network.repository.UserRepository
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
@@ -21,8 +22,8 @@ class UserInteractor @Inject constructor(
         userRepository.updateCategories(CategoriesUpdateRequest(categoryIds))
     }
 
-    suspend fun addFavourite(bookId: String) {
-        userRepository
+    suspend fun getUserInfo(): UserInfoResponse = withContext(Contexts.UI) {
+        return@withContext userRepository.getUserInfo()
     }
 
 }

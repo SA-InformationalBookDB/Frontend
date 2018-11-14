@@ -57,8 +57,8 @@ class BookRepository @Inject constructor(
         }
     }
 
-    suspend fun getTrendingBooks() = withContext(Contexts.NETWORK) {
-        val response = bookApi.getTrendingBooks().execute()
+    suspend fun getTrendingBooks(publishedAfter: String) = withContext(Contexts.NETWORK) {
+        val response = bookApi.getTrendingBooks(publishedAfter).execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
         } else {

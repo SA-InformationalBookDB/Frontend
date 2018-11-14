@@ -38,7 +38,6 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
     }
 
     override fun showBookDetail(bookResponse: BookResponse) {
-
         Picasso.get()
             .load(bookResponse.imageUrl)
             .placeholder(R.drawable.ic_book_image_url)

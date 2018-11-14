@@ -1,7 +1,6 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,8 @@ import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.util.Navigator
+import szarch.bme.hu.ibdb.util.StringUtil
+import java.util.*
 import javax.inject.Inject
 
 class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener, MainScreen {
@@ -100,10 +101,12 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     }
 
     private fun getBooks() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MONTH, -3)
         mainScreenPresenter.getRecommendationBooks()
         mainScreenPresenter.getBestsellerBooks()
         mainScreenPresenter.getPopularBooks()
-        mainScreenPresenter.getTrendingBooks()
+        mainScreenPresenter.getTrendingBooks(StringUtil.formatTrendingDateToString(calendar.time))
     }
 
     private fun shouldShowLoginDialog() {
@@ -138,7 +141,6 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     }
 
     override fun onItemSelected(bookItemId: String) {
-        Log.d("Testing", "onItemSelected")
         Navigator.navigateToDetailScreen(requireActivity(), bookItemId)
     }
 
