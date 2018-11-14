@@ -1,5 +1,7 @@
 package szarch.bme.hu.ibdb.ui.favourites
 
+import android.util.Log
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
@@ -15,19 +17,17 @@ class FavouritePresenter @Inject constructor(
 ) : Presenter<FavouriteScreen>() {
 
     fun getFavouriteBooks() {
-        GlobalScope.launch(Contexts.UI) {
-            try {
-                screen?.showFavouritesBooks(userInteractor.getFavourites())
-            } catch (e: UnauthorizedException) {
-                e.printStackTrace()
-            } catch (e: ForbiddenException) {
-                e.printStackTrace()
-            } catch (e: NotFoundException) {
-                e.printStackTrace()
-            } catch (e: Exception) {
-                e.printStackTrace()
+        GlobalScope.launch(Contexts.UI + CoroutineExceptionHandler { coroutineContext, throwable ->
+            when (throwable) {
+                is UnauthorizedException -> throwable.printStackTrace()
+                is ForbiddenException -> throwable.printStackTrace()
+                is NotFoundException -> throwable.printStackTrace()
+                else -> throwable.printStackTrace()
             }
+            Log.d("Testing", "getRecommendationBooks")
+        }) {
+            screen?.showFavouritesBooks(userInteractor.getFavourites())
         }
     }
-
 }
+
