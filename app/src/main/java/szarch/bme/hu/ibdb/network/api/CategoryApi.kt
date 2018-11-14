@@ -15,4 +15,5 @@ interface CategoryApi {
     @DELETE("/admin/category/{id}")
     fun removeCategory(@Path("id") id: String)
 
+
 }

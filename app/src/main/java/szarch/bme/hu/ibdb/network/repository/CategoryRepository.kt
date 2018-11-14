@@ -28,11 +28,4 @@ class CategoryRepository @Inject constructor(
         }
     }
 
-    suspend fun addCategory(categoryName: String) = withContext(Contexts.NETWORK) {
-
-    }
-
-    suspend fun removeCategory(id: String) = withContext(Contexts.NETWORK) {
-
-    }
 }

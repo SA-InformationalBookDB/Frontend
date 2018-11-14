@@ -5,7 +5,6 @@ import szarch.bme.hu.ibdb.network.api.BookApi
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
-import szarch.bme.hu.ibdb.network.models.book.BookRequest
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
@@ -88,49 +87,6 @@ class BookRepository @Inject constructor(
 
     suspend fun findBooks(queryString: String) = withContext(Contexts.NETWORK) {
         val response = bookApi.findBooks(queryString).execute()
-        if (response.isSuccessful) {
-            return@withContext response.body()!!
-        } else {
-            when (response.code()) {
-                401 -> throw UnauthorizedException("Unauthorized")
-                403 -> throw ForbiddenException("Forbidden")
-                404 -> throw NotFoundException("Not found")
-                else -> throw Exception(response.message())
-            }
-        }
-    }
-
-
-    suspend fun addBook(bookRequest: BookRequest) = withContext(Contexts.NETWORK) {
-        val response = bookApi.addBook(bookRequest).execute()
-        if (response.isSuccessful) {
-            return@withContext response.body()!!
-        } else {
-            when (response.code()) {
-                401 -> throw UnauthorizedException("Unauthorized")
-                403 -> throw ForbiddenException("Forbidden")
-                404 -> throw NotFoundException("Not found")
-                else -> throw Exception(response.message())
-            }
-        }
-    }
-
-    suspend fun updateBook(id: String, bookRequest: BookRequest) = withContext(Contexts.NETWORK) {
-        val response = bookApi.updateBook(id, bookRequest).execute()
-        if (response.isSuccessful) {
-            return@withContext response.body()!!
-        } else {
-            when (response.code()) {
-                401 -> throw UnauthorizedException("Unauthorized")
-                403 -> throw ForbiddenException("Forbidden")
-                404 -> throw NotFoundException("Not found")
-                else -> throw Exception(response.message())
-            }
-        }
-    }
-
-    suspend fun deleteBook(id: String) = withContext(Contexts.NETWORK) {
-        val response = bookApi.deleteBook(id).execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
         } else {

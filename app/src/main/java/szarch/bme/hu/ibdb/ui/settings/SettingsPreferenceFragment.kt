@@ -7,20 +7,27 @@ import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import szarch.bme.hu.ibdb.R
+import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
+import javax.inject.Inject
 
 
-class SettingsPreferenceFragment : PreferenceFragmentCompat() {
+class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenceScreen {
+
+    @Inject
+    lateinit var settingsPreferencePresenter: SettingsPreferencePresenter
 
     private lateinit var etpEmailAddress: EditTextPreference
     private lateinit var etpNickname: EditTextPreference
     private lateinit var etpYearOfBirth: EditTextPreference
     private lateinit var etpCategory: Preference
+    private var categoryIds: MutableList<String> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectFragment()
+        settingsPreferencePresenter.attachScreen(this)
         initializeEditTextPreferences()
         setEditTextPreferencesSummaries()
         setEditTextOnClickListeners()
@@ -81,18 +88,22 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
         }
     }
 
-
-    private fun showFavouriteDialog() {
-        // setup the alert builder
+    override fun showCategoryDialog(categoryList: List<CategoryResponse>) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle(resources.getString(R.string.category_selection_text))
+        val title = builder.setTitle(resources.getString(R.string.category_selection_text))
 
-        val bookCategories = arrayOf("Crime", "Fantasy", "Sci-fi", "Comedy", "Biography")
+        val bookCategories = categoryList.map { it -> it.name }.toTypedArray()
         val checkedItems = booleanArrayOf(false, false, false, false, false)
         builder.setMultiChoiceItems(
             bookCategories, checkedItems
         ) { dialog: DialogInterface, which: Int, isChecked: Boolean ->
-
+            if (isChecked) {
+                if (isChecked) {
+                    categoryIds.add(categoryList[which].id)
+                } else {
+                    categoryIds.removeAt(categoryIds.indexOfFirst { it -> it == categoryList[which].id })
+                }
+            }
         }
         builder.setPositiveButton("OK") { dialog, which ->
             // user clicked OK
@@ -101,6 +112,12 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+
+    private fun showFavouriteDialog() {
+        // setup the alert builder
+
     }
 
 }

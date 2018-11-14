@@ -2,23 +2,23 @@ package szarch.bme.hu.ibdb.ui.main.fragment
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import szarch.bme.hu.ibdb.domain.interactors.BookInteractor
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
-import szarch.bme.hu.ibdb.network.repository.BookRepository
 import szarch.bme.hu.ibdb.ui.base.Presenter
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
 class MainScreenPresenter @Inject constructor(
-    private val bookRepository: BookRepository
+    private val bookInteractor: BookInteractor
 ) : Presenter<MainScreen>() {
 
 
     fun getRecommendationBooks() {
         GlobalScope.launch(Contexts.UI) {
             try {
-                screen?.showRecommendationBooks(bookRepository.getOfferBooks())
+                screen?.showRecommendationBooks(bookInteractor.getRecommendationBook())
             } catch (e: UnauthorizedException) {
                 e.printStackTrace()
             } catch (e: ForbiddenException) {
@@ -34,10 +34,10 @@ class MainScreenPresenter @Inject constructor(
     fun getBestsellerBooks() {
         GlobalScope.launch(Contexts.UI) {
             try {
-                screen?.showBestsellerBooks(bookRepository.getBestsellerBooks())
+                screen?.showBestsellerBooks(bookInteractor.getBestsellerBooks())
             } catch (e: UnauthorizedException) {
                 e.printStackTrace()
-                screen?.showBestsellerBooks(bookRepository.getPublicPopularBooks())
+                screen?.showBestsellerBooks(bookInteractor.getPublicBestsellerBooks())
             } catch (e: ForbiddenException) {
                 e.printStackTrace()
             } catch (e: NotFoundException) {
@@ -51,10 +51,10 @@ class MainScreenPresenter @Inject constructor(
     fun getPopularBooks() {
         GlobalScope.launch(Contexts.UI) {
             try {
-                screen?.showPopularBooks(bookRepository.getPopularBooks())
+                screen?.showPopularBooks(bookInteractor.getPopularBooks())
             } catch (e: UnauthorizedException) {
                 e.printStackTrace()
-                screen?.showPopularBooks(bookRepository.getPublicPopularBooks())
+                screen?.showPopularBooks(bookInteractor.getPublicPopularBooks())
             } catch (e: ForbiddenException) {
                 e.printStackTrace()
             } catch (e: NotFoundException) {
@@ -68,10 +68,10 @@ class MainScreenPresenter @Inject constructor(
     fun getTrendingBooks() {
         GlobalScope.launch(Contexts.UI) {
             try {
-                screen?.showTrendingBooks(bookRepository.getTrendingBooks())
+                screen?.showTrendingBooks(bookInteractor.getTrendingBooks())
             } catch (e: UnauthorizedException) {
                 e.printStackTrace()
-                screen?.showTrendingBooks(bookRepository.getPublicTrendingBooks())
+                screen?.showTrendingBooks(bookInteractor.getPublicTrendingBooks())
             } catch (e: ForbiddenException) {
                 e.printStackTrace()
             } catch (e: NotFoundException) {

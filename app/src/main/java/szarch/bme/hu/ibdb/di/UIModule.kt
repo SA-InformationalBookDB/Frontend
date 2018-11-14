@@ -2,9 +2,10 @@ package szarch.bme.hu.ibdb.di
 
 import dagger.Module
 import dagger.Provides
+import szarch.bme.hu.ibdb.domain.interactors.BookInteractor
+import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
 import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.network.repository.BookRepository
-import szarch.bme.hu.ibdb.network.repository.UserRepository
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesPresenter
 import szarch.bme.hu.ibdb.ui.favourites.FavouritePresenter
 import szarch.bme.hu.ibdb.ui.main.fragment.MainScreenPresenter
@@ -21,11 +22,11 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun favouritesPresenter(userRepository: UserRepository) = FavouritePresenter(userRepository)
+    fun favouritesPresenter(userInteractor: UserInteractor) = FavouritePresenter(userInteractor)
 
     @Provides
     @Singleton
-    fun mainPresenter(bookRepository: BookRepository) = MainScreenPresenter(bookRepository)
+    fun mainPresenter(bookInteractor: BookInteractor) = MainScreenPresenter(bookInteractor)
 
     @Provides
     @Singleton

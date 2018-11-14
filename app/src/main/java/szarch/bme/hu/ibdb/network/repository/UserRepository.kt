@@ -8,6 +8,7 @@ import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
 import szarch.bme.hu.ibdb.network.models.user.UpdateUserRequest
+import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -31,30 +32,79 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun updateCategories(userId: String, categoriesUpdateRequest: CategoriesUpdateRequest) =
+    suspend fun updateCategories(categoriesUpdateRequest: CategoriesUpdateRequest) =
         withContext(Contexts.NETWORK) {
-
+            val response = userApi.updateCategories(categoriesUpdateRequest).execute()
+            if (response.isSuccessful.not()) {
+                when (response.code()) {
+                    401 -> throw UnauthorizedException("Unauthorized")
+                    403 -> throw ForbiddenException("Forbidden")
+                    404 -> throw NotFoundException("Not found")
+                    else -> throw Exception(response.message())
+                }
+            }
         }
 
-    suspend fun addCategory(id: String, userId: String) = withContext(Contexts.NETWORK) {
-
+    suspend fun addFavourite(bookId: String) = withContext(Contexts.NETWORK) {
+        val response = userApi.addFavourite(bookId).execute()
+        if (response.isSuccessful.not()) {
+            when (response.code()) {
+                401 -> throw UnauthorizedException("Unauthorized")
+                403 -> throw ForbiddenException("Forbidden")
+                404 -> throw NotFoundException("Not found")
+                else -> throw Exception(response.message())
+            }
+        }
     }
 
-    suspend fun deleteCategory(id: String, userId: String) = withContext(Contexts.NETWORK) {
-
+    suspend fun deleteFavourite(bookId: String) = withContext(Contexts.NETWORK) {
+        val response = userApi.deleteFavourite(bookId).execute()
+        if (response.isSuccessful.not()) {
+            when (response.code()) {
+                401 -> throw UnauthorizedException("Unauthorized")
+                403 -> throw ForbiddenException("Forbidden")
+                404 -> throw NotFoundException("Not found")
+                else -> throw Exception(response.message())
+            }
+        }
     }
 
-    /*
-    suspend fun getUserInfo():UserInfoResponse = withContext(Contexts.NETWORK){
-
-    }*/
-
-    suspend fun updateUserInfo(userId: String, updateUserRequest: UpdateUserRequest) = withContext(Contexts.NETWORK) {
-
+    suspend fun getUserInfo(): UserInfoResponse? = withContext(Contexts.NETWORK) {
+        val response = userApi.getUserInfo().execute()
+        if (response.isSuccessful) {
+            return@withContext response.body()
+        } else {
+            when (response.code()) {
+                401 -> throw UnauthorizedException("Unauthorized")
+                403 -> throw ForbiddenException("Forbidden")
+                404 -> throw NotFoundException("Not found")
+                else -> throw Exception(response.message())
+            }
+        }
     }
 
-    suspend fun deleteUser(userId: String) = withContext(Contexts.NETWORK) {
+    suspend fun updateUserInfo(updateUserRequest: UpdateUserRequest) = withContext(Contexts.NETWORK) {
+        val response = userApi.updateUserInfo(updateUserRequest).execute()
+        if (response.isSuccessful.not()) {
+            when (response.code()) {
+                401 -> throw UnauthorizedException("Unauthorized")
+                403 -> throw ForbiddenException("Forbidden")
+                404 -> throw NotFoundException("Not found")
+                else -> throw Exception(response.message())
+            }
+        }
+    }
 
+    suspend fun deleteUser() = withContext(Contexts.NETWORK) {
+        val response = userApi.deleteUser().execute()
+        if (response.isSuccessful.not()) {
+            when (response.code()) {
+                401 -> throw UnauthorizedException("Unauthorized")
+                403 -> throw ForbiddenException("Forbidden")
+                404 -> throw NotFoundException("Not found")
+                else -> throw Exception(response.message())
+            }
+        }
     }
 
 }

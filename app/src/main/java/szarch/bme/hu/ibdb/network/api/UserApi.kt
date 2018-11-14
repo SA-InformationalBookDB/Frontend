@@ -14,20 +14,17 @@ interface UserApi {
 
     @PUT("/user/category")
     fun updateCategories(
-        @Query("userId") userId: String,
         @Body categoriesUpdateRequest: CategoriesUpdateRequest
     ): Call<Void>
 
     @PUT("/user/favourite/{id}")
-    fun addCategory(
-        @Path("id") favouriteId: String,
-        @Query("userId") userId: String
+    fun addFavourite(
+        @Path("id") favouriteId: String
     ): Call<Void>
 
     @DELETE("/user/favourite/{id}")
-    fun deleteCategory(
-        @Path("id") favouriteId: String,
-        @Query("userId") userId: String
+    fun deleteFavourite(
+        @Path("id") favouriteId: String
     ): Call<Void>
 
     @GET("/user/profile")
@@ -35,14 +32,10 @@ interface UserApi {
 
     @PUT("/user/profile")
     fun updateUserInfo(
-        @Query("userId") userId: String,
         @Body updateUserRequest: UpdateUserRequest
-    )
+    ): Call<Void>
 
     @DELETE("/user/profile")
-    fun deleteUser(
-        @Query("userId") userId: String,
-        @Body updateUserRequest: UpdateUserRequest
-    )
+    fun deleteUser(): Call<Void>
 
 }
