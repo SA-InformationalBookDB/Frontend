@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.search.SearchActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ViewFlipper
+            android:id="@+id/vf_search_books"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:showIn="@layout/activity_search"
-            tools:context=".ui.search.SearchActivity">
+            android:layout_height="match_parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_books"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/no_data_text"
+                  android:textColor="@android:color/black"
+                  android:layout_gravity="center"
+        />
+
+    </ViewFlipper>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -68,13 +68,13 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                     android:id="@+id/tv_login_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toRightOf="@id/iv_login_result"
+                    app:layout_constraintStart_toEndOf="@id/iv_login_result"
                     android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/tv_login_error_reason"
@@ -89,7 +89,7 @@
                     android:textSize="14sp"
                     android:textColor="@android:color/black"
                     app:layout_constraintTop_toBottomOf="@id/tv_login_result"
-                    app:layout_constraintLeft_toLeftOf="@id/tv_login_result"
+                    app:layout_constraintStart_toStartOf="@id/tv_login_result"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:visibility="gone"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

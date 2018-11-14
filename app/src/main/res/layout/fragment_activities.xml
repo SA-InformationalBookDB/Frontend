@@ -3,11 +3,21 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_activities"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"/>
+    <ViewFlipper
+            android:id="@+id/vf_activities"
+            android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_activities"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/no_data_text"
+                  android:textColor="@android:color/black"
+                  android:layout_gravity="center"/>
+    </ViewFlipper>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

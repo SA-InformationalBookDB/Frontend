@@ -2,6 +2,7 @@ package szarch.bme.hu.ibdb.di
 
 import dagger.Module
 import dagger.Provides
+import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.network.repository.BookRepository
 import szarch.bme.hu.ibdb.network.repository.UserRepository
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesPresenter
@@ -32,7 +33,7 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun usersPresenter() = UsersPresenter()
+    fun usersPresenter(adminRepository: AdminRepository) = UsersPresenter(adminRepository)
 
 
 }

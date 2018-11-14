@@ -1,18 +1,18 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
+import szarch.bme.hu.ibdb.util.Navigator
 import javax.inject.Inject
 
 class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener, MainScreen {
@@ -138,7 +138,8 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     }
 
     override fun onItemSelected(bookItemId: String) {
-        Toast.makeText(requireContext(), bookItemId, Toast.LENGTH_LONG).show()
+        Log.d("Testing", "onItemSelected")
+        Navigator.navigateToDetailScreen(requireActivity(), bookItemId)
     }
 
     companion object {

@@ -17,14 +17,14 @@
                 android:id="@+id/iv_upload_book_title"
                 android:layout_width="40dp" android:layout_height="40dp"
                 android:src="@drawable/ic_book_title"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="8dp"
         />
 
         <EditText
                 android:id="@+id/et_upload_book_title"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/book_title"
                 style="@style/BookItemPageTextViewStyle"/>
@@ -42,14 +42,14 @@
         <ImageView
                 android:id="@+id/iv_upload_book_author"
                 android:src="@drawable/ic_book_author"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/BookItemPageImageViewStyle"
         />
 
         <EditText
                 android:id="@+id/et_upload_book_author"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/book_author"
                 style="@style/BookItemPageTextViewStyle"/>
@@ -74,7 +74,7 @@
 
         <EditText
                 android:id="@+id/et_upload_book_publisher"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/book_publisher"
                 style="@style/BookItemPageTextViewStyle"/>
@@ -92,14 +92,14 @@
         <ImageView
                 android:id="@+id/iv_upload_book_published"
                 android:src="@drawable/ic_book_published"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/BookItemPageImageViewStyle"
         />
 
         <TextView
                 android:id="@+id/et_upload_book_published"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/book_publisher"
                 style="@style/BookItemPageTextViewStyle"/>
@@ -117,14 +117,14 @@
         <ImageView
                 android:id="@+id/iv_upload_book_category"
                 android:src="@drawable/ic_book_categories"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/BookItemPageImageViewStyle"
         />
 
         <TextView
                 android:id="@+id/et_upload_book_category"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/book_category"
                 style="@style/BookItemPageTextViewStyle"/>
@@ -143,7 +143,7 @@
         <ImageView
                 android:id="@+id/iv_upload_book_page_number"
                 android:src="@drawable/ic_book_page_number"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 style="@style/BookItemPageImageViewStyle"
         />
@@ -151,7 +151,7 @@
         <TextView
                 android:id="@+id/et_upload_book_page_number"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 android:hint="@string/book_page_number"
                 style="@style/BookItemPageTextViewStyle"/>
 
@@ -167,7 +167,7 @@
 
         <ImageView
                 android:id="@+id/iv_upload_book_summary"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/ic_book_summary"
                 style="@style/BookItemPageImageViewStyle"
@@ -175,7 +175,7 @@
 
         <TextView
                 android:id="@+id/et_upload_book_summary"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/book_summary"
                 style="@style/BookItemPageTextViewStyle"/>
@@ -192,7 +192,7 @@
 
         <ImageView
                 android:id="@+id/iv_upload_book_image_url"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/ic_book_image_url"
                 style="@style/BookItemPageImageViewStyle"
@@ -200,7 +200,7 @@
 
         <TextView
                 android:id="@+id/et_upload_book_image_url"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:hint="@string/book_image"
                 style="@style/BookItemPageTextViewStyle"/>

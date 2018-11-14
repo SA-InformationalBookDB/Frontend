@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_users.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.User
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
-class UsersFragment : androidx.fragment.app.Fragment(), UsersScreen {
+class UsersFragment : androidx.fragment.app.Fragment(), UsersAdapter.UserListener, UsersScreen {
 
     @Inject
     lateinit var usersPresenter: UsersPresenter
@@ -28,7 +29,6 @@ class UsersFragment : androidx.fragment.app.Fragment(), UsersScreen {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        usersPresenter = UsersPresenter()
         usersPresenter.attachScreen(this)
         setupRecyclerViewAdapter()
         setupRecyclerView()
@@ -62,6 +62,23 @@ class UsersFragment : androidx.fragment.app.Fragment(), UsersScreen {
 
     override fun showUserList(userList: List<User>) {
         usersAdapter.submitList(userList)
+    }
+
+    override fun enableUser(userId: String) {
+        usersPresenter.enableUser(userId)
+    }
+
+    override fun disableUSer(userId: String) {
+        usersPresenter.disableUser(userId)
+    }
+
+    override fun removeUser(userId: String) {
+        usersPresenter.removeUser(userId)
+    }
+
+    override fun showErrorMessage() {
+        Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+        usersPresenter.getUsers()
     }
 
     companion object {

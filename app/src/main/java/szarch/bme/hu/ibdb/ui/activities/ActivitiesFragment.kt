@@ -61,7 +61,12 @@ class ActivitiesFragment : androidx.fragment.app.Fragment(), ActivitiesScreen {
     }
 
     override fun showActivities(reviewList: List<Review>) {
-        activitiesAdapter.submitList(reviewList)
+        if (reviewList.isEmpty()) {
+            vf_activities.displayedChild = 1
+        } else {
+            vf_activities.displayedChild = 0
+            activitiesAdapter.submitList(reviewList)
+        }
     }
 
     companion object {

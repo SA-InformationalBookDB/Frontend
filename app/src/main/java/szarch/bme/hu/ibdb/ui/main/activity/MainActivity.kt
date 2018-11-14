@@ -59,6 +59,11 @@ class MainActivity : AppCompatActivity() {
         showFragment(MainFragment.TAG)
     }
 
+    override fun onStart() {
+        super.onStart()
+    }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)

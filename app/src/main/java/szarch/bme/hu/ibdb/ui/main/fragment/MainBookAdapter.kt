@@ -1,13 +1,13 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_main_book_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.domain.models.Book
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.comparators.BookComparator
 
@@ -23,10 +23,12 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
 
     override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
         val item = getItem(position)
+        holder.item = item
         holder.tvBookTitle.text = item.title
         item.imageUrl?.let {
-            Glide.with(holder.itemView.context)
+            Picasso.get()
                 .load(it)
+                .fit()
                 .into(holder.ivBookImage)
         }
     }
@@ -36,13 +38,18 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
         val tvBookTitle = bookItemView.tv_main_book_item
         val ivBookImage = bookItemView.iv_main_book_item
 
-        var item: Book? = null
+        var item: BookResponse? = null
 
         init {
-            itemView.setOnClickListener {
-                item?.let { item -> listener?.onItemSelected(item.id) }
+            bookItemView.setOnClickListener {
+                Log.d("Testing", (item == null).toString())
+                item?.let { item ->
+                    listener?.onItemSelected(item.id)
+                }
             }
         }
+
+
     }
 
     interface Listener {

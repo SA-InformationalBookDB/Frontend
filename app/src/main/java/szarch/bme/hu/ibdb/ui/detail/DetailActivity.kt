@@ -1,6 +1,7 @@
 package szarch.bme.hu.ibdb.ui.detail
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -9,13 +10,24 @@ import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.util.StringUtil
+import javax.inject.Inject
 
 class DetailActivity : AppCompatActivity(), DetailScreen {
+
+    @Inject
+    lateinit var detailPresenter: DetailPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectActivity()
         setContentView(R.layout.activity_detail)
+        detailPresenter.attachScreen(this)
+        detailPresenter.getBookDetails(intent.getStringExtra("bookId"))
+    }
+
+    override fun onStop() {
+        detailPresenter.detachScreen()
+        super.onStop()
     }
 
     private fun injectActivity() {
@@ -26,13 +38,12 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
     }
 
     override fun showBookDetail(bookResponse: BookResponse) {
-        bookResponse.imageUrl?.let {
-            Picasso.get()
-                .load(it)
-                .fit()
-                .into(iv_detail)
-        }
 
+        Picasso.get()
+            .load(bookResponse.imageUrl)
+            .placeholder(R.drawable.ic_book_image_url)
+            .resize(200, 200)
+            .into(iv_detail)
         tv_detail_book_title.text = bookResponse.title
         tv_detail_book_author.text = bookResponse.author
         tv_detail_book_publisher.text = bookResponse.publisher
@@ -47,8 +58,10 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
         bookResponse.views?.let {
             tv_detail_book_views.text = it.toString()
         }
+    }
 
-
+    override fun showBookError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
 }

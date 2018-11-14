@@ -48,8 +48,8 @@
                         android:backgroundTint="@android:color/black"
                         android:text="@string/sign_up_text"
                         android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/btn_login"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btn_login"/>
 
                 <Button
                         android:id="@+id/btn_login"
@@ -58,8 +58,8 @@
                         android:backgroundTint="@android:color/black"
                         android:text="@string/login_text"
                         android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintLeft_toRightOf="@id/btn_sign_in"
-                        app:layout_constraintRight_toRightOf="parent"/>
+                        app:layout_constraintStart_toEndOf="@id/btn_sign_in"
+                        app:layout_constraintEnd_toEndOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,8 +78,8 @@
                         android:backgroundTint="@android:color/black"
                         android:text="@string/logout_text"
                         android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
