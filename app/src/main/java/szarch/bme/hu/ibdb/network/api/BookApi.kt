@@ -1,7 +1,10 @@
 package szarch.bme.hu.ibdb.network.api
 
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 
 interface BookApi {
@@ -26,7 +29,7 @@ interface BookApi {
 
     @POST("/book/find")
     fun findBooks(
-        @Field("queryString") queryString: String
+        @Query("queryString") queryString: String
     ): Call<List<BookResponse>>
 
     @GET("/public/book/bestseller")
