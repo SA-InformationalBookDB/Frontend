@@ -1,7 +1,7 @@
 package szarch.bme.hu.ibdb.ui.activities
 
-import szarch.bme.hu.ibdb.domain.models.Review
+import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 
 interface ActivitiesScreen {
-    fun showActivities(reviewList: List<Review>)
+    fun showActivities(reviewList: List<ReviewResponse>)
 }

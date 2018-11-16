@@ -1,6 +1,7 @@
 package szarch.bme.hu.ibdb.domain.local
 
 import android.content.Context
+import szarch.bme.hu.ibdb.network.models.user.Role
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,6 +19,7 @@ class SharedPreferencesProvider @Inject constructor(
     private val CLIENT_REFRESH_TOKEN_STRING = "client_refresh_token"
     private val CLIENT_REDIRECT_URI_STRING = "client_redirect_uri"
     private val CLIENT_FIRST_STARTING = "client_first_starting"
+    private val CLIENT_IS_ADMIN = "client_role"
 
     private val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
 
@@ -82,6 +84,14 @@ class SharedPreferencesProvider @Inject constructor(
         sharedPreferences.edit().putString(CLIENT_REFRESH_TOKEN_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_ACCESS_TOKEN_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_REDIRECT_URI_STRING, "").apply()
+    }
+
+    fun setUserRole(role: Role) {
+        sharedPreferences.edit().putBoolean(CLIENT_IS_ADMIN, role == Role.ADMIN).apply()
+    }
+
+    fun getUserRole(): Boolean {
+        return sharedPreferences.getBoolean(CLIENT_IS_ADMIN, false)
     }
 
 

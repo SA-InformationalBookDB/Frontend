@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
@@ -44,8 +45,17 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
         mainScreenPresenter.attachScreen(this)
         setupRecyclerViewAdapter()
         setupRecyclerView()
-        getBooks()
         shouldShowLoginDialog()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getBooks()
+        checkUserValidity()
+    }
+
+    private fun checkUserValidity() {
+        mainScreenPresenter.getUserIsAdmin()
     }
 
     override fun onDestroy() {
@@ -142,6 +152,11 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
 
     override fun onItemSelected(bookItemId: String) {
         Navigator.navigateToDetailScreen(requireActivity(), bookItemId)
+    }
+
+    override fun setUserInteractionPossibilities(userIsAdmin: Boolean) {
+        activity?.navigation?.menu?.getItem(2)?.isVisible = userIsAdmin
+        activity?.navigation?.menu?.getItem(4)?.isVisible = userIsAdmin
     }
 
     companion object {

@@ -7,4 +7,5 @@ interface MainScreen {
     fun showBestsellerBooks(bookList: List<BookResponse>)
     fun showPopularBooks(bookList: List<BookResponse>)
     fun showTrendingBooks(bookList: List<BookResponse>)
+    fun setUserInteractionPossibilities(userIsAdmin: Boolean)
 }

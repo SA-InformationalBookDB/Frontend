@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_activity_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.domain.models.Review
+import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 import szarch.bme.hu.ibdb.ui.base.comparators.ReviewComparator
 
-class ActivitiesAdapter : ListAdapter<Review, ActivitiesAdapter.ActivityItemViewHolder>(ReviewComparator) {
+class ActivitiesAdapter : ListAdapter<ReviewResponse, ActivitiesAdapter.ActivityItemViewHolder>(ReviewComparator) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ActivityItemViewHolder {
         val activityItemView =
@@ -19,7 +19,7 @@ class ActivitiesAdapter : ListAdapter<Review, ActivitiesAdapter.ActivityItemView
 
     override fun onBindViewHolder(holder: ActivityItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.tvActivityBookTitle.text = item.book.title
+        holder.tvActivityBookTitle.text = "Book title"
         holder.rtActivityRating.rating = item.points.toFloat()
         holder.tv_ActivityBookComment.text = item.comment
 

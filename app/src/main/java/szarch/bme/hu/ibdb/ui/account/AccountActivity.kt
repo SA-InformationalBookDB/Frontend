@@ -4,13 +4,11 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.ViewFlipper
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_account.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.models.AuthenticationResult
@@ -32,6 +30,7 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
         super.onCreate(savedInstanceState)
         injectActivity()
         setContentView(R.layout.activity_account)
+        setupScreen()
         showSettingsFragment()
         setupButtons()
     }
@@ -58,6 +57,10 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
         fragmentTransaction.add(R.id.settings_fragment_container, SettingsPreferenceFragment())
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    private fun setupScreen() {
+        accountPresenter.getUserAuthenticationInfo()
     }
 
     private fun setupButtons() {
@@ -186,6 +189,15 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
         dialog.show()
     }
 
+    private fun showAuthenticationStatus(isUserAuthenticated: Boolean) {
+        tv_intro.text =
+                if (isUserAuthenticated) resources.getString(R.string.account_signed_in_title) else resources.getString(
+                    R.string.account_signed_out_title
+                )
+        cl_signed_in.isVisible = isUserAuthenticated
+        cl_signed_out.isVisible = isUserAuthenticated.not()
+    }
+
     override fun showRegistrationResult(authenticationResult: AuthenticationResult) {
         dialogState = DialogState.RESULT
         dialogView.findViewById<ViewFlipper>(R.id.vf_registration).displayedChild = 2
@@ -211,12 +223,22 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
             dialogView.findViewById<ImageView>(R.id.iv_login_result)
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_success))
             accountPresenter.getUser()
+            showAuthenticationStatus(true)
         } else {
             dialogView.findViewById<ImageView>(R.id.iv_login_result)
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_error))
             dialogView.findViewById<TextView>(R.id.tv_login_error_reason).visibility = View.VISIBLE
             dialogView.findViewById<TextView>(R.id.tv_login_error_reason).text = authenticationResult.message
         }
+    }
+
+    override fun showLogoutResult(authenticationResult: AuthenticationResult) {
+        Toast.makeText(this@AccountActivity, authenticationResult.message, Toast.LENGTH_LONG).show()
+        showAuthenticationStatus(false)
+    }
+
+    override fun showIsUserAuthenticated(isUserAuthenticated: Boolean) {
+        showAuthenticationStatus(isUserAuthenticated)
     }
 
 }

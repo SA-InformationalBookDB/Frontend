@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_activities.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.domain.models.Review
+import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
@@ -60,7 +60,7 @@ class ActivitiesFragment : androidx.fragment.app.Fragment(), ActivitiesScreen {
         activitiesPresenter.getActivities()
     }
 
-    override fun showActivities(reviewList: List<Review>) {
+    override fun showActivities(reviewList: List<ReviewResponse>) {
         if (reviewList.isEmpty()) {
             vf_activities.displayedChild = 1
         } else {

@@ -10,6 +10,7 @@ import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.ui.favourites.FavouriteAdapter
+import szarch.bme.hu.ibdb.util.Navigator
 import javax.inject.Inject
 
 
@@ -74,7 +75,7 @@ class SearchActivity : AppCompatActivity(), SearchScreen, FavouriteAdapter.Liste
     }
 
     override fun onItemSelected(bookItemId: String) {
-
+        Navigator.navigateToDetailScreen(this@SearchActivity, bookItemId)
     }
 
 }

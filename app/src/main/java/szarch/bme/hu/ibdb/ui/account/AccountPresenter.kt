@@ -1,13 +1,13 @@
 package szarch.bme.hu.ibdb.ui.account
 
 import android.content.res.Resources
-import android.util.Log
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
 import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
+import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.domain.models.AuthenticationResult
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
@@ -19,11 +19,12 @@ import javax.inject.Inject
 class AccountPresenter @Inject constructor(
     private val userInteractor: UserInteractor,
     private val oauthInteractor: OauthInteractor,
+    private val sharedPreferencesProvider: SharedPreferencesProvider,
     private val resources: Resources
 ) : Presenter<AccountScreen>() {
 
     fun registerUser(email: String, password: String, confirmPassword: String) {
-        GlobalScope.launch(Contexts.UI + CoroutineExceptionHandler { coroutineContext, throwable ->
+        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
             when (throwable) {
                 is UnauthorizedException -> {
                     throwable.printStackTrace()
@@ -69,7 +70,7 @@ class AccountPresenter @Inject constructor(
     }
 
     fun loginUser(email: String, password: String) {
-        GlobalScope.launch(Contexts.UI + CoroutineExceptionHandler { coroutineContext, throwable ->
+        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
             when (throwable) {
                 is UnauthorizedException -> {
                     throwable.printStackTrace()
@@ -117,34 +118,34 @@ class AccountPresenter @Inject constructor(
 
 
     fun logoutUser() {
-        GlobalScope.launch(Contexts.UI + CoroutineExceptionHandler { coroutineContext, throwable ->
+        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
             when (throwable) {
                 is UnauthorizedException -> {
-                    throwable.printStackTrace()
-                    screen?.showRegistrationResult(
+                    sharedPreferencesProvider.clearUserDatas()
+                    screen?.showLogoutResult(
                         AuthenticationResult(
                             false,
-                            resources.getString(R.string.registration_unsuccessful),
+                            resources.getString(R.string.logout_unsuccessful),
                             throwable.message!!
                         )
                     )
                 }
                 is ForbiddenException -> {
-                    throwable.printStackTrace()
-                    screen?.showRegistrationResult(
+                    sharedPreferencesProvider.clearUserDatas()
+                    screen?.showLogoutResult(
                         AuthenticationResult(
                             false,
-                            resources.getString(R.string.registration_unsuccessful),
+                            resources.getString(R.string.logout_unsuccessful),
                             throwable.message!!
                         )
                     )
                 }
                 is NotFoundException -> {
-                    throwable.printStackTrace()
-                    screen?.showRegistrationResult(
+                    sharedPreferencesProvider.clearUserDatas()
+                    screen?.showLogoutResult(
                         AuthenticationResult(
                             false,
-                            resources.getString(R.string.registration_unsuccessful),
+                            resources.getString(R.string.logout_unsuccessful),
                             throwable.message!!
                         )
                     )
@@ -153,10 +154,10 @@ class AccountPresenter @Inject constructor(
             }
         }) {
             oauthInteractor.sendLogoutRequest()
-            screen?.showRegistrationResult(
+            screen?.showLogoutResult(
                 AuthenticationResult(
                     true,
-                    resources.getString(R.string.registration_successful)
+                    resources.getString(R.string.logout_successful)
                 )
             )
         }
@@ -166,9 +167,13 @@ class AccountPresenter @Inject constructor(
     fun getUser() {
         GlobalScope.launch(Contexts.UI) {
             val user = userInteractor.getUserInfo()
-            Log.d("Testing", user.toString())
         }
     }
 
+    fun getUserAuthenticationInfo() {
+        GlobalScope.launch(Contexts.UI) {
+            screen?.showIsUserAuthenticated(userInteractor.getUserAuthentication())
+        }
+    }
 
 }

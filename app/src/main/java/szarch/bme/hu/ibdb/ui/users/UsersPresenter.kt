@@ -16,7 +16,7 @@ class UsersPresenter @Inject constructor(
 ) : Presenter<UsersScreen>() {
 
     fun getUsers() {
-        //screen?.showUserList(adminRepository.)
+        //screen?.showUserList(adminRepository.get)
     }
 
     fun enableUser(userId: String) {

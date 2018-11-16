@@ -3,6 +3,8 @@ package szarch.bme.hu.ibdb.di
 import dagger.Module
 import dagger.Provides
 import szarch.bme.hu.ibdb.domain.interactors.BookInteractor
+import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
+import szarch.bme.hu.ibdb.domain.interactors.ReviewInteractor
 import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
 import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.network.repository.BookRepository
@@ -18,7 +20,8 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun activitiesPresenter() = ActivitiesPresenter()
+    fun activitiesPresenter(reviewInteractor: ReviewInteractor, oauthInteractor: OauthInteractor) =
+        ActivitiesPresenter(reviewInteractor, oauthInteractor)
 
     @Provides
     @Singleton
@@ -26,7 +29,11 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun mainPresenter(bookInteractor: BookInteractor) = MainScreenPresenter(bookInteractor)
+    fun mainPresenter(
+        bookInteractor: BookInteractor,
+        oauthInteractor: OauthInteractor,
+        userInteractor: UserInteractor
+    ) = MainScreenPresenter(bookInteractor, oauthInteractor, userInteractor)
 
     @Provides
     @Singleton

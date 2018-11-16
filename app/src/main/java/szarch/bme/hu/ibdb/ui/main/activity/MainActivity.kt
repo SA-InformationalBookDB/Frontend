@@ -3,7 +3,9 @@ package szarch.bme.hu.ibdb.ui.main.activity
 import android.app.SearchManager
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -61,6 +63,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        Log.d("Testing", "activity on start")
     }
 
 
@@ -120,5 +123,9 @@ class MainActivity : AppCompatActivity() {
             fragment = supportFragmentManager.findFragmentByTag(tag)!!
         }
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment, tag).addToBackStack(null).commit()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

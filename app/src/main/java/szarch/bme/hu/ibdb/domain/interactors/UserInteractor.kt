@@ -23,7 +23,17 @@ class UserInteractor @Inject constructor(
     }
 
     suspend fun getUserInfo(): UserInfoResponse = withContext(Contexts.UI) {
-        return@withContext userRepository.getUserInfo()
+        val userResponse = userRepository.getUserInfo()
+        sharedPreferencesProvider.setUserRole(userResponse.role)
+        return@withContext userResponse
+    }
+
+    suspend fun getUserAuthentication(): Boolean = withContext(Contexts.UI) {
+        return@withContext sharedPreferencesProvider.getClientAccessToken().isNotEmpty()
+    }
+
+    suspend fun getUserIsAdmin(): Boolean = withContext(Contexts.UI) {
+        return@withContext sharedPreferencesProvider.getUserRole()
     }
 
 }

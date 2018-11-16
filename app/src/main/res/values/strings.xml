@@ -23,6 +23,8 @@
     <string name="login_unsuccessful">Login unsuccessful</string>
     <string name="registration_successful">Registration successful</string>
     <string name="registration_unsuccessful">Registration unsuccessful</string>
+    <string name="logout_successful">Logout successful</string>
+    <string name="logout_unsuccessful">Logout unsuccessful</string>
 
     <!--View spceific-->
     <string name="title_home">Home</string>
