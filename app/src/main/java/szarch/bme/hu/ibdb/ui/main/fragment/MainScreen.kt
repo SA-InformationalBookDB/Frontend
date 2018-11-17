@@ -8,4 +8,5 @@ interface MainScreen {
     fun showPopularBooks(bookList: List<BookResponse>)
     fun showTrendingBooks(bookList: List<BookResponse>)
     fun setUserInteractionPossibilities(userIsAdmin: Boolean)
+    fun showErrorMessage(message: String?)
 }

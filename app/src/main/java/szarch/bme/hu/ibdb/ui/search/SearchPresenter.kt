@@ -1,6 +1,5 @@
 package szarch.bme.hu.ibdb.ui.search
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -19,12 +18,17 @@ class SearchPresenter @Inject constructor(
     fun searchBooks(query: String) {
         GlobalScope.launch(Contexts.UI + CoroutineExceptionHandler { coroutineContext, throwable ->
             when (throwable) {
-                is UnauthorizedException -> throwable.printStackTrace()
+                is UnauthorizedException -> {
+                    GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+                        screen?.showErrorMessage(throwable.message)
+                    }) {
+                        screen?.showBooks(bookRepository.findBooks(query))
+                    }
+                }
                 is ForbiddenException -> throwable.printStackTrace()
                 is NotFoundException -> throwable.printStackTrace()
                 else -> throwable.printStackTrace()
             }
-            Log.d("Testing", "getRecommendationBooks")
         }) {
             screen?.showBooks(bookRepository.findBooks(query))
         }

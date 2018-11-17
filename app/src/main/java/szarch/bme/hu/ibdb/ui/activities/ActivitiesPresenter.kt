@@ -22,12 +22,7 @@ class ActivitiesPresenter @Inject constructor(
             when (throwable) {
                 is UnauthorizedException -> {
                     GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-                        when (throwable) {
-                            is UnauthorizedException -> throwable.printStackTrace()
-                            is ForbiddenException -> throwable.printStackTrace()
-                            is NotFoundException -> throwable.printStackTrace()
-                            else -> throwable.printStackTrace()
-                        }
+                        screen?.showErrorMessage(throwable.message)
                     }) {
                         oauthInteractor.sendRefreshTokenRequest()
                         screen?.showActivities(reviewInteractor.getUserReviews())

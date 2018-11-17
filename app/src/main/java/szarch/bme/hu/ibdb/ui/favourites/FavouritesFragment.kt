@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_favourites.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
@@ -68,6 +69,10 @@ class FavouritesFragment : androidx.fragment.app.Fragment(), FavouriteAdapter.Li
             vf_favourites.displayedChild = 0
             favouriteAdapter.submitList(bookList)
         }
+    }
+
+    override fun showErrorMeaasge(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun onItemSelected(bookItemId: String) {

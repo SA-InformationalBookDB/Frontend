@@ -3,6 +3,7 @@ package szarch.bme.hu.ibdb.ui.search
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_search.*
@@ -76,6 +77,10 @@ class SearchActivity : AppCompatActivity(), SearchScreen, FavouriteAdapter.Liste
 
     override fun onItemSelected(bookItemId: String) {
         Navigator.navigateToDetailScreen(this@SearchActivity, bookItemId)
+    }
+
+    override fun showErrorMessage(message: String?) {
+        Toast.makeText(this@SearchActivity, message, Toast.LENGTH_LONG).show()
     }
 
 }

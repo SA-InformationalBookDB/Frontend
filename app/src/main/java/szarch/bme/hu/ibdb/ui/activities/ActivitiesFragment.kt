@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_activities.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
@@ -67,6 +68,10 @@ class ActivitiesFragment : androidx.fragment.app.Fragment(), ActivitiesScreen {
             vf_activities.displayedChild = 0
             activitiesAdapter.submitList(reviewList)
         }
+    }
+
+    override fun showErrorMessage(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     companion object {

@@ -4,4 +4,5 @@ import szarch.bme.hu.ibdb.network.models.book.BookResponse
 
 interface SearchScreen {
     fun showBooks(bookList: List<BookResponse>)
+    fun showErrorMessage(message: String?)
 }

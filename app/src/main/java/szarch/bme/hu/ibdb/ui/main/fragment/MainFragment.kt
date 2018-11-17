@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -157,6 +158,10 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     override fun setUserInteractionPossibilities(userIsAdmin: Boolean) {
         activity?.navigation?.menu?.getItem(2)?.isVisible = userIsAdmin
         activity?.navigation?.menu?.getItem(4)?.isVisible = userIsAdmin
+    }
+
+    override fun showErrorMessage(message: String?) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     companion object {
