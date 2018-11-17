@@ -2,12 +2,12 @@ package szarch.bme.hu.ibdb.ui.upload
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import kotlinx.android.synthetic.main.content_detail.*
 import kotlinx.android.synthetic.main.content_upload.*
 import kotlinx.android.synthetic.main.fragment_upload.*
 import szarch.bme.hu.ibdb.R
@@ -55,13 +55,21 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
     }
 
     private fun setupCategoryButton() {
-        cl_detail_book_category.setOnClickListener {
+        cl_book_category.setOnClickListener {
             if (categoryList.isNotEmpty()) {
-                val builder = AlertDialog.Builder(requireContext())
+                val builder = AlertDialog.Builder(ContextThemeWrapper(requireContext(), R.style.AlertDialogStyle))
                 val title = builder.setTitle(resources.getString(R.string.category_selection_text))
 
                 val bookCategories = categoryList.map { it -> it.name }.toTypedArray()
                 val checkedItemList = BooleanArray(bookCategories.size) { false }
+
+                if (selectedCategoryIds.isNotEmpty()) {
+                    selectedCategoryIds.forEachIndexed { index, categoryId ->
+                        checkedItemList[categoryList.indexOfFirst { it -> it.id == categoryId }] = true
+                    }
+                }
+
+
                 builder.setMultiChoiceItems(
                     bookCategories, checkedItemList
                 ) { dialog: DialogInterface, which: Int, isChecked: Boolean ->
@@ -79,7 +87,8 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
                 val dialog = builder.create()
                 dialog.show()
             } else {
-                Toast.makeText(requireContext(), resources.getString(R.string.category_error), Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), resources.getString(R.string.category_error), Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
