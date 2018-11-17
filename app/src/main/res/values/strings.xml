@@ -67,5 +67,7 @@
         account settings are available at the top right account icon.
     </string>
     <string name="no_data_text">Data is unavailable</string>
-
+    <string name="book_upload_successful">Successful upload</string>
+    <string name="book_upload_unsuccessful">UnSuccessful upload! Please, try it again!</string>
+    <string name="category_error">Category selection is not available!</string>
 </resources>

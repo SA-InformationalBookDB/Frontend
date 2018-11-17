@@ -23,6 +23,7 @@ class MainScreenPresenter @Inject constructor(
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
             when (throwable) {
                 is UnauthorizedException -> {
+                    screen?.hideRecommendationBookList()
                 }
                 is ForbiddenException -> throwable.printStackTrace()
                 is NotFoundException -> throwable.printStackTrace()
@@ -40,7 +41,7 @@ class MainScreenPresenter @Inject constructor(
                     GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
                         screen?.showErrorMessage(throwable.message)
                     }) {
-                        screen?.showTrendingBooks(bookInteractor.getPublicBestsellerBooks())
+                        screen?.showBestsellerBooks(bookInteractor.getPublicBestsellerBooks())
                     }
                 }
                 is ForbiddenException -> throwable.printStackTrace()
@@ -64,7 +65,7 @@ class MainScreenPresenter @Inject constructor(
                             else -> throwable.printStackTrace()
                         }
                     }) {
-                        screen?.showTrendingBooks(bookInteractor.getPublicPopularBooks())
+                        screen?.showPopularBooks(bookInteractor.getPublicPopularBooks())
                     }
                 }
                 is ForbiddenException -> throwable.printStackTrace()

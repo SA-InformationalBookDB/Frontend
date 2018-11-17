@@ -25,7 +25,8 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun favouritesPresenter(userInteractor: UserInteractor) = FavouritePresenter(userInteractor)
+    fun favouritesPresenter(oauthInteractor: OauthInteractor, userInteractor: UserInteractor) =
+        FavouritePresenter(oauthInteractor, userInteractor)
 
     @Provides
     @Singleton

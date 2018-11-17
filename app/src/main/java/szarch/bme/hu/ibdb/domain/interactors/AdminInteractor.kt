@@ -13,7 +13,7 @@ class AdminInteractor @Inject constructor(
 
     suspend fun addBook(
         title: String, author: String, published: Date?, publisher: String?,
-        imageUrl: String?, summary: String, pageNumber: Int, sold: Int?, views: Int?
+        imageUrl: String?, summary: String, pageNumber: Int, sold: Int?
     ) = withContext(Contexts.UI) {
         adminRepository.addBook(
             BookRequest(
@@ -24,8 +24,7 @@ class AdminInteractor @Inject constructor(
                 imageUrl,
                 summary,
                 pageNumber,
-                sold,
-                views
+                sold
             )
         )
     }
@@ -36,7 +35,7 @@ class AdminInteractor @Inject constructor(
     ) = withContext(Contexts.UI) {
         adminRepository.updateBook(
             id,
-            BookRequest(title, author, published, publisher, imageUrl, summary, pageNumber, sold, views)
+            BookRequest(title, author, published, publisher, imageUrl, summary, pageNumber, sold)
         )
     }
 

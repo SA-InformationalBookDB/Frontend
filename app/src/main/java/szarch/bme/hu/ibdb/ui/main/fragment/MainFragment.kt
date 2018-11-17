@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import szarch.bme.hu.ibdb.R
@@ -55,14 +56,15 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
         checkUserValidity()
     }
 
+    override fun onStop() {
+        super.onStop()
+        mainScreenPresenter.detachScreen()
+    }
+
     private fun checkUserValidity() {
         mainScreenPresenter.getUserIsAdmin()
     }
 
-    override fun onDestroy() {
-        mainScreenPresenter.detachScreen()
-        super.onDestroy()
-    }
 
     private fun injectFragment() {
         (context?.applicationContext as? BaseApplication)
@@ -158,6 +160,10 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     override fun setUserInteractionPossibilities(userIsAdmin: Boolean) {
         activity?.navigation?.menu?.getItem(2)?.isVisible = userIsAdmin
         activity?.navigation?.menu?.getItem(4)?.isVisible = userIsAdmin
+    }
+
+    override fun hideRecommendationBookList() {
+        cv_recommendations.isVisible = false
     }
 
     override fun showErrorMessage(message: String?) {

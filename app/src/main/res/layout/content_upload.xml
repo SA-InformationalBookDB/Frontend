@@ -97,11 +97,12 @@
                 style="@style/BookItemPageImageViewStyle"
         />
 
-        <TextView
+        <EditText
                 android:id="@+id/et_upload_book_published"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:hint="@string/book_publisher"
+                android:inputType="date"
+                android:hint="@string/book_published"
                 style="@style/BookItemPageTextViewStyle"/>
 
 
@@ -148,11 +149,37 @@
                 style="@style/BookItemPageImageViewStyle"
         />
 
-        <TextView
+        <EditText
                 android:id="@+id/et_upload_book_page_number"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:inputType="number"
                 android:hint="@string/book_page_number"
+                style="@style/BookItemPageTextViewStyle"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_book_sold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            app:layout_constraintTop_toBottomOf="@id/cl_book_page_number">
+
+        <ImageView
+                android:id="@+id/iv_upload_book_sold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_book_sold"
+                style="@style/BookItemPageImageViewStyle"
+        />
+
+        <EditText
+                android:id="@+id/et_upload_book_sold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:hint="@string/book_sold"
                 style="@style/BookItemPageTextViewStyle"/>
 
 
@@ -163,7 +190,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="56dp"
-            app:layout_constraintTop_toBottomOf="@id/cl_book_page_number">
+            app:layout_constraintTop_toBottomOf="@id/cl_book_sold">
 
         <ImageView
                 android:id="@+id/iv_upload_book_summary"
@@ -173,7 +200,7 @@
                 style="@style/BookItemPageImageViewStyle"
         />
 
-        <TextView
+        <EditText
                 android:id="@+id/et_upload_book_summary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -198,7 +225,7 @@
                 style="@style/BookItemPageImageViewStyle"
         />
 
-        <TextView
+        <EditText
                 android:id="@+id/et_upload_book_image_url"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

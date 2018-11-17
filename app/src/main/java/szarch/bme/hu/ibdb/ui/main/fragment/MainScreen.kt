@@ -9,4 +9,5 @@ interface MainScreen {
     fun showTrendingBooks(bookList: List<BookResponse>)
     fun setUserInteractionPossibilities(userIsAdmin: Boolean)
     fun showErrorMessage(message: String?)
+    fun hideRecommendationBookList()
 }
