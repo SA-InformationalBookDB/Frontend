@@ -1,17 +1,16 @@
 package szarch.bme.hu.ibdb.di
 
+import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
-import szarch.bme.hu.ibdb.domain.interactors.BookInteractor
-import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
-import szarch.bme.hu.ibdb.domain.interactors.ReviewInteractor
-import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
+import szarch.bme.hu.ibdb.domain.interactors.*
 import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.network.repository.BookRepository
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesPresenter
 import szarch.bme.hu.ibdb.ui.favourites.FavouritePresenter
 import szarch.bme.hu.ibdb.ui.main.fragment.MainScreenPresenter
 import szarch.bme.hu.ibdb.ui.search.SearchPresenter
+import szarch.bme.hu.ibdb.ui.upload.UploadPresenter
 import szarch.bme.hu.ibdb.ui.users.UsersPresenter
 import javax.inject.Singleton
 
@@ -39,6 +38,14 @@ class UIModule {
     @Provides
     @Singleton
     fun searchPresenter(bookRepository: BookRepository) = SearchPresenter(bookRepository)
+
+    @Provides
+    @Singleton
+    fun uploadPresenter(
+        adminInteractor: AdminInteractor,
+        categoryInteractor: CategoryInteractor,
+        resources: Resources
+    ) = UploadPresenter(adminInteractor, categoryInteractor, resources)
 
     @Provides
     @Singleton
