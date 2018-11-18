@@ -1,5 +1,6 @@
 package szarch.bme.hu.ibdb.ui.users
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import szarch.bme.hu.ibdb.ui.base.comparators.UserComparator
 
 class UsersAdapter : ListAdapter<UserInfoResponse, UsersAdapter.UsersItemViewHolder>(UserComparator) {
 
-    val listener: UserListener? = null
+    var listener: UserListener? = null
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): UsersItemViewHolder {
         val userItemView =
@@ -43,13 +44,16 @@ class UsersAdapter : ListAdapter<UserInfoResponse, UsersAdapter.UsersItemViewHol
     private fun showUserInfoDialog(view: View, user: UserInfoResponse) {
         val popup = PopupMenu(view.context, view)
         popup.menuInflater.inflate(R.menu.user_popup_menu, popup.menu)
-        /* if (user.) {
-             popup.menu.removeItem(R.id.menu_user_enable)
-         } else {
-             popup.menu.removeItem(R.id.menu_user_disable)
-         }*/
+        user.enabled?.let {
+            if (it) {
+                popup.menu.removeItem(R.id.menu_user_enable)
+            } else {
+                popup.menu.removeItem(R.id.menu_user_disable)
+            }
+        }
 
         popup.setOnMenuItemClickListener {
+            Log.d("Testing", (listener == null).toString())
             when (it.itemId) {
                 R.id.menu_user_enable -> {
                     listener?.enableUser(user.id)

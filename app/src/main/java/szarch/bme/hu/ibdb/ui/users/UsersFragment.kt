@@ -49,6 +49,7 @@ class UsersFragment : androidx.fragment.app.Fragment(), UsersAdapter.UserListene
 
     private fun setupRecyclerViewAdapter() {
         usersAdapter = UsersAdapter()
+        usersAdapter.listener = this
     }
 
     private fun setupRecyclerView() {
@@ -61,6 +62,7 @@ class UsersFragment : androidx.fragment.app.Fragment(), UsersAdapter.UserListene
     }
 
     override fun showUserList(userList: List<UserInfoResponse>) {
+        vf_users.displayedChild = if (userList.isEmpty()) 1 else 0
         usersAdapter.submitList(userList)
     }
 
@@ -76,8 +78,18 @@ class UsersFragment : androidx.fragment.app.Fragment(), UsersAdapter.UserListene
         usersPresenter.removeUser(userId)
     }
 
+    override fun showSuccessfulMessage() {
+        Toast.makeText(requireContext(), resources.getString(R.string.successful_user_modification), Toast.LENGTH_LONG)
+            .show()
+        usersPresenter.getUsers()
+    }
+
     override fun showErrorMessage() {
-        Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            requireContext(),
+            resources.getString(R.string.unsuccessful_user_modification),
+            Toast.LENGTH_LONG
+        ).show()
         usersPresenter.getUsers()
     }
 

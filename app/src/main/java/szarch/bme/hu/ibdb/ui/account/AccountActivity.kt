@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_account.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.domain.models.AuthenticationResult
+import szarch.bme.hu.ibdb.network.models.base.AuthenticationResult
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.ui.settings.SettingsPreferenceFragment
 import szarch.bme.hu.ibdb.util.StringUtil

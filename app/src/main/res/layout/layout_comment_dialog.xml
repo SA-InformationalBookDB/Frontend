@@ -26,6 +26,7 @@
             android:id="@+id/et_review_upload_comment"
             android:layout_width="match_parent" android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/rt_review_upload"
-            android:hint="@string/comment_hint"/>
+            android:hint="@string/comment_hint"
+            android:textColor="@android:color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

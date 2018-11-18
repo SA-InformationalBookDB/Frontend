@@ -17,7 +17,6 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
     @Inject
     lateinit var settingsPreferencePresenter: SettingsPreferencePresenter
 
-    private lateinit var etpEmailAddress: EditTextPreference
     private lateinit var etpNickname: EditTextPreference
     private lateinit var etpYearOfBirth: EditTextPreference
     private lateinit var etpCategory: Preference
@@ -31,6 +30,16 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
         initializeEditTextPreferences()
         setEditTextPreferencesSummaries()
         setEditTextOnClickListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        settingsPreferencePresenter.attachScreen(this)
+    }
+
+    override fun onDestroy() {
+        settingsPreferencePresenter.detachScreen()
+        super.onDestroy()
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -54,32 +63,37 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
     }
 
     private fun initializeEditTextPreferences() {
-        etpEmailAddress = findPreference("pref_email_address") as EditTextPreference
         etpNickname = findPreference("pref_nickname") as EditTextPreference
         etpYearOfBirth = findPreference("pref_birth_year") as EditTextPreference
         etpCategory = findPreference("pref_category") as Preference
     }
 
     private fun setEditTextPreferencesSummaries() {
-        etpEmailAddress.summary = etpEmailAddress.text
         etpNickname.summary = etpNickname.text
         etpYearOfBirth.summary = etpYearOfBirth.text
     }
 
     private fun setEditTextOnClickListeners() {
-        etpEmailAddress.setOnPreferenceChangeListener { _, any ->
-            etpEmailAddress.summary = any.toString()
-            true
-        }
+
         etpNickname.setOnPreferenceChangeListener { _, any ->
             etpNickname.summary = any.toString()
-            //   nav_header_user_name.text = any.toString()
+            settingsPreferencePresenter.updateUserInfos(nickName = any.toString())
             true
         }
 
         etpYearOfBirth.setOnPreferenceChangeListener { _, any ->
-            etpYearOfBirth.summary = any.toString()
-            true
+            if (szarch.bme.hu.ibdb.util.StringUtil.isDateValid(any.toString())) {
+                etpYearOfBirth.summary = any.toString()
+                settingsPreferencePresenter.updateUserInfos(
+                    birthDate = szarch.bme.hu.ibdb.util.StringUtil.createDateFromString(
+                        any.toString()
+                    )
+                )
+                true
+            } else {
+                false
+            }
+
         }
 
         etpCategory.setOnPreferenceClickListener {
@@ -93,9 +107,9 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
         val title = builder.setTitle(resources.getString(R.string.category_selection_text))
 
         val bookCategories = categoryList.map { it -> it.name }.toTypedArray()
-        val checkedItems = booleanArrayOf(false, false, false, false, false)
+        val checkedItemList = BooleanArray(bookCategories.size) { false }
         builder.setMultiChoiceItems(
-            bookCategories, checkedItems
+            bookCategories, checkedItemList
         ) { dialog: DialogInterface, which: Int, isChecked: Boolean ->
             if (isChecked) {
                 if (isChecked) {
@@ -105,10 +119,10 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
                 }
             }
         }
-        builder.setPositiveButton("OK") { dialog, which ->
-            // user clicked OK
+        builder.setPositiveButton(resources.getString(R.string.dialog_ok_text)) { dialog, which ->
+            settingsPreferencePresenter.updateUserCategories(categoryIds)
         }
-        builder.setNegativeButton("Cancel", null)
+        builder.setNegativeButton(resources.getString(R.string.cancel_text), null)
 
         val dialog = builder.create()
         dialog.show()
@@ -116,8 +130,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
 
 
     private fun showFavouriteDialog() {
-        // setup the alert builder
-
+        settingsPreferencePresenter.getCategories()
     }
 
 }

@@ -1,6 +1,6 @@
 package szarch.bme.hu.ibdb.ui.account
 
-import szarch.bme.hu.ibdb.domain.models.AuthenticationResult
+import szarch.bme.hu.ibdb.network.models.base.AuthenticationResult
 
 interface AccountScreen {
 

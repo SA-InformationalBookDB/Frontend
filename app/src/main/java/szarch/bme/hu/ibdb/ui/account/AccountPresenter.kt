@@ -8,10 +8,10 @@ import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
 import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
-import szarch.bme.hu.ibdb.domain.models.AuthenticationResult
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
+import szarch.bme.hu.ibdb.network.models.base.AuthenticationResult
 import szarch.bme.hu.ibdb.ui.base.Presenter
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject

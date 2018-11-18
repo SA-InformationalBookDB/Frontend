@@ -3,18 +3,14 @@
     <PreferenceCategory android:title="@string/preference_personal_details_header">
 
         <EditTextPreference
-                android:inputType="textEmailAddress"
-                android:key="pref_email_address"
-                android:title="@string/preference_email_address"
-        />
-
-        <EditTextPreference
                 android:key="pref_nickname"
+                android:inputType="textPersonName"
                 android:title="@string/preference_nickname"/>
 
         <EditTextPreference
-                android:inputType="date"
+                android:inputType="datetime"
                 android:key="pref_birth_year"
+                android:hint="@string/birth_date_format"
                 android:title="@string/preference_birth_year"/>
 
         <Preference

@@ -7,5 +7,6 @@ data class UserInfoResponse(
     val email: String,
     val role: Role,
     val nickname: String,
-    val birthDate: Date
+    val birthDate: Date,
+    val enabled: Boolean?
 )

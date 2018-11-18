@@ -17,13 +17,13 @@ interface AdminApi {
     @DELETE("/admin/book/{id}")
     fun deleteBook(@Path("id") id: String): Call<Void>
 
-    @POST("/admin/{userId}/disable")
+    @POST("/admin/user/{userId}/disable")
     fun disableUser(@Path("userId") userId: String): Call<Void>
 
-    @POST("/admin/{userId}/enable")
+    @POST("/admin/user/{userId}/enable")
     fun enableUser(@Path("userId") userId: String): Call<Void>
 
-    @DELETE("/admin/{userId}/remove")
+    @DELETE("/admin/user/{userId}/remove")
     fun removeUser(@Path("userId") userId: String): Call<Void>
 
     @DELETE("/admin/user/{userId}/review/{reviewId}")

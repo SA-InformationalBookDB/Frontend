@@ -4,6 +4,7 @@ import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
+import szarch.bme.hu.ibdb.network.models.user.UpdateUserRequest
 import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.network.repository.UserRepository
 import szarch.bme.hu.ibdb.util.Contexts
@@ -42,6 +43,10 @@ class UserInteractor @Inject constructor(
 
     suspend fun getUserIsAdmin(): Boolean = withContext(Contexts.UI) {
         return@withContext sharedPreferencesProvider.getUserRole()
+    }
+
+    suspend fun updateUserInfo(nickname: String?, birthDate: String?) = withContext(Contexts.UI) {
+        return@withContext userRepository.updateUserInfo(UpdateUserRequest(birthDate = birthDate, nickname = nickname))
     }
 
 

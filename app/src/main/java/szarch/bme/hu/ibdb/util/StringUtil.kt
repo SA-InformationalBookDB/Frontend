@@ -11,6 +11,8 @@ object StringUtil {
         Regex.fromLiteral("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!\\-_?&])(?=\\S+$).{8,}")
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private val trendingDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    private val preferenceDateFormat =
+        Regex.fromLiteral("[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))")
 
 
     fun checkEmailValidity(email: String): Boolean {
@@ -26,4 +28,12 @@ object StringUtil {
     fun formatDateToString(date: Date): String = dateFormat.format(date)
 
     fun formatTrendingDateToString(date: Date): String = trendingDateFormat.format(date)
+
+    fun isDateValid(date: String): Boolean {
+        return date.matches(preferenceDateFormat)
+    }
+
+    fun createDateFromString(date: String): String {
+        return trendingDateFormat.format(dateFormat.parse(date))
+    }
 }

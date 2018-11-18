@@ -17,7 +17,7 @@ interface BookApi {
     fun getBestsellerBooks(
     ): Call<List<BookResponse>>
 
-    @POST("/book/offer")
+    @GET("/book/offer")
     fun getOfferBooks(
         @Query("publishedAfter") publishedAfter: String
     ): Call<List<BookResponse>>

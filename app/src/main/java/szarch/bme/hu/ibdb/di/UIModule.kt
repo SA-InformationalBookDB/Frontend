@@ -10,6 +10,7 @@ import szarch.bme.hu.ibdb.ui.favourites.FavouritePresenter
 import szarch.bme.hu.ibdb.ui.main.fragment.MainScreenPresenter
 import szarch.bme.hu.ibdb.ui.reviews.ReviewsPresenter
 import szarch.bme.hu.ibdb.ui.search.SearchPresenter
+import szarch.bme.hu.ibdb.ui.settings.SettingsPreferencePresenter
 import szarch.bme.hu.ibdb.ui.upload.UploadPresenter
 import szarch.bme.hu.ibdb.ui.users.UsersPresenter
 import javax.inject.Singleton
@@ -54,6 +55,11 @@ class UIModule {
     @Provides
     @Singleton
     fun reviewPresenter(reviewInteractor: ReviewInteractor) = ReviewsPresenter(reviewInteractor)
+
+    @Provides
+    @Singleton
+    fun settingsPreferencePresenter(categoryInteractor: CategoryInteractor, userInteractor: UserInteractor) =
+        SettingsPreferencePresenter(categoryInteractor, userInteractor)
 
 
 }

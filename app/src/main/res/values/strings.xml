@@ -9,6 +9,7 @@
     <string name="cancel_text">Cancel</string>
     <string name="close_text">Close</string>
     <string name="send_text">Send</string>
+    <string name="birth_date_format">YYYY-MM-DD</string>
 
     <!--Authentication-->
     <string name="email_hint_text">Email address</string>
@@ -81,4 +82,7 @@
     <string name="comment_hint">Your review</string>
     <string name="successful_review">Your review successfully uploaded!</string>
     <string name="unsuccessful_review">There was an error during your upload! PLease try it again!</string>
+    <string name="successful_user_modification">Successful user status modification!</string>
+    <string name="unsuccessful_user_modification">There was an error during your modification! Please, try it again!
+    </string>
 </resources>

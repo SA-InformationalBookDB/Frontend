@@ -39,6 +39,7 @@ class UsersPresenter @Inject constructor(
             }
         }) {
             adminInteractor.enableUser(userId)
+            screen?.showSuccessfulMessage()
         }
     }
 
@@ -53,6 +54,7 @@ class UsersPresenter @Inject constructor(
             }
         }) {
             adminInteractor.disableUser(userId)
+            screen?.showSuccessfulMessage()
         }
     }
 
@@ -66,6 +68,7 @@ class UsersPresenter @Inject constructor(
             }
         }) {
             adminInteractor.removeUser(userId)
+            screen?.showSuccessfulMessage()
         }
     }
 
