@@ -43,8 +43,8 @@ class BookRepository @Inject constructor(
         }
     }
 
-    suspend fun getOfferBooks() = withContext(Contexts.NETWORK) {
-        val response = bookApi.getOfferBooks().execute()
+    suspend fun getOfferBooks(publishedAfter: String) = withContext(Contexts.NETWORK) {
+        val response = bookApi.getOfferBooks(publishedAfter).execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
         } else {

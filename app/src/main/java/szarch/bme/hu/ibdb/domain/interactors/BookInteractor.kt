@@ -10,8 +10,8 @@ class BookInteractor @Inject constructor(
     private val bookRepository: BookRepository
 ) {
 
-    suspend fun getRecommendationBook(): List<BookResponse> = withContext(Contexts.UI) {
-        return@withContext bookRepository.getOfferBooks()
+    suspend fun getRecommendationBook(publishedAfter: String): List<BookResponse> = withContext(Contexts.UI) {
+        return@withContext bookRepository.getOfferBooks(publishedAfter)
     }
 
     suspend fun getBestsellerBooks(): List<BookResponse> = withContext(Contexts.UI) {

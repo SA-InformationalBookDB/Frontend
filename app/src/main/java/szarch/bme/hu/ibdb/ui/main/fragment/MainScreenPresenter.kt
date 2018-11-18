@@ -19,7 +19,7 @@ class MainScreenPresenter @Inject constructor(
     private val userInteractor: UserInteractor
 ) : Presenter<MainScreen>() {
 
-    fun getRecommendationBooks() {
+    fun getRecommendationBooks(publishedAfter: String) {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
             when (throwable) {
                 is UnauthorizedException -> {
@@ -30,7 +30,7 @@ class MainScreenPresenter @Inject constructor(
                 else -> throwable.printStackTrace()
             }
         }) {
-            screen?.showRecommendationBooks(bookInteractor.getRecommendationBook())
+            screen?.showRecommendationBooks(bookInteractor.getRecommendationBook(publishedAfter))
         }
     }
 

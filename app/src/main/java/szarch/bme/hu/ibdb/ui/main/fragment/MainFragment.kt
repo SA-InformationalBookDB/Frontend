@@ -1,6 +1,7 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,29 +37,29 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectFragment()
+        Log.d("Testing", "onCreate")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d("Testing", "onCreateView")
         return inflater.inflate(R.layout.fragment_main, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("Testing", "onViewCreated")
         mainScreenPresenter.attachScreen(this)
         setupRecyclerViewAdapter()
         setupRecyclerView()
         shouldShowLoginDialog()
-    }
-
-    override fun onStart() {
-        super.onStart()
         getBooks()
         checkUserValidity()
     }
 
-    override fun onStop() {
-        super.onStop()
+
+    override fun onDestroy() {
         mainScreenPresenter.detachScreen()
+        super.onDestroy()
     }
 
     private fun checkUserValidity() {
@@ -116,7 +117,7 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     private fun getBooks() {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.MONTH, -3)
-        //mainScreenPresenter.getRecommendationBooks()
+        mainScreenPresenter.getRecommendationBooks(StringUtil.formatTrendingDateToString(calendar.time))
         mainScreenPresenter.getBestsellerBooks()
         mainScreenPresenter.getPopularBooks()
         mainScreenPresenter.getTrendingBooks(StringUtil.formatTrendingDateToString(calendar.time))
