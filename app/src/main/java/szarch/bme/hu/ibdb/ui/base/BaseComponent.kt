@@ -6,6 +6,7 @@ import szarch.bme.hu.ibdb.ui.detail.DetailActivity
 import szarch.bme.hu.ibdb.ui.favourites.FavouritesFragment
 import szarch.bme.hu.ibdb.ui.main.activity.MainActivity
 import szarch.bme.hu.ibdb.ui.main.fragment.MainFragment
+import szarch.bme.hu.ibdb.ui.reviews.ReviewsActivity
 import szarch.bme.hu.ibdb.ui.search.SearchActivity
 import szarch.bme.hu.ibdb.ui.settings.SettingsActivity
 import szarch.bme.hu.ibdb.ui.settings.SettingsPreferenceFragment
@@ -25,6 +26,8 @@ interface BaseComponent {
     fun inject(mainActivity: MainActivity)
 
     fun inject(mainFragment: MainFragment)
+
+    fun inject(reviewsActivity: ReviewsActivity)
 
     fun inject(searchActivity: SearchActivity)
 

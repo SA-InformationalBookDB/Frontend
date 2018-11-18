@@ -38,4 +38,8 @@ class BookInteractor @Inject constructor(
         return@withContext bookRepository.getPublicTrendingBooks()
     }
 
+    suspend fun getBook(bookId: String) = withContext(Contexts.UI) {
+        return@withContext bookRepository.getBook(bookId)
+    }
+
 }

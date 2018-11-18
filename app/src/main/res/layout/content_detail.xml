@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
-                android:theme="@style/CustomRatingBarStyle"
+                android:theme="@style/CustomRatingBarStylePrimary"
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_book_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

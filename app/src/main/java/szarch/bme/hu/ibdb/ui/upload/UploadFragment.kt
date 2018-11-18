@@ -1,5 +1,6 @@
 package szarch.bme.hu.ibdb.ui.upload
 
+import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.ContextThemeWrapper
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_upload.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
+import szarch.bme.hu.ibdb.util.StringUtil
 import java.util.*
 import javax.inject.Inject
 
@@ -24,6 +26,7 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
 
     private var categoryList: List<CategoryResponse> = listOf()
     private val selectedCategoryIds: ArrayList<String> = ArrayList()
+    private val bookPublishDate: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,7 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
         uploadPresenter.attachScreen(this)
         uploadPresenter.getCategories()
         setupCategoryButton()
+        setupPublishedButton()
         setupSendButton()
     }
 
@@ -93,12 +97,31 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
         }
     }
 
+    private fun setupPublishedButton() {
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            bookPublishDate.set(year, month, dayOfMonth)
+            tv_upload_book_published.text = szarch.bme.hu.ibdb.util.StringUtil.formatDateToString(bookPublishDate.time)
+        }
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            R.style.CustomDatePickerDialog,
+            dateSetListener,
+            bookPublishDate.get(Calendar.YEAR),
+            bookPublishDate.get(Calendar.MONTH),
+            bookPublishDate.get(Calendar.DAY_OF_MONTH)
+        )
+
+        tv_upload_book_published.setOnClickListener {
+            datePickerDialog.show()
+        }
+    }
+
     private fun setupSendButton() {
         fab_send.setOnClickListener {
             uploadPresenter.uploadBook(
                 title = et_upload_book_title.text.toString(),
                 author = et_upload_book_author.text.toString(),
-                published = Date(),
+                published = StringUtil.formatTrendingDateToString(bookPublishDate.time),
                 publisher = et_upload_book_publisher.text.toString(),
                 imageUrl = et_upload_book_image_url.text.toString(),
                 pageNumber = et_upload_book_page_number.text.toString().toInt(),

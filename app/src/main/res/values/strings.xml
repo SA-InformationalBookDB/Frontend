@@ -8,6 +8,7 @@
     <string name="sign_up_text">Sign up</string>
     <string name="cancel_text">Cancel</string>
     <string name="close_text">Close</string>
+    <string name="send_text">Send</string>
 
     <!--Authentication-->
     <string name="email_hint_text">Email address</string>
@@ -68,6 +69,16 @@
     </string>
     <string name="no_data_text">Data is unavailable</string>
     <string name="book_upload_successful">Successful upload</string>
-    <string name="book_upload_unsuccessful">UnSuccessful upload! Please, try it again!</string>
+    <string name="book_upload_unsuccessful">Unsuccessful upload! Please, try it again!</string>
     <string name="category_error">Category selection is not available!</string>
+    <string name="no_authentication_feature_text">Feature is unavailable until you\'re only guest!</string>
+    <string name="successful_favourite_adding">Book is now your favourite one!</string>
+    <string name="successful_favourite_removing">Book is now your not liked one!</string>
+    <string name="unsuccessful_favourite_text">Your request is not completed! PLease, try it again!</string>
+    <string name="title_activity_reviews">ReviewsActivity</string>
+    <string name="no_comment_text">There is no comment for this review.</string>
+    <string name="review_dialog_title">Add your review</string>
+    <string name="comment_hint">Your review</string>
+    <string name="successful_review">Your review successfully uploaded!</string>
+    <string name="unsuccessful_review">There was an error during your upload! PLease try it again!</string>
 </resources>

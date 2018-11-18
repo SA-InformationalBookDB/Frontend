@@ -7,11 +7,11 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_user_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.domain.models.User
+import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.ui.base.comparators.UserComparator
 
 
-class UsersAdapter : ListAdapter<User, UsersAdapter.UsersItemViewHolder>(UserComparator) {
+class UsersAdapter : ListAdapter<UserInfoResponse, UsersAdapter.UsersItemViewHolder>(UserComparator) {
 
     val listener: UserListener? = null
 
@@ -23,7 +23,7 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UsersItemViewHolder>(UserCom
 
     override fun onBindViewHolder(holder: UsersItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.tvUserName.text = item.nickName
+        holder.tvUserName.text = item.nickname
         holder.tvUserRole.text = item.role.name
         holder.tvUserEmail.text = item.email
         holder.ivUserMore.setOnClickListener {
@@ -40,14 +40,14 @@ class UsersAdapter : ListAdapter<User, UsersAdapter.UsersItemViewHolder>(UserCom
         val ivUserMore = userItemView.iv_user_more
     }
 
-    private fun showUserInfoDialog(view: View, user: User) {
+    private fun showUserInfoDialog(view: View, user: UserInfoResponse) {
         val popup = PopupMenu(view.context, view)
         popup.menuInflater.inflate(R.menu.user_popup_menu, popup.menu)
-        if (user.isEnabled) {
-            popup.menu.removeItem(R.id.menu_user_enable)
-        } else {
-            popup.menu.removeItem(R.id.menu_user_disable)
-        }
+        /* if (user.) {
+             popup.menu.removeItem(R.id.menu_user_enable)
+         } else {
+             popup.menu.removeItem(R.id.menu_user_disable)
+         }*/
 
         popup.setOnMenuItemClickListener {
             when (it.itemId) {

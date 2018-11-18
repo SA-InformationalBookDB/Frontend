@@ -116,7 +116,7 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     private fun getBooks() {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.MONTH, -3)
-        mainScreenPresenter.getRecommendationBooks()
+        //mainScreenPresenter.getRecommendationBooks()
         mainScreenPresenter.getBestsellerBooks()
         mainScreenPresenter.getPopularBooks()
         mainScreenPresenter.getTrendingBooks(StringUtil.formatTrendingDateToString(calendar.time))

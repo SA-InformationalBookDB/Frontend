@@ -18,6 +18,14 @@ class UserInteractor @Inject constructor(
         return@withContext userRepository.getFavourites()
     }
 
+    suspend fun addFavourite(bookId: String) = withContext(Contexts.UI) {
+        return@withContext userRepository.addFavourite(bookId)
+    }
+
+    suspend fun removeFavourite(bookId: String) = withContext(Contexts.UI) {
+        return@withContext userRepository.deleteFavourite(bookId)
+    }
+
     suspend fun updateCategories(categoryIds: List<String>) = withContext(Contexts.UI) {
         userRepository.updateCategories(CategoriesUpdateRequest(categoryIds))
     }
@@ -35,5 +43,6 @@ class UserInteractor @Inject constructor(
     suspend fun getUserIsAdmin(): Boolean = withContext(Contexts.UI) {
         return@withContext sharedPreferencesProvider.getUserRole()
     }
+
 
 }

@@ -4,7 +4,6 @@ import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.network.models.book.BookRequest
 import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.util.Contexts
-import java.util.*
 import javax.inject.Inject
 
 class AdminInteractor @Inject constructor(
@@ -12,7 +11,7 @@ class AdminInteractor @Inject constructor(
 ) {
 
     suspend fun addBook(
-        title: String, author: String, published: Date?, publisher: String?,
+        title: String, author: String, published: String?, publisher: String?,
         imageUrl: String?, summary: String, pageNumber: Int, sold: Int?
     ) = withContext(Contexts.UI) {
         adminRepository.addBook(
@@ -30,7 +29,7 @@ class AdminInteractor @Inject constructor(
     }
 
     suspend fun updateBook(
-        id: String, title: String, author: String, published: Date?, publisher: String?,
+        id: String, title: String, author: String, published: String?, publisher: String?,
         imageUrl: String?, summary: String, pageNumber: Int, sold: Int?, views: Int?
     ) = withContext(Contexts.UI) {
         adminRepository.updateBook(
@@ -57,6 +56,10 @@ class AdminInteractor @Inject constructor(
 
     suspend fun removeReviewById(userId: String, reviewId: String) = withContext(Contexts.UI) {
         adminRepository.removeReviewById(userId, reviewId)
+    }
+
+    suspend fun getUsers() = withContext(Contexts.UI) {
+        return@withContext adminRepository.getUsers()
     }
 
 }

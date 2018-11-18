@@ -233,7 +233,7 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     }
 
     override fun showLogoutResult(authenticationResult: AuthenticationResult) {
-        Toast.makeText(this@AccountActivity, authenticationResult.message, Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, authenticationResult.message, Toast.LENGTH_LONG).show()
         showAuthenticationStatus(false)
     }
 

@@ -3,6 +3,7 @@ package szarch.bme.hu.ibdb.network.api
 import retrofit2.Call
 import retrofit2.http.*
 import szarch.bme.hu.ibdb.network.models.book.BookRequest
+import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 
 interface AdminApi {
 
@@ -27,5 +28,8 @@ interface AdminApi {
 
     @DELETE("/admin/user/{userId}/review/{reviewId}")
     fun deleteReviewByAdmin(@Path("userId") userId: String, @Path("reviewId") reviewId: String): Call<Void>
+
+    @GET("admin/user")
+    fun getUsers(): Call<List<UserInfoResponse>>
 
 }

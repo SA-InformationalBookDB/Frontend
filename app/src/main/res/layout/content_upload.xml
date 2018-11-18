@@ -97,11 +97,10 @@
                 style="@style/BookItemPageImageViewStyle"
         />
 
-        <EditText
-                android:id="@+id/et_upload_book_published"
+        <TextView
+                android:id="@+id/tv_upload_book_published"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:inputType="date"
                 android:hint="@string/book_published"
                 style="@style/BookItemPageTextViewStyle"/>
 
@@ -179,6 +178,7 @@
                 android:id="@+id/et_upload_book_sold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:inputType="number"
                 android:hint="@string/book_sold"
                 style="@style/BookItemPageTextViewStyle"/>
 

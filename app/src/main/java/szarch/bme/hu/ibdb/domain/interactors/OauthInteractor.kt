@@ -40,6 +40,7 @@ class OauthInteractor @Inject constructor(
 
     suspend fun sendLogoutRequest() = withContext(Contexts.UI) {
         oauthRepository.sendLogout(LogoutRequest(sharedPreferencesProvider.getClientAccessToken()))
+        sharedPreferencesProvider.clearUserDatas()
     }
 
 

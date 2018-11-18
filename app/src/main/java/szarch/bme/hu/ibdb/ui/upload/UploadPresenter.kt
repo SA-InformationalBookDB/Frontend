@@ -9,7 +9,6 @@ import szarch.bme.hu.ibdb.domain.interactors.AdminInteractor
 import szarch.bme.hu.ibdb.domain.interactors.CategoryInteractor
 import szarch.bme.hu.ibdb.ui.base.Presenter
 import szarch.bme.hu.ibdb.util.Contexts
-import java.util.*
 import javax.inject.Inject
 
 class UploadPresenter @Inject constructor(
@@ -19,7 +18,7 @@ class UploadPresenter @Inject constructor(
 ) : Presenter<UploadScreen>() {
 
     fun uploadBook(
-        title: String, author: String, published: Date? = null, publisher: String? = null,
+        title: String, author: String, published: String? = null, publisher: String? = null,
         imageUrl: String? = null, summary: String, pageNumber: Int, sold: Int? = null
     ) {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->

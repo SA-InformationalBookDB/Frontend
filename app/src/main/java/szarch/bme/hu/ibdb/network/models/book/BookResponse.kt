@@ -10,6 +10,7 @@ data class BookResponse(
     val author: String,
     val published: Date?,
     val publisher: String?,
+    val favourite: Boolean?,
     val reviews: List<ReviewResponse>?,
     val categories: List<CategoryResponse>,
     val imageUrl: String?,

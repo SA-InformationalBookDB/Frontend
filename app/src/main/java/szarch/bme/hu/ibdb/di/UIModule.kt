@@ -4,11 +4,11 @@ import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
 import szarch.bme.hu.ibdb.domain.interactors.*
-import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.network.repository.BookRepository
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesPresenter
 import szarch.bme.hu.ibdb.ui.favourites.FavouritePresenter
 import szarch.bme.hu.ibdb.ui.main.fragment.MainScreenPresenter
+import szarch.bme.hu.ibdb.ui.reviews.ReviewsPresenter
 import szarch.bme.hu.ibdb.ui.search.SearchPresenter
 import szarch.bme.hu.ibdb.ui.upload.UploadPresenter
 import szarch.bme.hu.ibdb.ui.users.UsersPresenter
@@ -49,7 +49,11 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun usersPresenter(adminRepository: AdminRepository) = UsersPresenter(adminRepository)
+    fun usersPresenter(adminInteractor: AdminInteractor) = UsersPresenter(adminInteractor)
+
+    @Provides
+    @Singleton
+    fun reviewPresenter(reviewInteractor: ReviewInteractor) = ReviewsPresenter(reviewInteractor)
 
 
 }

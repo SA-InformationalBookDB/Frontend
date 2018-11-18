@@ -3,20 +3,30 @@ package szarch.bme.hu.ibdb.ui.users
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import szarch.bme.hu.ibdb.domain.interactors.AdminInteractor
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
-import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.ui.base.Presenter
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
 class UsersPresenter @Inject constructor(
-    private val adminRepository: AdminRepository
+    private val adminInteractor: AdminInteractor
 ) : Presenter<UsersScreen>() {
 
     fun getUsers() {
-        //screen?.showUserList(adminRepository.get)
+        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            when (throwable) {
+                is UnauthorizedException -> throwable.printStackTrace()
+                is ForbiddenException -> throwable.printStackTrace()
+                is NotFoundException -> throwable.printStackTrace()
+                else -> throwable.printStackTrace()
+            }
+        }) {
+            screen?.showUserList(adminInteractor.getUsers())
+        }
+
     }
 
     fun enableUser(userId: String) {
@@ -28,7 +38,7 @@ class UsersPresenter @Inject constructor(
                 else -> screen?.showErrorMessage()
             }
         }) {
-            adminRepository.enableUser(userId)
+            adminInteractor.enableUser(userId)
         }
     }
 
@@ -42,7 +52,7 @@ class UsersPresenter @Inject constructor(
                 else -> screen?.showErrorMessage()
             }
         }) {
-            adminRepository.disableUser(userId)
+            adminInteractor.disableUser(userId)
         }
     }
 
@@ -55,7 +65,7 @@ class UsersPresenter @Inject constructor(
                 else -> screen?.showErrorMessage()
             }
         }) {
-            adminRepository.removeUser(userId)
+            adminInteractor.removeUser(userId)
         }
     }
 

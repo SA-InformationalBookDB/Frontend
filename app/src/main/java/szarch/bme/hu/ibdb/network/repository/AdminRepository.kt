@@ -100,4 +100,18 @@ class AdminRepository @Inject constructor(
             }
         }
     }
+
+    suspend fun getUsers() = withContext(Contexts.NETWORK) {
+        val response = adminApi.getUsers().execute()
+        if (response.isSuccessful) {
+            return@withContext response.body()!!
+        } else {
+            when (response.code()) {
+                401 -> throw UnauthorizedException("Unauthorized")
+                403 -> throw ForbiddenException("Forbidden")
+                404 -> throw NotFoundException("Not found")
+                else -> throw Exception(response.message())
+            }
+        }
+    }
 }

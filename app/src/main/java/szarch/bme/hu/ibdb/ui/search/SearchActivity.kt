@@ -28,12 +28,12 @@ class SearchActivity : AppCompatActivity(), SearchScreen, FavouriteAdapter.Liste
         setContentView(R.layout.activity_search)
         setupRecyclerViewAdapter()
         setupRecyclerView()
-        doSearch(intent)
     }
 
     override fun onStart() {
         super.onStart()
         searchPresenter.attachScreen(this)
+        doSearch(intent)
     }
 
     private fun injectActivity() {

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_users.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.domain.models.User
+import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
@@ -60,7 +60,7 @@ class UsersFragment : androidx.fragment.app.Fragment(), UsersAdapter.UserListene
         usersPresenter.getUsers()
     }
 
-    override fun showUserList(userList: List<User>) {
+    override fun showUserList(userList: List<UserInfoResponse>) {
         usersAdapter.submitList(userList)
     }
 

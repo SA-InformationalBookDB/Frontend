@@ -3,15 +3,16 @@ package szarch.bme.hu.ibdb.ui.main.activity
 import android.app.SearchManager
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import szarch.bme.hu.ibdb.R
+import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.ui.activities.ActivitiesFragment
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.ui.favourites.FavouritesFragment
@@ -20,8 +21,12 @@ import szarch.bme.hu.ibdb.ui.search.SearchActivity
 import szarch.bme.hu.ibdb.ui.upload.UploadFragment
 import szarch.bme.hu.ibdb.ui.users.UsersFragment
 import szarch.bme.hu.ibdb.util.Navigator
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var sharedPreferencesProvider: SharedPreferencesProvider
 
     private lateinit var fragment: androidx.fragment.app.Fragment
 
@@ -72,15 +77,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            /*R.id.menu_main_search -> {
-                Navigator.navigateToSearchActivity(this@MainActivity)
-                true
-            }*/
             R.id.menu_main_account -> {
                 Navigator.navigateToAccountActivity(this@MainActivity)
                 true
             }
-
             else -> {
                 super.onOptionsItemSelected(item)
             }
@@ -107,9 +107,16 @@ class MainActivity : AppCompatActivity() {
             when (tag) {
                 MainFragment.TAG -> fragment =
                         MainFragment()
-                FavouritesFragment.TAG -> fragment = FavouritesFragment()
+                FavouritesFragment.TAG -> {
+
+                    fragment = FavouritesFragment()
+
+                }
                 UploadFragment.TAG -> fragment = UploadFragment()
-                ActivitiesFragment.TAG -> fragment = ActivitiesFragment()
+                ActivitiesFragment.TAG -> {
+                    fragment = ActivitiesFragment()
+
+                }
                 UsersFragment.TAG -> fragment = UsersFragment()
             }
         } else {
@@ -118,7 +125,15 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment, tag).addToBackStack(null).commit()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun isUserAuthenticated(): Boolean {
+        return sharedPreferencesProvider.getClientAccessToken().isEmpty()
+    }
+
+    private fun showAuthenticationError() {
+        Toast.makeText(
+            this@MainActivity,
+            resources.getString(R.string.no_authentication_feature_text),
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
