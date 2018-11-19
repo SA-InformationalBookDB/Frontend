@@ -67,6 +67,10 @@ dependencies {
     //Stetho
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
+    //Chuck interceptor
+    debugImplementation "com.readystatesoftware.chuck:library:$chuck_version"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck_version"
+
     //Testing
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation 'androidx.test:runner:1.1.0'

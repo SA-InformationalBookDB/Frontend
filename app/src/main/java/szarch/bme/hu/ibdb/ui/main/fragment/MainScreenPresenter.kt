@@ -2,6 +2,7 @@ package szarch.bme.hu.ibdb.ui.main.fragment
 
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.domain.interactors.BookInteractor
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
@@ -21,6 +22,7 @@ class MainScreenPresenter @Inject constructor(
 
     fun getRecommendationBooks(publishedAfter: String) {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            job = Job()
             when (throwable) {
                 is UnauthorizedException -> {
                     screen?.hideRecommendationBookList()
@@ -36,6 +38,7 @@ class MainScreenPresenter @Inject constructor(
 
     fun getBestsellerBooks() {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            job = Job()
             when (throwable) {
                 is UnauthorizedException -> {
                     GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -55,6 +58,7 @@ class MainScreenPresenter @Inject constructor(
 
     fun getPopularBooks() {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            job = Job()
             when (throwable) {
                 is UnauthorizedException -> {
                     GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -79,6 +83,7 @@ class MainScreenPresenter @Inject constructor(
 
     fun getTrendingBooks(publishedAfter: String) {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            job = Job()
             when (throwable) {
                 is UnauthorizedException -> {
                     GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->

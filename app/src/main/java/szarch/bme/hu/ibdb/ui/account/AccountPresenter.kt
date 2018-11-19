@@ -3,6 +3,7 @@ package szarch.bme.hu.ibdb.ui.account
 import android.content.res.Resources
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
@@ -25,9 +26,9 @@ class AccountPresenter @Inject constructor(
 
     fun registerUser(email: String, password: String, confirmPassword: String) {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            job = Job()
             when (throwable) {
                 is UnauthorizedException -> {
-                    throwable.printStackTrace()
                     screen?.showRegistrationResult(
                         AuthenticationResult(
                             false,
@@ -37,7 +38,6 @@ class AccountPresenter @Inject constructor(
                     )
                 }
                 is ForbiddenException -> {
-                    throwable.printStackTrace()
                     screen?.showRegistrationResult(
                         AuthenticationResult(
                             false,
@@ -47,7 +47,6 @@ class AccountPresenter @Inject constructor(
                     )
                 }
                 is NotFoundException -> {
-                    throwable.printStackTrace()
                     screen?.showRegistrationResult(
                         AuthenticationResult(
                             false,
@@ -56,7 +55,15 @@ class AccountPresenter @Inject constructor(
                         )
                     )
                 }
-                else -> throwable.printStackTrace()
+                else -> {
+                    screen?.showRegistrationResult(
+                        AuthenticationResult(
+                            false,
+                            resources.getString(R.string.registration_unsuccessful),
+                            throwable.message!!
+                        )
+                    )
+                }
             }
         }) {
             oauthInteractor.sendRegistrationRequest(email, password, confirmPassword)
@@ -71,10 +78,10 @@ class AccountPresenter @Inject constructor(
 
     fun loginUser(email: String, password: String) {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            job = Job()
             when (throwable) {
                 is UnauthorizedException -> {
-                    throwable.printStackTrace()
-                    screen?.showRegistrationResult(
+                    screen?.showLoginResult(
                         AuthenticationResult(
                             false,
                             resources.getString(R.string.login_unsuccessful),
@@ -83,8 +90,7 @@ class AccountPresenter @Inject constructor(
                     )
                 }
                 is ForbiddenException -> {
-                    throwable.printStackTrace()
-                    screen?.showRegistrationResult(
+                    screen?.showLoginResult(
                         AuthenticationResult(
                             false,
                             resources.getString(R.string.login_unsuccessful),
@@ -93,8 +99,16 @@ class AccountPresenter @Inject constructor(
                     )
                 }
                 is NotFoundException -> {
-                    throwable.printStackTrace()
-                    screen?.showRegistrationResult(
+                    screen?.showLoginResult(
+                        AuthenticationResult(
+                            false,
+                            resources.getString(R.string.login_unsuccessful),
+                            throwable.message!!
+                        )
+                    )
+                }
+                else -> {
+                    screen?.showLoginResult(
                         AuthenticationResult(
                             false,
                             resources.getString(R.string.login_unsuccessful),
@@ -119,6 +133,7 @@ class AccountPresenter @Inject constructor(
 
     fun logoutUser() {
         GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
+            job = Job()
             when (throwable) {
                 is UnauthorizedException -> {
                     sharedPreferencesProvider.clearUserDatas()
@@ -150,7 +165,16 @@ class AccountPresenter @Inject constructor(
                         )
                     )
                 }
-                else -> throwable.printStackTrace()
+                else -> {
+                    sharedPreferencesProvider.clearUserDatas()
+                    screen?.showLogoutResult(
+                        AuthenticationResult(
+                            false,
+                            resources.getString(R.string.logout_unsuccessful),
+                            throwable.message!!
+                        )
+                    )
+                }
             }
         }) {
             oauthInteractor.sendLogoutRequest()

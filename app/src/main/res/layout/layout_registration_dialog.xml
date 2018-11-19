@@ -30,7 +30,7 @@
                     app:layout_constraintTop_toBottomOf="@id/et_registration_user_name"
                     android:layout_marginTop="16dp"
                     android:hint="@string/password_hint_text"
-                    android:inputType="textVisiblePassword"
+                    android:inputType="textPassword"
                     android:textColor="@android:color/black"/>
 
             <EditText
@@ -39,7 +39,7 @@
                     app:layout_constraintTop_toBottomOf="@id/et_registration_password"
                     android:layout_marginTop="16dp"
                     android:hint="@string/confirm_password_hint_text"
-                    android:inputType="textVisiblePassword"
+                    android:inputType="textPassword"
                     android:textColor="@android:color/black"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -66,6 +66,7 @@
                       android:layout_marginStart="16dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
                                                            android:layout_height="wrap_content"
@@ -102,7 +103,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:visibility="gone"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </ViewFlipper>
 

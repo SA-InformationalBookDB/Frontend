@@ -77,7 +77,6 @@ class SharedPreferencesProvider @Inject constructor(
     fun getIsClientFirstStarting(): Boolean = sharedPreferences.getBoolean(CLIENT_FIRST_STARTING, true)
 
     fun clearUserDatas() {
-        sharedPreferences.edit().putString(CLIENT_ID_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_USER_ID_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_CODE_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_EMAIL_STRING, "").apply()
