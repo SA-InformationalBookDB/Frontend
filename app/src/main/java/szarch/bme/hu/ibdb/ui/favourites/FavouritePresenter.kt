@@ -1,16 +1,10 @@
 package szarch.bme.hu.ibdb.ui.favourites
 
-import android.util.Log
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
 import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
-import szarch.bme.hu.ibdb.network.exception.ForbiddenException
-import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
 import szarch.bme.hu.ibdb.ui.base.Presenter
-import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
 class FavouritePresenter @Inject constructor(
@@ -19,23 +13,19 @@ class FavouritePresenter @Inject constructor(
 ) : Presenter<FavouriteScreen>() {
 
     fun getFavouriteBooks() {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            when (throwable) {
-                is UnauthorizedException -> {
-                    GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-                        screen?.showErrorMeaasge(throwable.message)
-                    }) {
-                        oauthInteractor.sendRefreshTokenRequest()
-                        screen?.showFavouritesBooks(userInteractor.getFavourites())
-                    }
+        launch {
+            try {
+                screen?.showFavouritesBooks(userInteractor.getFavourites())
+            } catch (e: UnauthorizedException) {
+                try {
+                    oauthInteractor.sendRefreshTokenRequest()
+                    screen?.showFavouritesBooks(userInteractor.getFavourites())
+                } catch (e: Exception) {
+                    screen?.showErrorMeaasge(e.message)
                 }
-                is ForbiddenException -> throwable.printStackTrace()
-                is NotFoundException -> throwable.printStackTrace()
-                else -> throwable.printStackTrace()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            Log.d("Testing", "getRecommendationBooks")
-        }) {
-            screen?.showFavouritesBooks(userInteractor.getFavourites())
         }
     }
 }

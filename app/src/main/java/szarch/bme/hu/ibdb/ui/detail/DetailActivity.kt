@@ -25,13 +25,16 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
     private var isFavourite: Boolean = false
     private var menuItem: MenuItem? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectActivity()
         setContentView(R.layout.activity_detail)
         detailPresenter.attachScreen(this)
-        detailPresenter.getBookDetails(intent.getStringExtra("bookId"))
-        detailPresenter.getBookReviews(intent.getStringExtra("bookId"))
+        if (intent.getStringExtra(INTENT_BOOK_ID) != null) {
+            detailPresenter.getBookDetails(intent.getStringExtra(INTENT_BOOK_ID))
+            detailPresenter.getBookReviews(intent.getStringExtra(INTENT_BOOK_ID))
+        }
     }
 
     override fun onStop() {
@@ -54,7 +57,6 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
                 } else {
                     detailPresenter.addFavourite(bookResponse.id)
                 }
-
 
                 true
             }
@@ -126,6 +128,10 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
 
     override fun showBookError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    companion object {
+        const val INTENT_BOOK_ID = "bookID"
     }
 
 }

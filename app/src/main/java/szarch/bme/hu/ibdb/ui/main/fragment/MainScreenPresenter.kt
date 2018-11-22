@@ -1,17 +1,12 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.domain.interactors.BookInteractor
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
 import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
-import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
 import szarch.bme.hu.ibdb.ui.base.Presenter
-import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
 class MainScreenPresenter @Inject constructor(
@@ -21,93 +16,62 @@ class MainScreenPresenter @Inject constructor(
 ) : Presenter<MainScreen>() {
 
     fun getRecommendationBooks(publishedAfter: String) {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            job = Job()
-            when (throwable) {
-                is UnauthorizedException -> {
-                    screen?.hideRecommendationBookList()
-                }
-                is ForbiddenException -> throwable.printStackTrace()
-                is NotFoundException -> throwable.printStackTrace()
-                else -> throwable.printStackTrace()
+        launch {
+            try {
+                screen?.showRecommendationBooks(bookInteractor.getRecommendationBook(publishedAfter))
+            } catch (e: UnauthorizedException) {
+                screen?.hideRecommendationBookList()
+            } catch (e: ForbiddenException) {
+                e.printStackTrace()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        }) {
-            screen?.showRecommendationBooks(bookInteractor.getRecommendationBook(publishedAfter))
         }
     }
 
     fun getBestsellerBooks() {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            job = Job()
-            when (throwable) {
-                is UnauthorizedException -> {
-                    GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-                        screen?.showErrorMessage(throwable.message)
-                    }) {
-                        screen?.showBestsellerBooks(bookInteractor.getPublicBestsellerBooks())
-                    }
-                }
-                is ForbiddenException -> throwable.printStackTrace()
-                is NotFoundException -> throwable.printStackTrace()
-                else -> throwable.printStackTrace()
+        launch {
+            try {
+                screen?.showBestsellerBooks(bookInteractor.getBestsellerBooks())
+            } catch (e: UnauthorizedException) {
+                screen?.showErrorMessage(e.message)
+                screen?.showBestsellerBooks(bookInteractor.getPublicBestsellerBooks())
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        }) {
-            screen?.showBestsellerBooks(bookInteractor.getBestsellerBooks())
         }
+
     }
 
     fun getPopularBooks() {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            job = Job()
-            when (throwable) {
-                is UnauthorizedException -> {
-                    GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-                        when (throwable) {
-                            is UnauthorizedException -> throwable.printStackTrace()
-                            is ForbiddenException -> throwable.printStackTrace()
-                            is NotFoundException -> throwable.printStackTrace()
-                            else -> throwable.printStackTrace()
-                        }
-                    }) {
-                        screen?.showPopularBooks(bookInteractor.getPublicPopularBooks())
-                    }
-                }
-                is ForbiddenException -> throwable.printStackTrace()
-                is NotFoundException -> throwable.printStackTrace()
-                else -> throwable.printStackTrace()
+        launch {
+            try {
+                screen?.showPopularBooks(bookInteractor.getPopularBooks())
+
+            } catch (e: UnauthorizedException) {
+                screen?.showErrorMessage(e.message)
+                screen?.showPopularBooks(bookInteractor.getPublicPopularBooks())
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        }) {
-            screen?.showPopularBooks(bookInteractor.getPopularBooks())
         }
     }
 
     fun getTrendingBooks(publishedAfter: String) {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            job = Job()
-            when (throwable) {
-                is UnauthorizedException -> {
-                    GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-                        when (throwable) {
-                            is UnauthorizedException -> throwable.printStackTrace()
-                            is ForbiddenException -> throwable.printStackTrace()
-                            is NotFoundException -> throwable.printStackTrace()
-                            else -> throwable.printStackTrace()
-                        }
-                    }) {
-                        screen?.showTrendingBooks(bookInteractor.getPublicTrendingBooks())
-                    }
-                }
-                is ForbiddenException -> throwable.printStackTrace()
-                is NotFoundException -> throwable.printStackTrace()
-                else -> throwable.printStackTrace()
+        launch {
+            try {
+                screen?.showTrendingBooks(bookInteractor.getTrendingBooks(publishedAfter))
+            } catch (e: UnauthorizedException) {
+                screen?.showErrorMessage(e.message)
+                screen?.showTrendingBooks(bookInteractor.getPublicTrendingBooks())
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-        }) {
-            screen?.showTrendingBooks(bookInteractor.getTrendingBooks(publishedAfter))
         }
     }
 
     fun getUserIsAdmin() {
-        GlobalScope.launch(Contexts.UI) {
+        launch {
             screen?.setUserInteractionPossibilities(userInteractor.getUserIsAdmin())
         }
     }

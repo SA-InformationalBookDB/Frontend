@@ -32,7 +32,7 @@ class ReviewsActivity : AppCompatActivity(), ReviewsScreen {
 
     override fun onStart() {
         super.onStart()
-        bookId = intent.getStringExtra("bookId")
+        bookId = intent.getStringExtra(INTENT_BOOK_ID)
         reviewPresenter.attachScreen(this)
         reviewPresenter.getReviews(bookId)
     }
@@ -94,6 +94,10 @@ class ReviewsActivity : AppCompatActivity(), ReviewsScreen {
 
     override fun showUnsuccessfulReviewSending() {
         reviewPresenter.getReviews(bookId)
+    }
+
+    companion object {
+        const val INTENT_BOOK_ID = "bookID"
     }
 
 }

@@ -15,13 +15,13 @@ object Navigator {
 
     fun navigateToReviewActivity(activity: AppCompatActivity, bookId: String) {
         val intent = Intent(activity, ReviewsActivity::class.java)
-        intent.putExtra("bookId", bookId)
+        intent.putExtra(ReviewsActivity.INTENT_BOOK_ID, bookId)
         activity.startActivity(intent)
     }
 
     fun navigateToDetailScreen(activity: FragmentActivity, bookId: String) {
         val intent = Intent(activity, DetailActivity::class.java)
-        intent.putExtra("bookId", bookId)
+        intent.putExtra(DetailActivity.INTENT_BOOK_ID, bookId)
         activity.startActivity(intent)
     }
 

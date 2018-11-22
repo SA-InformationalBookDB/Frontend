@@ -1,20 +1,13 @@
 package szarch.bme.hu.ibdb.ui.account
 
 import android.content.res.Resources
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
 import szarch.bme.hu.ibdb.domain.interactors.UserInteractor
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
-import szarch.bme.hu.ibdb.network.exception.ForbiddenException
-import szarch.bme.hu.ibdb.network.exception.NotFoundException
-import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
 import szarch.bme.hu.ibdb.network.models.base.AuthenticationResult
 import szarch.bme.hu.ibdb.ui.base.Presenter
-import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
 class AccountPresenter @Inject constructor(
@@ -25,179 +18,96 @@ class AccountPresenter @Inject constructor(
 ) : Presenter<AccountScreen>() {
 
     fun registerUser(email: String, password: String, confirmPassword: String) {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            job = Job()
-            when (throwable) {
-                is UnauthorizedException -> {
-                    screen?.showRegistrationResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.registration_unsuccessful),
-                            throwable.message!!
-                        )
+        launch {
+            try {
+                oauthInteractor.sendRegistrationRequest(email, password, confirmPassword)
+                screen?.showRegistrationResult(
+                    AuthenticationResult(
+                        true,
+                        resources.getString(R.string.registration_successful)
                     )
-                }
-                is ForbiddenException -> {
-                    screen?.showRegistrationResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.registration_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-                is NotFoundException -> {
-                    screen?.showRegistrationResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.registration_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-                else -> {
-                    screen?.showRegistrationResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.registration_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-            }
-        }) {
-            oauthInteractor.sendRegistrationRequest(email, password, confirmPassword)
-            screen?.showRegistrationResult(
-                AuthenticationResult(
-                    true,
-                    resources.getString(R.string.registration_successful)
                 )
-            )
+            } catch (e: Exception) {
+                screen?.showRegistrationResult(
+                    AuthenticationResult(
+                        false,
+                        resources.getString(R.string.registration_unsuccessful),
+                        e.message!!
+                    )
+                )
+            }
         }
     }
+
 
     fun loginUser(email: String, password: String) {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            job = Job()
-            when (throwable) {
-                is UnauthorizedException -> {
-                    screen?.showLoginResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.login_unsuccessful),
-                            throwable.message!!
-                        )
+        launch {
+            try {
+                oauthInteractor.sendLoginRequest(email, password)
+                oauthInteractor.sendAccessTokenRequest()
+                screen?.showLoginResult(
+                    AuthenticationResult(
+                        true,
+                        resources.getString(R.string.login_successful)
                     )
-                }
-                is ForbiddenException -> {
-                    screen?.showLoginResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.login_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-                is NotFoundException -> {
-                    screen?.showLoginResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.login_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-                else -> {
-                    screen?.showLoginResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.login_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-            }
-        })
-        {
-            oauthInteractor.sendLoginRequest(email, password)
-            oauthInteractor.sendAccessTokenRequest()
-            screen?.showLoginResult(
-                AuthenticationResult(
-                    true,
-                    resources.getString(R.string.login_successful)
                 )
-            )
+            } catch (e: Exception) {
+                screen?.showLoginResult(
+                    AuthenticationResult(
+                        false,
+                        resources.getString(R.string.login_unsuccessful),
+                        e.message!!
+                    )
+                )
+            }
         }
+
     }
 
-
     fun logoutUser() {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            job = Job()
-            when (throwable) {
-                is UnauthorizedException -> {
-                    sharedPreferencesProvider.clearUserDatas()
-                    screen?.showLogoutResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.logout_unsuccessful),
-                            throwable.message!!
-                        )
+        launch {
+            try {
+                oauthInteractor.sendLogoutRequest()
+                screen?.showLogoutResult(
+                    AuthenticationResult(
+                        true,
+                        resources.getString(R.string.logout_successful)
                     )
-                }
-                is ForbiddenException -> {
-                    sharedPreferencesProvider.clearUserDatas()
-                    screen?.showLogoutResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.logout_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-                is NotFoundException -> {
-                    sharedPreferencesProvider.clearUserDatas()
-                    screen?.showLogoutResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.logout_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-                else -> {
-                    sharedPreferencesProvider.clearUserDatas()
-                    screen?.showLogoutResult(
-                        AuthenticationResult(
-                            false,
-                            resources.getString(R.string.logout_unsuccessful),
-                            throwable.message!!
-                        )
-                    )
-                }
-            }
-        }) {
-            oauthInteractor.sendLogoutRequest()
-            screen?.showLogoutResult(
-                AuthenticationResult(
-                    true,
-                    resources.getString(R.string.logout_successful)
                 )
-            )
+            } catch (e: Exception) {
+                sharedPreferencesProvider.clearUserDatas()
+                screen?.showLogoutResult(
+                    AuthenticationResult(
+                        false,
+                        resources.getString(R.string.logout_unsuccessful),
+                        e.message!!
+                    )
+                )
+            }
         }
     }
 
 
     fun getUser() {
-        GlobalScope.launch(Contexts.UI) {
-            val user = userInteractor.getUserInfo()
+        launch {
+            try {
+                val user = userInteractor.getUserInfo()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
+
     fun getUserAuthenticationInfo() {
-        GlobalScope.launch(Contexts.UI) {
-            screen?.showIsUserAuthenticated(userInteractor.getUserAuthentication())
+        launch {
+            try {
+                screen?.showIsUserAuthenticated(userInteractor.getUserAuthentication())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
+
     }
 
 }

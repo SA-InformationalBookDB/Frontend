@@ -1,14 +1,11 @@
 package szarch.bme.hu.ibdb.ui.upload
 
 import android.content.res.Resources
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.interactors.AdminInteractor
 import szarch.bme.hu.ibdb.domain.interactors.CategoryInteractor
 import szarch.bme.hu.ibdb.ui.base.Presenter
-import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
 class UploadPresenter @Inject constructor(
@@ -21,20 +18,23 @@ class UploadPresenter @Inject constructor(
         title: String, author: String, published: String? = null, publisher: String? = null,
         imageUrl: String? = null, summary: String, pageNumber: Int, sold: Int? = null
     ) {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            screen?.showUplaodMesaage(resources.getString(R.string.book_upload_unsuccessful))
-        })
-        {
-            adminInteractor.addBook(title, author, published, publisher, imageUrl, summary, pageNumber, sold)
-            screen?.showUplaodMesaage(resources.getString(R.string.book_upload_successful))
+        launch {
+            try {
+                adminInteractor.addBook(title, author, published, publisher, imageUrl, summary, pageNumber, sold)
+                screen?.showUplaodMesaage(resources.getString(R.string.book_upload_successful))
+            } catch (e: Exception) {
+                screen?.showUplaodMesaage(resources.getString(R.string.book_upload_unsuccessful))
+            }
         }
     }
 
     fun getCategories() {
-        GlobalScope.launch(Contexts.UI + job + CoroutineExceptionHandler { coroutineContext, throwable ->
-            //Error handling
-        }) {
-            screen?.setCategories(categoryInteractor.getCategories())
+        launch {
+            try {
+                screen?.setCategories(categoryInteractor.getCategories())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
