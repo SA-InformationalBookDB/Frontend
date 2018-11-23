@@ -82,18 +82,17 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
         }
 
         etpYearOfBirth.setOnPreferenceChangeListener { _, any ->
-            //if (szarch.bme.hu.ibdb.util.StringUtil.isDateValid(any.toString())) {
+            if (szarch.bme.hu.ibdb.util.StringUtil.isDateValid(any.toString())) {
                 etpYearOfBirth.summary = any.toString()
                 settingsPreferencePresenter.updateUserInfos(
                     birthDate = szarch.bme.hu.ibdb.util.StringUtil.createDateFromString(
                         any.toString()
                     )
                 )
-            true
-            /*       true
-               } else {
-                   false
-               }*/
+                true
+            } else {
+                false
+            }
 
         }
 
@@ -105,7 +104,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
 
     override fun showCategoryDialog(categoryList: List<CategoryResponse>) {
         val builder = AlertDialog.Builder(requireContext())
-        val title = builder.setTitle(resources.getString(R.string.category_selection_text))
+        builder.setTitle(resources.getString(R.string.category_selection_text))
 
         val bookCategories = categoryList.map { it -> it.name }.toTypedArray()
         val checkedItemList = BooleanArray(bookCategories.size) { false }
@@ -133,5 +132,13 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
     private fun showFavouriteDialog() {
         settingsPreferencePresenter.getCategories()
     }
+
+    fun refreshScreen() {
+        preferenceScreen = null
+        addPreferencesFromResource(R.xml.settings)
+        initializeEditTextPreferences()
+        setEditTextPreferencesSummaries()
+    }
+
 
 }

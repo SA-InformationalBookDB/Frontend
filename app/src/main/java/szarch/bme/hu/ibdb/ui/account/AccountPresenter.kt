@@ -83,6 +83,8 @@ class AccountPresenter @Inject constructor(
                         e.message!!
                     )
                 )
+            } finally {
+                screen?.showUserInfos()
             }
         }
     }
@@ -91,7 +93,8 @@ class AccountPresenter @Inject constructor(
     fun getUser() {
         launch {
             try {
-                val user = userInteractor.getUserInfo()
+                userInteractor.getUserInfo()
+                screen?.showUserInfos()
             } catch (e: Exception) {
                 e.printStackTrace()
             }

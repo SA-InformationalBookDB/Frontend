@@ -4,7 +4,6 @@ import retrofit2.Call
 import retrofit2.http.*
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
-import szarch.bme.hu.ibdb.network.models.user.UpdateUserRequest
 import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 
 interface UserApi {
@@ -32,7 +31,8 @@ interface UserApi {
 
     @PUT("/user/profile")
     fun updateUserInfo(
-        @Body updateUserRequest: UpdateUserRequest
+        @Query("birthDate") birthDate: String?,
+        @Query("nickname") nickname: String?
     ): Call<Void>
 
     @DELETE("/user/profile")

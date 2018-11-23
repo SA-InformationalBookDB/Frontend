@@ -1,13 +1,14 @@
 package szarch.bme.hu.ibdb.domain.local
 
 import android.content.Context
+import androidx.preference.PreferenceManager
 import szarch.bme.hu.ibdb.network.models.user.Role
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class SharedPreferencesProvider @Inject constructor(
-    context: Context
+    private val context: Context
 ) {
 
     private val CLIENT_DATA_STRING = "ibdb_client"
@@ -20,6 +21,8 @@ class SharedPreferencesProvider @Inject constructor(
     private val CLIENT_REDIRECT_URI_STRING = "client_redirect_uri"
     private val CLIENT_FIRST_STARTING = "client_first_starting"
     private val CLIENT_IS_ADMIN = "client_role"
+    private val CLIENT_NICKNAME = "pref_nickname"
+    private val CLIENT_BIRTH_DATE = "pref_birth_year"
 
     private val sharedPreferences = context.getSharedPreferences(CLIENT_DATA_STRING, Context.MODE_PRIVATE)
 
@@ -84,6 +87,8 @@ class SharedPreferencesProvider @Inject constructor(
         sharedPreferences.edit().putString(CLIENT_ACCESS_TOKEN_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_REDIRECT_URI_STRING, "").apply()
         sharedPreferences.edit().putBoolean(CLIENT_IS_ADMIN, false).apply()
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(CLIENT_NICKNAME, "").apply()
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(CLIENT_BIRTH_DATE, "").apply()
     }
 
     fun setUserRole(role: Role) {
@@ -95,11 +100,11 @@ class SharedPreferencesProvider @Inject constructor(
     }
 
     fun setUserNickName(nickName: String) {
-        sharedPreferences.edit().putString("pref_nickname", nickName).apply()
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(CLIENT_NICKNAME, nickName).apply()
     }
 
-    fun setBirthDate(birthDate: String) {
-        sharedPreferences.edit().putString("pref_birth_year", birthDate).apply()
+    fun setUserBirthDate(birthDate: String) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(CLIENT_BIRTH_DATE, birthDate).apply()
     }
 
 

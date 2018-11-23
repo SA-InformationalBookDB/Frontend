@@ -26,10 +26,10 @@ class DetailPresenter @Inject constructor(
                     oauthInteractor.sendRefreshTokenRequest()
                     screen?.showBookDetail(bookInteractor.getBook(bookId))
                 } catch (e: Exception) {
-                    screen?.showBookError(resources.getString(R.string.error_text))
+                    screen?.showBookError(resources.getString(R.string.error_text_network))
                 }
             } catch (e: Exception) {
-                screen?.showBookError(resources.getString(R.string.error_text))
+                screen?.showBookError(resources.getString(R.string.error_text_network))
             }
         }
     }

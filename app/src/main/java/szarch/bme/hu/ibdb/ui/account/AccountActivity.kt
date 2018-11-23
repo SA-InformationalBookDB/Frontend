@@ -27,6 +27,7 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     private var dialogState: DialogState = DialogState.INPUT
     private lateinit var dialogView: View
     private lateinit var dialog: AlertDialog
+    private lateinit var fragment: SettingsPreferenceFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +66,9 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     }
 
     private fun showSettingsFragment() {
+        fragment = SettingsPreferenceFragment()
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.settings_fragment_container, SettingsPreferenceFragment())
+        fragmentTransaction.add(R.id.settings_fragment_container, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
@@ -236,6 +238,7 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_success))
             accountPresenter.getUser()
             showAuthenticationStatus(true)
+
         } else {
             dialogView.findViewById<ImageView>(R.id.iv_login_result)
                 .setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_error))
@@ -251,6 +254,10 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
 
     override fun showIsUserAuthenticated(isUserAuthenticated: Boolean) {
         showAuthenticationStatus(isUserAuthenticated)
+    }
+
+    override fun showUserInfos() {
+        fragment.refreshScreen()
     }
 
     override fun onBackPressed() {

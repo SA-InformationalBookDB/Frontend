@@ -20,13 +20,17 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun activitiesPresenter(reviewInteractor: ReviewInteractor, oauthInteractor: OauthInteractor) =
-        ActivitiesPresenter(reviewInteractor, oauthInteractor)
+    fun activitiesPresenter(
+        reviewInteractor: ReviewInteractor,
+        oauthInteractor: OauthInteractor,
+        resources: Resources
+    ) =
+        ActivitiesPresenter(reviewInteractor, oauthInteractor, resources)
 
     @Provides
     @Singleton
-    fun favouritesPresenter(oauthInteractor: OauthInteractor, userInteractor: UserInteractor) =
-        FavouritePresenter(oauthInteractor, userInteractor)
+    fun favouritesPresenter(oauthInteractor: OauthInteractor, userInteractor: UserInteractor, resources: Resources) =
+        FavouritePresenter(oauthInteractor, userInteractor, resources)
 
     @Provides
     @Singleton

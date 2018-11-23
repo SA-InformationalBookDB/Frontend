@@ -87,5 +87,8 @@
     <string name="successful_user_modification">Successful user status modification!</string>
     <string name="unsuccessful_user_modification">There was an error during your modification! Please, try it again!
     </string>
-    <string name="error_text">There was an error during your request, please try it again!</string>
+    <string name="error_text_network">There was an error during your request, please try it again!</string>
+    <string name="error_text_possible_authorization_problems">There was an error during your request,check your
+        authentication and please try it again!
+    </string>
 </resources>

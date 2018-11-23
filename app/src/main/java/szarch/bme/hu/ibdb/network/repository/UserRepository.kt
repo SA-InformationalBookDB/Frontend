@@ -7,7 +7,6 @@ import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
-import szarch.bme.hu.ibdb.network.models.user.UpdateUserRequest
 import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
@@ -83,8 +82,8 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun updateUserInfo(updateUserRequest: UpdateUserRequest) = withContext(Contexts.NETWORK) {
-        val response = userApi.updateUserInfo(updateUserRequest).execute()
+    suspend fun updateUserInfo(birthDate: String?, nickname: String?) = withContext(Contexts.NETWORK) {
+        val response = userApi.updateUserInfo(birthDate, nickname).execute()
         if (response.isSuccessful.not()) {
             when (response.code()) {
                 401 -> throw UnauthorizedException("Unauthorized")

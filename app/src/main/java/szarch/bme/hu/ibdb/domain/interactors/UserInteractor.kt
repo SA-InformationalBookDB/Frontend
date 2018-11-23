@@ -1,13 +1,9 @@
 package szarch.bme.hu.ibdb.domain.interactors
 
-import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
 import szarch.bme.hu.ibdb.network.models.book.BookResponse
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
-import szarch.bme.hu.ibdb.network.models.user.UpdateUserRequest
-import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.network.repository.UserRepository
-import szarch.bme.hu.ibdb.util.Contexts
 import szarch.bme.hu.ibdb.util.StringUtil
 import javax.inject.Inject
 
@@ -32,24 +28,23 @@ class UserInteractor @Inject constructor(
         userRepository.updateCategories(CategoriesUpdateRequest(categoryIds))
     }
 
-    suspend fun getUserInfo(): UserInfoResponse {
+    suspend fun getUserInfo() {
         val userResponse = userRepository.getUserInfo()
         sharedPreferencesProvider.setUserRole(userResponse.role)
         sharedPreferencesProvider.setUserNickName(userResponse.nickname)
-        sharedPreferencesProvider.setBirthDate(StringUtil.formatDateToString(userResponse.birthDate))
-        return userResponse
+        sharedPreferencesProvider.setUserBirthDate(StringUtil.formatDateToString(userResponse.birthDate))
     }
 
-    suspend fun getUserAuthentication(): Boolean {
+    fun getUserAuthentication(): Boolean {
         return sharedPreferencesProvider.getClientAccessToken().isNotEmpty()
     }
 
-    suspend fun getUserIsAdmin(): Boolean {
+    fun getUserIsAdmin(): Boolean {
         return sharedPreferencesProvider.getUserRole()
     }
 
-    suspend fun updateUserInfo(nickname: String?, birthDate: String?) = withContext(Contexts.UI) {
-        return@withContext userRepository.updateUserInfo(UpdateUserRequest(birthDate = birthDate, nickname = nickname))
+    suspend fun updateUserInfo(nickname: String?, birthDate: String?) {
+        return userRepository.updateUserInfo(birthDate = birthDate, nickname = nickname)
     }
 
 

@@ -8,4 +8,5 @@ interface AccountScreen {
     fun showLoginResult(authenticationResult: AuthenticationResult)
     fun showIsUserAuthenticated(isUserAuthenticated: Boolean)
     fun showLogoutResult(authenticationResult: AuthenticationResult)
+    fun showUserInfos()
 }
