@@ -46,9 +46,9 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
         setupSendButton()
     }
 
-    override fun onStop() {
+    override fun onDestroy() {
         uploadPresenter.detachScreen()
-        super.onStop()
+        super.onDestroy()
     }
 
     private fun injectFragment() {

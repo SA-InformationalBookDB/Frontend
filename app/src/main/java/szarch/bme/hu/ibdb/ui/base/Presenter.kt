@@ -9,7 +9,7 @@ abstract class Presenter<S> : CoroutineScope {
 
     protected var screen: S? = null
 
-    private var job: Job = Job()
+    var job: Job = Job()
 
     override val coroutineContext: CoroutineContext = Contexts.UI + job
 

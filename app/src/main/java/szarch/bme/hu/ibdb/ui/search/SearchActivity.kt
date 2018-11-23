@@ -36,6 +36,11 @@ class SearchActivity : AppCompatActivity(), SearchScreen, FavouriteAdapter.Liste
         doSearch(intent)
     }
 
+    override fun onDestroy() {
+        searchPresenter.detachScreen()
+        super.onDestroy()
+    }
+
     private fun injectActivity() {
         (applicationContext as? BaseApplication)
             ?.injector

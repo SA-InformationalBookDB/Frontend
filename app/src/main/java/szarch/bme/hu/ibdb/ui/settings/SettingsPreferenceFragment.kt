@@ -2,6 +2,8 @@ package szarch.bme.hu.ibdb.ui.settings
 
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
@@ -26,14 +28,13 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectFragment()
-        settingsPreferencePresenter.attachScreen(this)
         initializeEditTextPreferences()
         setEditTextPreferencesSummaries()
         setEditTextOnClickListeners()
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         settingsPreferencePresenter.attachScreen(this)
     }
 
@@ -97,6 +98,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
         }
 
         etpCategory.setOnPreferenceClickListener {
+            Log.d("Testing", "OnClick")
             showFavouriteDialog()
             true
         }

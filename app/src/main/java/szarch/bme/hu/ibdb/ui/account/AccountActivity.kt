@@ -43,9 +43,9 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
         accountPresenter.attachScreen(this)
     }
 
-    override fun onStop() {
+    override fun onDestroy() {
         accountPresenter.detachScreen()
-        super.onStop()
+        super.onDestroy()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

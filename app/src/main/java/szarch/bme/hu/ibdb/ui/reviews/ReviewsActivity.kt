@@ -6,6 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_reviews.*
 import szarch.bme.hu.ibdb.R
@@ -64,6 +65,12 @@ class ReviewsActivity : AppCompatActivity(), ReviewsScreen, ReviewsAdapter.Liste
 
     private fun showReviewDialog() {
         val dialogView = layoutInflater.inflate(R.layout.layout_comment_dialog, null)
+        dialogView.findViewById<AppCompatRatingBar>(R.id.rt_review_upload)
+            .setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+                if (rating < 1.0) {
+                    ratingBar.rating = 1.0f
+                }
+            }
         val dialog = AlertDialog.Builder(ContextThemeWrapper(this, R.style.PreferenceScreen))
             .setView(dialogView)
             .setTitle(R.string.review_dialog_title)

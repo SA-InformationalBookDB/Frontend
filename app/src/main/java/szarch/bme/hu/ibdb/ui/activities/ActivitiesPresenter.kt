@@ -26,6 +26,8 @@ class ActivitiesPresenter @Inject constructor(
                 } catch (e: Exception) {
                     screen?.showErrorMessage(resources.getString(R.string.error_text_possible_authorization_problems))
                 }
+            } catch (e: Exception) {
+                screen?.showErrorMessage(resources.getString(R.string.error_text_possible_authorization_problems))
             }
         }
 

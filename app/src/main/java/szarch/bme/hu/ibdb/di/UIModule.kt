@@ -13,13 +13,11 @@ import szarch.bme.hu.ibdb.ui.search.SearchPresenter
 import szarch.bme.hu.ibdb.ui.settings.SettingsPreferencePresenter
 import szarch.bme.hu.ibdb.ui.upload.UploadPresenter
 import szarch.bme.hu.ibdb.ui.users.UsersPresenter
-import javax.inject.Singleton
 
 @Module
 class UIModule {
 
     @Provides
-    @Singleton
     fun activitiesPresenter(
         reviewInteractor: ReviewInteractor,
         oauthInteractor: OauthInteractor,
@@ -28,12 +26,10 @@ class UIModule {
         ActivitiesPresenter(reviewInteractor, oauthInteractor, resources)
 
     @Provides
-    @Singleton
     fun favouritesPresenter(oauthInteractor: OauthInteractor, userInteractor: UserInteractor, resources: Resources) =
         FavouritePresenter(oauthInteractor, userInteractor, resources)
 
     @Provides
-    @Singleton
     fun mainPresenter(
         bookInteractor: BookInteractor,
         oauthInteractor: OauthInteractor,
@@ -41,11 +37,9 @@ class UIModule {
     ) = MainScreenPresenter(bookInteractor, oauthInteractor, userInteractor)
 
     @Provides
-    @Singleton
     fun searchPresenter(bookRepository: BookRepository) = SearchPresenter(bookRepository)
 
     @Provides
-    @Singleton
     fun uploadPresenter(
         adminInteractor: AdminInteractor,
         categoryInteractor: CategoryInteractor,
@@ -53,16 +47,13 @@ class UIModule {
     ) = UploadPresenter(adminInteractor, categoryInteractor, resources)
 
     @Provides
-    @Singleton
     fun usersPresenter(adminInteractor: AdminInteractor) = UsersPresenter(adminInteractor)
 
     @Provides
-    @Singleton
     fun reviewPresenter(reviewInteractor: ReviewInteractor, oauthInteractor: OauthInteractor, resources: Resources) =
         ReviewsPresenter(reviewInteractor, oauthInteractor, resources)
 
     @Provides
-    @Singleton
     fun settingsPreferencePresenter(categoryInteractor: CategoryInteractor, userInteractor: UserInteractor) =
         SettingsPreferencePresenter(categoryInteractor, userInteractor)
 

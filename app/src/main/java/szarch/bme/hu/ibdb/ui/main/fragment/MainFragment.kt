@@ -1,6 +1,7 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("Testing", "onCreate ")
         super.onCreate(savedInstanceState)
         injectFragment()
     }
@@ -52,11 +54,12 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
         checkUserValidity()
     }
 
-
     override fun onDestroy() {
+        Log.d("Testing", "onDestroy")
         mainScreenPresenter.detachScreen()
         super.onDestroy()
     }
+
 
     private fun checkUserValidity() {
         mainScreenPresenter.getUserIsAdmin()
