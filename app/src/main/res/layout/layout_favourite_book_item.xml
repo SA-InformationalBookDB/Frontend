@@ -34,7 +34,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_favourites_book_position"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/ic_book_image_url"
         />
 
         <TextView

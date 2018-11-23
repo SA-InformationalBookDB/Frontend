@@ -2,6 +2,7 @@ package szarch.bme.hu.ibdb.domain.interactors
 
 import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.network.models.book.BookRequest
+import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
@@ -13,7 +14,7 @@ class AdminInteractor @Inject constructor(
     suspend fun addBook(
         title: String, author: String, published: String?, publisher: String?,
         imageUrl: String?, summary: String, pageNumber: Int, sold: Int?
-    ) = withContext(Contexts.UI) {
+    ) {
         adminRepository.addBook(
             BookRequest(
                 title,
@@ -38,28 +39,28 @@ class AdminInteractor @Inject constructor(
         )
     }
 
-    suspend fun deleteBook(id: String) = withContext(Contexts.UI) {
+    suspend fun deleteBook(id: String) {
         adminRepository.deleteBook(id)
     }
 
-    suspend fun disableUser(userId: String) = withContext(Contexts.UI) {
+    suspend fun disableUser(userId: String) {
         adminRepository.disableUser(userId)
     }
 
-    suspend fun enableUser(userId: String) = withContext(Contexts.UI) {
+    suspend fun enableUser(userId: String) {
         adminRepository.enableUser(userId)
     }
 
-    suspend fun removeUser(userId: String) = withContext(Contexts.UI) {
+    suspend fun removeUser(userId: String) {
         adminRepository.removeUser(userId)
     }
 
-    suspend fun removeReviewById(userId: String, reviewId: String) = withContext(Contexts.UI) {
+    suspend fun removeReviewById(userId: String, reviewId: String) {
         adminRepository.removeReviewById(userId, reviewId)
     }
 
-    suspend fun getUsers() = withContext(Contexts.UI) {
-        return@withContext adminRepository.getUsers()
+    suspend fun getUsers(): List<UserInfoResponse> {
+        return adminRepository.getUsers()
     }
 
 }

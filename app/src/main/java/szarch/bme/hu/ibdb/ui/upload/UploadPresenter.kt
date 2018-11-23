@@ -1,6 +1,7 @@
 package szarch.bme.hu.ibdb.ui.upload
 
 import android.content.res.Resources
+import android.util.Log
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.interactors.AdminInteractor
@@ -20,6 +21,7 @@ class UploadPresenter @Inject constructor(
     ) {
         launch {
             try {
+                Log.d("Testign", "Presenter sends")
                 adminInteractor.addBook(title, author, published, publisher, imageUrl, summary, pageNumber, sold)
                 screen?.showUplaodMesaage(resources.getString(R.string.book_upload_successful))
             } catch (e: Exception) {

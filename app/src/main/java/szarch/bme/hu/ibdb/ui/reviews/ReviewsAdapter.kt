@@ -23,7 +23,7 @@ class ReviewsAdapter : ListAdapter<ReviewResponse, ReviewsAdapter.ReviewItemView
     override fun onBindViewHolder(holder: ReviewItemViewHolder, position: Int) {
         val item = getItem(position)
         holder.tvNickName.text = item.userNickName
-        holder.rtBookRating.rating = (item.points % 5.0).toFloat()
+        holder.rtBookRating.rating = (item.points).toFloat()
         holder.tvReviewComment.text = item.comment
         holder.ivReviewMore.setOnClickListener {
             showreviewInfoDialog(holder.ivReviewMore, item)

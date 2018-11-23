@@ -15,34 +15,34 @@ class UserInteractor @Inject constructor(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun getFavourites(): List<BookResponse> = withContext(Contexts.UI) {
-        return@withContext userRepository.getFavourites()
+    suspend fun getFavourites(): List<BookResponse> {
+        return userRepository.getFavourites()
     }
 
-    suspend fun addFavourite(bookId: String) = withContext(Contexts.UI) {
-        return@withContext userRepository.addFavourite(bookId)
+    suspend fun addFavourite(bookId: String) {
+        return userRepository.addFavourite(bookId)
     }
 
-    suspend fun removeFavourite(bookId: String) = withContext(Contexts.UI) {
-        return@withContext userRepository.deleteFavourite(bookId)
+    suspend fun removeFavourite(bookId: String) {
+        return userRepository.deleteFavourite(bookId)
     }
 
-    suspend fun updateCategories(categoryIds: List<String>) = withContext(Contexts.UI) {
+    suspend fun updateCategories(categoryIds: List<String>) {
         userRepository.updateCategories(CategoriesUpdateRequest(categoryIds))
     }
 
-    suspend fun getUserInfo(): UserInfoResponse = withContext(Contexts.UI) {
+    suspend fun getUserInfo(): UserInfoResponse {
         val userResponse = userRepository.getUserInfo()
         sharedPreferencesProvider.setUserRole(userResponse.role)
-        return@withContext userResponse
+        return userResponse
     }
 
-    suspend fun getUserAuthentication(): Boolean = withContext(Contexts.UI) {
-        return@withContext sharedPreferencesProvider.getClientAccessToken().isNotEmpty()
+    suspend fun getUserAuthentication(): Boolean {
+        return sharedPreferencesProvider.getClientAccessToken().isNotEmpty()
     }
 
-    suspend fun getUserIsAdmin(): Boolean = withContext(Contexts.UI) {
-        return@withContext sharedPreferencesProvider.getUserRole()
+    suspend fun getUserIsAdmin(): Boolean {
+        return sharedPreferencesProvider.getUserRole()
     }
 
     suspend fun updateUserInfo(nickname: String?, birthDate: String?) = withContext(Contexts.UI) {

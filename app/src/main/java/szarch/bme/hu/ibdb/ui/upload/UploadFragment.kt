@@ -3,6 +3,7 @@ package szarch.bme.hu.ibdb.ui.upload
 import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -118,6 +119,7 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
 
     private fun setupSendButton() {
         fab_send.setOnClickListener {
+            Log.d("testing", "Send button click")
             uploadPresenter.uploadBook(
                 title = et_upload_book_title.text.toString(),
                 author = et_upload_book_author.text.toString(),

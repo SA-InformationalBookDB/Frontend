@@ -1,9 +1,7 @@
 package szarch.bme.hu.ibdb.domain.interactors
 
-import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
 import szarch.bme.hu.ibdb.network.repository.CategoryRepository
-import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 
 class CategoryInteractor @Inject constructor(
@@ -11,9 +9,8 @@ class CategoryInteractor @Inject constructor(
 ) {
 
     suspend fun getCategories(): List<CategoryResponse> {
-        return withContext(Contexts.UI) {
-            return@withContext categoryRepository.getCategories()
-        }
+        return categoryRepository.getCategories()
     }
+
 
 }
