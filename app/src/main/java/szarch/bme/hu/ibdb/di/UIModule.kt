@@ -54,8 +54,8 @@ class UIModule {
 
     @Provides
     @Singleton
-    fun reviewPresenter(reviewInteractor: ReviewInteractor, resources: Resources) =
-        ReviewsPresenter(reviewInteractor, resources)
+    fun reviewPresenter(reviewInteractor: ReviewInteractor, oauthInteractor: OauthInteractor, resources: Resources) =
+        ReviewsPresenter(reviewInteractor, oauthInteractor, resources)
 
     @Provides
     @Singleton
