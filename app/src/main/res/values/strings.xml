@@ -87,4 +87,5 @@
     <string name="successful_user_modification">Successful user status modification!</string>
     <string name="unsuccessful_user_modification">There was an error during your modification! Please, try it again!
     </string>
+    <string name="error_text">There was an error during your request, please try it again!</string>
 </resources>

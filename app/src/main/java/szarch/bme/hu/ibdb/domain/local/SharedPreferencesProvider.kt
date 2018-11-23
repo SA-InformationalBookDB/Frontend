@@ -94,5 +94,13 @@ class SharedPreferencesProvider @Inject constructor(
         return sharedPreferences.getBoolean(CLIENT_IS_ADMIN, false)
     }
 
+    fun setUserNickName(nickName: String) {
+        sharedPreferences.edit().putString("pref_nickname", nickName).apply()
+    }
+
+    fun setBirthDate(birthDate: String) {
+        sharedPreferences.edit().putString("pref_birth_year", birthDate).apply()
+    }
+
 
 }

@@ -82,17 +82,18 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
         }
 
         etpYearOfBirth.setOnPreferenceChangeListener { _, any ->
-            if (szarch.bme.hu.ibdb.util.StringUtil.isDateValid(any.toString())) {
+            //if (szarch.bme.hu.ibdb.util.StringUtil.isDateValid(any.toString())) {
                 etpYearOfBirth.summary = any.toString()
                 settingsPreferencePresenter.updateUserInfos(
                     birthDate = szarch.bme.hu.ibdb.util.StringUtil.createDateFromString(
                         any.toString()
                     )
                 )
-                true
-            } else {
-                false
-            }
+            true
+            /*       true
+               } else {
+                   false
+               }*/
 
         }
 

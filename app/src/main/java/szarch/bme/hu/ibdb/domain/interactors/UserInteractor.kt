@@ -8,6 +8,7 @@ import szarch.bme.hu.ibdb.network.models.user.UpdateUserRequest
 import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
 import szarch.bme.hu.ibdb.network.repository.UserRepository
 import szarch.bme.hu.ibdb.util.Contexts
+import szarch.bme.hu.ibdb.util.StringUtil
 import javax.inject.Inject
 
 class UserInteractor @Inject constructor(
@@ -34,6 +35,8 @@ class UserInteractor @Inject constructor(
     suspend fun getUserInfo(): UserInfoResponse {
         val userResponse = userRepository.getUserInfo()
         sharedPreferencesProvider.setUserRole(userResponse.role)
+        sharedPreferencesProvider.setUserNickName(userResponse.nickname)
+        sharedPreferencesProvider.setBirthDate(StringUtil.formatDateToString(userResponse.birthDate))
         return userResponse
     }
 

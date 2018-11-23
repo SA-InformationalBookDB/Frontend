@@ -21,7 +21,7 @@ class SearchPresenter @Inject constructor(
                     screen?.showErrorMessage(e.message)
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                screen?.showErrorMessage(e.message)
             }
         }
     }
