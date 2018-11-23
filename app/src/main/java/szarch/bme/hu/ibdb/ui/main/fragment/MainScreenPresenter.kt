@@ -47,7 +47,6 @@ class MainScreenPresenter @Inject constructor(
         launch {
             try {
                 screen?.showPopularBooks(bookInteractor.getPopularBooks())
-
             } catch (e: UnauthorizedException) {
                 screen?.showErrorMessage(e.message)
                 screen?.showPopularBooks(bookInteractor.getPublicPopularBooks())

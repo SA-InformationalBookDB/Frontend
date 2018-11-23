@@ -10,7 +10,10 @@ import szarch.bme.hu.ibdb.ui.reviews.ReviewsActivity
 object Navigator {
 
     fun navigateToAccountActivity(activity: AppCompatActivity) {
-        activity.startActivity(Intent(activity.applicationContext, AccountActivity::class.java))
+        activity.startActivityForResult(
+            Intent(activity.applicationContext, AccountActivity::class.java),
+            szarch.bme.hu.ibdb.ui.main.activity.MainActivity.ACCOUNT_REQUEST_CODE
+        )
     }
 
     fun navigateToReviewActivity(activity: AppCompatActivity, bookId: String) {

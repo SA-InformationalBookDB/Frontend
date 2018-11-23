@@ -33,7 +33,6 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
         detailPresenter.attachScreen(this)
         if (intent.getStringExtra(INTENT_BOOK_ID) != null) {
             detailPresenter.getBookDetails(intent.getStringExtra(INTENT_BOOK_ID))
-            detailPresenter.getBookReviews(intent.getStringExtra(INTENT_BOOK_ID))
         }
     }
 
@@ -86,6 +85,9 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
             .placeholder(R.drawable.ic_book_image_url)
             .resize(200, 200)
             .into(iv_detail)
+        bookResponse.averageRating?.let {
+            rt_detail_book_title.rating = (it % 5.0).toFloat()
+        }
         tv_detail_book_title.text = bookResponse.title
         tv_detail_book_author.text = bookResponse.author
         tv_detail_book_publisher.text = bookResponse.publisher

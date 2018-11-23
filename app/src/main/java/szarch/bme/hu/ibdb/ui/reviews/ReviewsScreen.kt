@@ -5,7 +5,6 @@ import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 interface ReviewsScreen {
 
     fun showReviews(reviewsResponse: List<ReviewResponse>)
-    fun showSuccessfulReviewSending()
-    fun showUnsuccessfulReviewSending()
+    fun showActionResult(message: String)
 
 }

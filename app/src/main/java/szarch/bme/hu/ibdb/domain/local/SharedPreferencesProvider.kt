@@ -83,6 +83,7 @@ class SharedPreferencesProvider @Inject constructor(
         sharedPreferences.edit().putString(CLIENT_REFRESH_TOKEN_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_ACCESS_TOKEN_STRING, "").apply()
         sharedPreferences.edit().putString(CLIENT_REDIRECT_URI_STRING, "").apply()
+        sharedPreferences.edit().putBoolean(CLIENT_IS_ADMIN, false).apply()
     }
 
     fun setUserRole(role: Role) {

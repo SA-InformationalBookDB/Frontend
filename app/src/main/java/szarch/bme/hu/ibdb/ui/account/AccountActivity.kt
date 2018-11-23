@@ -1,8 +1,10 @@
 package szarch.bme.hu.ibdb.ui.account
 
+import android.app.Activity
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.ContextThemeWrapper
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -43,6 +45,16 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     override fun onStop() {
         accountPresenter.detachScreen()
         super.onStop()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == android.R.id.home) {
+            setResult(Activity.RESULT_OK)
+            finish()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
     }
 
     private fun injectActivity() {
@@ -240,5 +252,11 @@ class AccountActivity : AppCompatActivity(), AccountScreen {
     override fun showIsUserAuthenticated(isUserAuthenticated: Boolean) {
         showAuthenticationStatus(isUserAuthenticated)
     }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_OK)
+        finish()
+    }
+
 
 }

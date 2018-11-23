@@ -1,6 +1,5 @@
 package szarch.bme.hu.ibdb.ui.users
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,6 @@ class UsersAdapter : ListAdapter<UserInfoResponse, UsersAdapter.UsersItemViewHol
         }
 
         popup.setOnMenuItemClickListener {
-            Log.d("Testing", (listener == null).toString())
             when (it.itemId) {
                 R.id.menu_user_enable -> {
                     listener?.enableUser(user.id)

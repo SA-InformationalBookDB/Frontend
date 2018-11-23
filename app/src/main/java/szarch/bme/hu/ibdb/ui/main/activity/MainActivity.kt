@@ -1,8 +1,10 @@
 package szarch.bme.hu.ibdb.ui.main.activity
 
+import android.app.Activity
 import android.app.SearchManager
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -136,4 +138,21 @@ class MainActivity : AppCompatActivity() {
             Toast.LENGTH_LONG
         ).show()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == ACCOUNT_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                supportFragmentManager
+                    .beginTransaction()
+                    .detach(fragment)
+                    .attach(fragment)
+                    .commitAllowingStateLoss()
+            }
+        }
+    }
+
+    companion object {
+        const val ACCOUNT_REQUEST_CODE = 1
+    }
+
 }

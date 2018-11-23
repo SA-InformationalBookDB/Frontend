@@ -13,7 +13,7 @@ import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
-class ReviewsActivity : AppCompatActivity(), ReviewsScreen {
+class ReviewsActivity : AppCompatActivity(), ReviewsScreen, ReviewsAdapter.Listener {
 
     @Inject
     lateinit var reviewPresenter: ReviewsPresenter
@@ -46,6 +46,7 @@ class ReviewsActivity : AppCompatActivity(), ReviewsScreen {
 
     private fun setupRecyclerView() {
         reviewAdapter = ReviewsAdapter()
+        reviewAdapter.listener = this
         rv_reviews.layoutManager =
                 androidx.recyclerview.widget.LinearLayoutManager(
                     this,
@@ -87,13 +88,13 @@ class ReviewsActivity : AppCompatActivity(), ReviewsScreen {
         }
     }
 
-    override fun showSuccessfulReviewSending() {
-        Toast.makeText(this, resources.getString(R.string.successful_review), Toast.LENGTH_LONG).show()
+    override fun showActionResult(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         reviewPresenter.getReviews(bookId)
     }
 
-    override fun showUnsuccessfulReviewSending() {
-        reviewPresenter.getReviews(bookId)
+    override fun removeReview(reviewId: String) {
+        reviewPresenter.removeReview(reviewId)
     }
 
     companion object {

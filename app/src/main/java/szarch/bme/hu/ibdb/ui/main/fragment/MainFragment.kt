@@ -1,7 +1,6 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,17 +36,14 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         injectFragment()
-        Log.d("Testing", "onCreate")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d("Testing", "onCreateView")
         return inflater.inflate(R.layout.fragment_main, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Testing", "onViewCreated")
         mainScreenPresenter.attachScreen(this)
         setupRecyclerViewAdapter()
         setupRecyclerView()
@@ -83,7 +79,6 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
         bestSellerAdapter.listener = this
         popularAdapter.listener = this
         trendingAdapter.listener = this
-
     }
 
     private fun setupRecyclerView() {

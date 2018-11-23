@@ -3,6 +3,7 @@ package szarch.bme.hu.ibdb.ui.reviews
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_review_item.view.*
 import szarch.bme.hu.ibdb.R
@@ -24,6 +25,9 @@ class ReviewsAdapter : ListAdapter<ReviewResponse, ReviewsAdapter.ReviewItemView
         holder.tvNickName.text = item.userNickName
         holder.rtBookRating.rating = (item.points % 5.0).toFloat()
         holder.tvReviewComment.text = item.comment
+        holder.ivReviewMore.setOnClickListener {
+            showreviewInfoDialog(holder.ivReviewMore, item)
+        }
     }
 
     inner class ReviewItemViewHolder(reviewItemView: View) :
@@ -31,11 +35,27 @@ class ReviewsAdapter : ListAdapter<ReviewResponse, ReviewsAdapter.ReviewItemView
         val tvNickName = reviewItemView.tv_review_nick_name
         val rtBookRating = reviewItemView.rt_review_rating
         val tvReviewComment = reviewItemView.tv_review_book_comment
+        val ivReviewMore = reviewItemView.iv_review_more
 
     }
 
+    private fun showreviewInfoDialog(view: View, review: ReviewResponse) {
+        val popup = PopupMenu(view.context, view)
+        popup.menuInflater.inflate(R.menu.review_popup_menu, popup.menu)
+
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_review_remove -> {
+                    listener?.removeReview(review.id)
+                }
+            }
+            true
+        }
+        popup.show()
+    }
+
     interface Listener {
-        fun onItemSelected(bookItemId: String)
+        fun removeReview(reviewId: String)
     }
 
 }
