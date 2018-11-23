@@ -106,20 +106,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFragment(tag: String) {
         if (supportFragmentManager.findFragmentByTag(tag) == null) {
-            when (tag) {
-                MainFragment.TAG -> fragment =
-                        MainFragment()
-                FavouritesFragment.TAG -> {
-
-                    fragment = FavouritesFragment()
-
-                }
-                UploadFragment.TAG -> fragment = UploadFragment()
-                ActivitiesFragment.TAG -> {
-                    fragment = ActivitiesFragment()
-
-                }
-                UsersFragment.TAG -> fragment = UsersFragment()
+            fragment = when (tag) {
+                FavouritesFragment.TAG -> FavouritesFragment()
+                UploadFragment.TAG -> UploadFragment()
+                ActivitiesFragment.TAG -> ActivitiesFragment()
+                UsersFragment.TAG -> UsersFragment()
+                else -> MainFragment()
             }
         } else {
             fragment = supportFragmentManager.findFragmentByTag(tag)!!
@@ -142,11 +134,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ACCOUNT_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                supportFragmentManager
-                    .beginTransaction()
-                    .detach(fragment)
-                    .attach(fragment)
-                    .commitAllowingStateLoss()
+                supportFragmentManager.beginTransaction().detach(fragment).attach(fragment).commitNowAllowingStateLoss()
             }
         }
     }

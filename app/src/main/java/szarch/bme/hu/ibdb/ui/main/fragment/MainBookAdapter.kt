@@ -24,12 +24,14 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
         val item = getItem(position)
         holder.item = item
         holder.tvBookTitle.text = item.title
-        item.imageUrl?.let {
-            Picasso.get()
-                .load(it)
-                .fit()
-                .placeholder(R.drawable.ic_book_image_url)
-                .into(holder.ivBookImage)
+        if (item.imageUrl != null && item.imageUrl.isNotEmpty()) {
+            item.imageUrl.let {
+                Picasso.get()
+                    .load(it)
+                    .fit()
+                    .placeholder(R.drawable.ic_book_image_url)
+                    .into(holder.ivBookImage)
+            }
         }
     }
 
@@ -47,8 +49,6 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
                 }
             }
         }
-
-
     }
 
     interface Listener {
