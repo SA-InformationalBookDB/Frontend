@@ -2,7 +2,6 @@ package szarch.bme.hu.ibdb.ui.settings
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.EditTextPreference
@@ -98,7 +97,6 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
         }
 
         etpCategory.setOnPreferenceClickListener {
-            Log.d("Testing", "OnClick")
             showFavouriteDialog()
             true
         }

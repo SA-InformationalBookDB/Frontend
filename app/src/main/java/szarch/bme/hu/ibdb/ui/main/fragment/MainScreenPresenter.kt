@@ -1,6 +1,5 @@
 package szarch.bme.hu.ibdb.ui.main.fragment
 
-import android.util.Log
 import kotlinx.coroutines.launch
 import szarch.bme.hu.ibdb.domain.interactors.BookInteractor
 import szarch.bme.hu.ibdb.domain.interactors.OauthInteractor
@@ -33,7 +32,6 @@ class MainScreenPresenter @Inject constructor(
     }
 
     fun getBestsellerBooks() {
-        Log.d("Testing", job.isCancelled.toString())
         launch {
             try {
                 screen?.showBestsellerBooks(bookInteractor.getBestsellerBooks())
