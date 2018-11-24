@@ -26,7 +26,7 @@ class ReviewsAdapter : ListAdapter<Review, ReviewsAdapter.ReviewItemViewHolder>(
         holder.rtBookRating.rating = (item.points).toFloat()
         holder.tvReviewComment.text = item.comment
         holder.ivReviewMore.setOnClickListener {
-            showreviewInfoDialog(holder.ivReviewMore, item)
+            showReviewInfoDialog(holder.ivReviewMore, item)
         }
     }
 
@@ -39,7 +39,7 @@ class ReviewsAdapter : ListAdapter<Review, ReviewsAdapter.ReviewItemViewHolder>(
 
     }
 
-    private fun showreviewInfoDialog(view: View, review: Review) {
+    private fun showReviewInfoDialog(view: View, review: Review) {
         val popup = PopupMenu(view.context, view)
         popup.menuInflater.inflate(R.menu.review_popup_menu, popup.menu)
 

@@ -4,6 +4,7 @@ import java.util.*
 
 data class Review(
     val id: String,
+    val bookTitle: String,
     val points: Double,
     val date: Date,
     val bookId: String,

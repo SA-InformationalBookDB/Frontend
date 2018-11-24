@@ -19,7 +19,7 @@ class ActivitiesAdapter : ListAdapter<Review, ActivitiesAdapter.ActivityItemView
 
     override fun onBindViewHolder(holder: ActivityItemViewHolder, position: Int) {
         val item = getItem(position)
-        holder.tvActivityBookTitle.text = "Book title"
+        holder.tvActivityBookTitle.text = item.bookTitle
         holder.rtActivityRating.rating = item.points.toFloat()
         holder.tv_ActivityBookComment.text = item.comment
 
