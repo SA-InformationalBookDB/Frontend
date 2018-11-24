@@ -52,7 +52,7 @@
     <string name="book_publisher">Publisher</string>
     <string name="book_reviews">Reviews</string>
     <string name="book_category">Category</string>
-    <string name="book_image">Select an image file</string>
+    <string name="book_image">Set an image URL</string>
     <string name="book_summary">Summary</string>
     <string name="book_page_number">Page number</string>
     <string name="book_sold">Sold</string>
