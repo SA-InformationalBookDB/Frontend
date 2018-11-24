@@ -1,5 +1,6 @@
 package szarch.bme.hu.ibdb.ui.reviews
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.widget.EditText
@@ -102,6 +103,11 @@ class ReviewsActivity : AppCompatActivity(), ReviewsScreen, ReviewsAdapter.Liste
 
     override fun removeReview(reviewId: String) {
         reviewPresenter.removeReview(reviewId)
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
     companion object {

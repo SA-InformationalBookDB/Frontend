@@ -40,10 +40,10 @@
     <string name="title_users">Users</string>
     <string name="title_search">Search</string>
     <string name="title_account">Account</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="title_activity_search">SearchActivity</string>
-    <string name="title_activity_detail">DetailActivity</string>
-    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_detail">Details</string>
+    <string name="title_activity_account">Account</string>
     <string name="views_book_number_text">%1$d views</string>
     <string name="search_hint">Enter book name</string>
     <string name="book_title">Title</string>
@@ -76,7 +76,7 @@
     <string name="successful_favourite_adding">Book is now your favourite one!</string>
     <string name="successful_favourite_removing">Book is now your not liked one!</string>
     <string name="unsuccessful_favourite_text">Your request is not completed! PLease, try it again!</string>
-    <string name="title_activity_reviews">ReviewsActivity</string>
+    <string name="title_activity_reviews">Reviews</string>
     <string name="no_comment_text">There is no comment for this review.</string>
     <string name="review_dialog_title">Add your review</string>
     <string name="comment_hint">Your review</string>

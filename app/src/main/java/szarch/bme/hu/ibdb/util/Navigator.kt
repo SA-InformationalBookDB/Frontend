@@ -19,7 +19,7 @@ object Navigator {
     fun navigateToReviewActivity(activity: AppCompatActivity, bookId: String) {
         val intent = Intent(activity, ReviewsActivity::class.java)
         intent.putExtra(ReviewsActivity.INTENT_BOOK_ID, bookId)
-        activity.startActivity(intent)
+        activity.startActivityForResult(intent, DetailActivity.REVIEW_REQUEST_CODE)
     }
 
     fun navigateToDetailScreen(activity: FragmentActivity, bookId: String) {

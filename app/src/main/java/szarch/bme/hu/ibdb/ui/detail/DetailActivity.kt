@@ -1,5 +1,7 @@
 package szarch.bme.hu.ibdb.ui.detail
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -21,7 +23,7 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
     @Inject
     lateinit var detailPresenter: DetailPresenter
 
-    private lateinit var book: Book
+    private var book: Book? = null
     private var isFavourite: Boolean = false
     private var menuItem: MenuItem? = null
 
@@ -51,17 +53,21 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
         return when (item?.itemId) {
 
             R.id.detail_favourite -> {
-                if (isFavourite) {
-                    detailPresenter.removeFavourite(book.id)
-                } else {
-                    detailPresenter.addFavourite(book.id)
+                book?.let {
+                    if (isFavourite) {
+                        detailPresenter.removeFavourite(it.id)
+                    } else {
+                        detailPresenter.addFavourite(it.id)
+                    }
                 }
 
                 true
             }
 
             R.id.detail_reviews -> {
-                Navigator.navigateToReviewActivity(this@DetailActivity, book.id)
+                book?.let {
+                    Navigator.navigateToReviewActivity(this@DetailActivity, it.id)
+                }
                 true
             }
 
@@ -132,8 +138,17 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REVIEW_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                recreate()
+            }
+        }
+    }
+
     companion object {
         const val INTENT_BOOK_ID = "bookID"
+        const val REVIEW_REQUEST_CODE = 2
     }
 
 }
