@@ -5,8 +5,8 @@ import szarch.bme.hu.ibdb.network.api.ReviewApi
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
+import szarch.bme.hu.ibdb.network.models.review.Review
 import szarch.bme.hu.ibdb.network.models.review.ReviewRequest
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,7 +16,7 @@ class ReviewRepository @Inject constructor(
     private val reviewApi: ReviewApi
 ) {
 
-    suspend fun getUserReviews(): List<ReviewResponse> = withContext(Contexts.NETWORK) {
+    suspend fun getUserReviews(): List<Review> = withContext(Contexts.NETWORK) {
         val response = reviewApi.getUserReviews().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!

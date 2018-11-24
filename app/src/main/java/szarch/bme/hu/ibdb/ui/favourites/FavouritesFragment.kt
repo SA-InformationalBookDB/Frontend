@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_favourites.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.util.Navigator
 import javax.inject.Inject
@@ -62,7 +62,7 @@ class FavouritesFragment : androidx.fragment.app.Fragment(), FavouriteAdapter.Li
         super.onDestroy()
     }
 
-    override fun showFavouritesBooks(bookList: List<BookResponse>) {
+    override fun showFavouritesBooks(bookList: List<Book>) {
         if (bookList.isEmpty()) {
             vf_favourites.displayedChild = 1
         } else {

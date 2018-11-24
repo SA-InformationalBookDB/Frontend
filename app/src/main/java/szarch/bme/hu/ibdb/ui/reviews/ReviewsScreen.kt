@@ -1,10 +1,10 @@
 package szarch.bme.hu.ibdb.ui.reviews
 
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
+import szarch.bme.hu.ibdb.network.models.review.Review
 
 interface ReviewsScreen {
 
-    fun showReviews(reviewsResponse: List<ReviewResponse>)
+    fun showReviews(reviews: List<Review>)
     fun showActionResult(message: String)
 
 }

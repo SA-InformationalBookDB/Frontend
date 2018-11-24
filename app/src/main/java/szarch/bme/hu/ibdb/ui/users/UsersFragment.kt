@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_users.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
+import szarch.bme.hu.ibdb.network.models.user.UserInfo
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
@@ -61,7 +61,7 @@ class UsersFragment : androidx.fragment.app.Fragment(), UsersAdapter.UserListene
         usersPresenter.getUsers()
     }
 
-    override fun showUserList(userList: List<UserInfoResponse>) {
+    override fun showUserList(userList: List<UserInfo>) {
         vf_users.displayedChild = if (userList.isEmpty()) 1 else 0
         usersAdapter.submitList(userList)
     }

@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.ListAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_main_book_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.ui.base.comparators.BookComparator
 
-class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHolder>(BookComparator) {
+class MainBookAdapter : ListAdapter<Book, MainBookAdapter.BookItemViewHolder>(BookComparator) {
 
     var listener: Listener? = null
 
@@ -40,7 +40,7 @@ class MainBookAdapter : ListAdapter<BookResponse, MainBookAdapter.BookItemViewHo
         val tvBookTitle = bookItemView.tv_main_book_item
         val ivBookImage = bookItemView.iv_main_book_item
 
-        var item: BookResponse? = null
+        var item: Book? = null
 
         init {
             bookItemView.setOnClickListener {

@@ -1,6 +1,5 @@
 package szarch.bme.hu.ibdb.di
 
-import com.facebook.stetho.okhttp3.StethoInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -32,7 +31,6 @@ class NetworkModule {
     fun provideOkHttpClient(sharedPreferencesProvider: SharedPreferencesProvider): OkHttpClient {
         val clientBuilder = OkHttpClient.Builder()
         clientBuilder.addInterceptor(AuthenticationInterceptor(sharedPreferencesProvider))
-        clientBuilder.addNetworkInterceptor(StethoInterceptor())
         return clientBuilder.build()
     }
 

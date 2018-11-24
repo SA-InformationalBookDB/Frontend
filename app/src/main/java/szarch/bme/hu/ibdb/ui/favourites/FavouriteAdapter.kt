@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_favourite_book_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.ui.base.comparators.BookComparator
 
-class FavouriteAdapter : ListAdapter<BookResponse, FavouriteAdapter.BookItemViewHolder>(BookComparator) {
+class FavouriteAdapter : ListAdapter<Book, FavouriteAdapter.BookItemViewHolder>(BookComparator) {
 
     var listener: Listener? = null
 
@@ -37,7 +37,7 @@ class FavouriteAdapter : ListAdapter<BookResponse, FavouriteAdapter.BookItemView
         val tvBookPosition = bookItemView.tv_favourites_book_position
         val ivBookImage = bookItemView.iv_favourites_book_item
 
-        var item: BookResponse? = null
+        var item: Book? = null
 
         init {
             itemView.setOnClickListener {

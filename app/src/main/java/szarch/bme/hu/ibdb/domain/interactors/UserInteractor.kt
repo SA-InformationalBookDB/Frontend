@@ -1,7 +1,7 @@
 package szarch.bme.hu.ibdb.domain.interactors
 
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
 import szarch.bme.hu.ibdb.network.repository.UserRepository
 import szarch.bme.hu.ibdb.util.StringUtil
@@ -12,7 +12,7 @@ class UserInteractor @Inject constructor(
     private val userRepository: UserRepository
 ) {
 
-    suspend fun getFavourites(): List<BookResponse> {
+    suspend fun getFavourites(): List<Book> {
         return userRepository.getFavourites()
     }
 

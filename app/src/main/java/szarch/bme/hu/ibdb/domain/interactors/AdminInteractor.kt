@@ -2,7 +2,7 @@ package szarch.bme.hu.ibdb.domain.interactors
 
 import kotlinx.coroutines.withContext
 import szarch.bme.hu.ibdb.network.models.book.BookRequest
-import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
+import szarch.bme.hu.ibdb.network.models.user.UserInfo
 import szarch.bme.hu.ibdb.network.repository.AdminRepository
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
@@ -59,7 +59,7 @@ class AdminInteractor @Inject constructor(
         adminRepository.removeReviewById(userId, reviewId)
     }
 
-    suspend fun getUsers(): List<UserInfoResponse> {
+    suspend fun getUsers(): List<UserInfo> {
         return adminRepository.getUsers()
     }
 

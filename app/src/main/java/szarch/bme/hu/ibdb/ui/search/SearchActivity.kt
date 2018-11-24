@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_search.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.ui.favourites.FavouriteAdapter
 import szarch.bme.hu.ibdb.util.Navigator
@@ -71,7 +71,7 @@ class SearchActivity : AppCompatActivity(), SearchScreen, FavouriteAdapter.Liste
         }
     }
 
-    override fun showBooks(bookList: List<BookResponse>) {
+    override fun showBooks(bookList: List<Book>) {
         if (bookList.isEmpty()) {
             vf_search_books.displayedChild = 1
         } else {

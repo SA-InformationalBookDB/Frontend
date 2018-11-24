@@ -8,7 +8,7 @@ import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
+import szarch.bme.hu.ibdb.network.models.category.Category
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
@@ -102,7 +102,7 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat(), SettingsPreferenc
         }
     }
 
-    override fun showCategoryDialog(categoryList: List<CategoryResponse>) {
+    override fun showCategoryDialog(categoryList: List<Category>) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(resources.getString(R.string.category_selection_text))
 

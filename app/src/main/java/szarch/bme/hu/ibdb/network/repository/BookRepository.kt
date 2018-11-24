@@ -5,7 +5,7 @@ import szarch.bme.hu.ibdb.network.api.BookApi
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,7 +15,7 @@ class BookRepository @Inject constructor(
     private val bookApi: BookApi
 ) {
 
-    suspend fun getPopularBooks(): List<BookResponse> = withContext(Contexts.NETWORK) {
+    suspend fun getPopularBooks(): List<Book> = withContext(Contexts.NETWORK) {
         val response = bookApi.getPopularBooks().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
@@ -71,7 +71,7 @@ class BookRepository @Inject constructor(
         }
     }
 
-    suspend fun getBook(bookId: String): BookResponse = withContext(Contexts.NETWORK) {
+    suspend fun getBook(bookId: String): Book = withContext(Contexts.NETWORK) {
         val response = bookApi.getBook(bookId).execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
@@ -99,7 +99,7 @@ class BookRepository @Inject constructor(
         }
     }
 
-    suspend fun getPublicBestsellerBooks(): List<BookResponse> = withContext(Contexts.NETWORK) {
+    suspend fun getPublicBestsellerBooks(): List<Book> = withContext(Contexts.NETWORK) {
         val response = bookApi.getPublicBestseller().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
@@ -113,7 +113,7 @@ class BookRepository @Inject constructor(
         }
     }
 
-    suspend fun getPublicPopularBooks(): List<BookResponse> = withContext(Contexts.NETWORK) {
+    suspend fun getPublicPopularBooks(): List<Book> = withContext(Contexts.NETWORK) {
         val response = bookApi.getPublicPopularBooks().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
@@ -127,7 +127,7 @@ class BookRepository @Inject constructor(
         }
     }
 
-    suspend fun getPublicTrendingBooks(): List<BookResponse> = withContext(Contexts.NETWORK) {
+    suspend fun getPublicTrendingBooks(): List<Book> = withContext(Contexts.NETWORK) {
         val response = bookApi.getPublicTrendingBook().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!

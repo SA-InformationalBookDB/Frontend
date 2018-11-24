@@ -2,13 +2,13 @@ package szarch.bme.hu.ibdb.network.api
 
 import retrofit2.Call
 import retrofit2.http.*
+import szarch.bme.hu.ibdb.network.models.review.Review
 import szarch.bme.hu.ibdb.network.models.review.ReviewRequest
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 
 interface ReviewApi {
 
     @GET("/review")
-    fun getUserReviews(): Call<List<ReviewResponse>>
+    fun getUserReviews(): Call<List<Review>>
 
 
     @PUT("/review/{reviewId}")
@@ -29,7 +29,7 @@ interface ReviewApi {
     ): Call<Void>
 
     @GET("/review/book/{id}")
-    fun getBookReviews(@Path("id") bookId: String): Call<List<ReviewResponse>>
+    fun getBookReviews(@Path("id") bookId: String): Call<List<Review>>
 
 
 

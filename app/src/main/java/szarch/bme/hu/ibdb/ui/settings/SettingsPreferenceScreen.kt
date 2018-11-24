@@ -1,7 +1,7 @@
 package szarch.bme.hu.ibdb.ui.settings
 
-import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
+import szarch.bme.hu.ibdb.network.models.category.Category
 
 interface SettingsPreferenceScreen {
-    fun showCategoryDialog(categoryList: List<CategoryResponse>)
+    fun showCategoryDialog(categoryList: List<Category>)
 }

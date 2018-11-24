@@ -1,7 +1,7 @@
 package szarch.bme.hu.ibdb.domain.interactors
 
+import szarch.bme.hu.ibdb.network.models.review.Review
 import szarch.bme.hu.ibdb.network.models.review.ReviewRequest
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
 import szarch.bme.hu.ibdb.network.repository.ReviewRepository
 import javax.inject.Inject
 
@@ -9,11 +9,11 @@ class ReviewInteractor @Inject constructor(
     private val reviewRepository: ReviewRepository
 ) {
 
-    suspend fun getUserReviews(): List<ReviewResponse> {
+    suspend fun getUserReviews(): List<Review> {
         return reviewRepository.getUserReviews()
     }
 
-    suspend fun getReviews(id: String): List<ReviewResponse> {
+    suspend fun getReviews(id: String): List<Review> {
         return reviewRepository.getReviews(id)
     }
 

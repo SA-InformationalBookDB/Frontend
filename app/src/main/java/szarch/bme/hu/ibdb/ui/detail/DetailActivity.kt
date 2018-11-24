@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.util.Navigator
 import szarch.bme.hu.ibdb.util.StringUtil
@@ -21,7 +21,7 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
     @Inject
     lateinit var detailPresenter: DetailPresenter
 
-    private lateinit var bookResponse: BookResponse
+    private lateinit var book: Book
     private var isFavourite: Boolean = false
     private var menuItem: MenuItem? = null
 
@@ -52,16 +52,16 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
 
             R.id.detail_favourite -> {
                 if (isFavourite) {
-                    detailPresenter.removeFavourite(bookResponse.id)
+                    detailPresenter.removeFavourite(book.id)
                 } else {
-                    detailPresenter.addFavourite(bookResponse.id)
+                    detailPresenter.addFavourite(book.id)
                 }
 
                 true
             }
 
             R.id.detail_reviews -> {
-                Navigator.navigateToReviewActivity(this@DetailActivity, bookResponse.id)
+                Navigator.navigateToReviewActivity(this@DetailActivity, book.id)
                 true
             }
 
@@ -78,31 +78,31 @@ class DetailActivity : AppCompatActivity(), DetailScreen {
             ?: throw IllegalStateException("InjectedActivity should not be used without an Application that inherits from BaseApplication")
     }
 
-    override fun showBookDetail(bookResponse: BookResponse) {
-        this.bookResponse = bookResponse
+    override fun showBookDetail(book: Book) {
+        this.book = book
         Picasso.get()
-            .load(bookResponse.imageUrl)
+            .load(book.imageUrl)
             .placeholder(R.drawable.ic_book_image_url)
             .resize(200, 200)
             .into(iv_detail)
-        bookResponse.averageRating?.let {
+        book.averageRating?.let {
             rt_detail_book_title.rating = (it % 5.0).toFloat()
         }
-        tv_detail_book_title.text = bookResponse.title
-        tv_detail_book_author.text = bookResponse.author
-        tv_detail_book_publisher.text = bookResponse.publisher
-        bookResponse.published?.let {
+        tv_detail_book_title.text = book.title
+        tv_detail_book_author.text = book.author
+        tv_detail_book_publisher.text = book.publisher
+        book.published?.let {
             tv_detail_book_published.text = StringUtil.formatDateToString(it)
         }
-        tv_detail_book_summary.text = bookResponse.summary
-        tv_detail_book_page_number.text = bookResponse.pageNumber.toString()
-        bookResponse.sold?.let {
+        tv_detail_book_summary.text = book.summary
+        tv_detail_book_page_number.text = book.pageNumber.toString()
+        book.sold?.let {
             tv_detail_book_sold.text = it.toString()
         }
-        bookResponse.views?.let {
+        book.views?.let {
             tv_detail_book_views.text = it.toString()
         }
-        bookResponse.favourite?.let {
+        book.favourite?.let {
             menuItem?.icon =
                     if (it) ContextCompat.getDrawable(this, R.drawable.ic_favourites) else ContextCompat.getDrawable(
                         this,

@@ -2,7 +2,7 @@ package szarch.bme.hu.ibdb.network.models.user
 
 import java.util.*
 
-data class UserInfoResponse(
+data class UserInfo(
     val id: String,
     val email: String,
     val role: Role,

@@ -2,7 +2,7 @@ package szarch.bme.hu.ibdb.network.models.review
 
 import java.util.*
 
-data class ReviewResponse(
+data class Review(
     val id: String,
     val points: Double,
     val date: Date,

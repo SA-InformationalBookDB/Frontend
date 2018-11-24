@@ -5,9 +5,9 @@ import szarch.bme.hu.ibdb.network.api.UserApi
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
-import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
+import szarch.bme.hu.ibdb.network.models.user.UserInfo
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -17,7 +17,7 @@ class UserRepository @Inject constructor(
     private val userApi: UserApi
 ) {
 
-    suspend fun getFavourites(): List<BookResponse> = withContext(Contexts.NETWORK) {
+    suspend fun getFavourites(): List<Book> = withContext(Contexts.NETWORK) {
         val response = userApi.getFavourites().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
@@ -68,7 +68,7 @@ class UserRepository @Inject constructor(
         }
     }
 
-    suspend fun getUserInfo(): UserInfoResponse = withContext(Contexts.NETWORK) {
+    suspend fun getUserInfo(): UserInfo = withContext(Contexts.NETWORK) {
         val response = userApi.getUserInfo().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!

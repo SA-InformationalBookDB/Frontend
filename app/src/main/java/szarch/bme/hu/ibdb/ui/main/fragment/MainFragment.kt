@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import szarch.bme.hu.ibdb.R
 import szarch.bme.hu.ibdb.domain.local.SharedPreferencesProvider
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.util.Navigator
 import szarch.bme.hu.ibdb.util.StringUtil
@@ -133,19 +133,19 @@ class MainFragment : androidx.fragment.app.Fragment(), MainBookAdapter.Listener,
     }
 
 
-    override fun showRecommendationBooks(bookList: List<BookResponse>) {
+    override fun showRecommendationBooks(bookList: List<Book>) {
         recommendationAdapter.submitList(bookList)
     }
 
-    override fun showBestsellerBooks(bookList: List<BookResponse>) {
+    override fun showBestsellerBooks(bookList: List<Book>) {
         bestSellerAdapter.submitList(bookList)
     }
 
-    override fun showPopularBooks(bookList: List<BookResponse>) {
+    override fun showPopularBooks(bookList: List<Book>) {
         popularAdapter.submitList(bookList)
     }
 
-    override fun showTrendingBooks(bookList: List<BookResponse>) {
+    override fun showTrendingBooks(bookList: List<Book>) {
         trendingAdapter.submitList(bookList)
     }
 

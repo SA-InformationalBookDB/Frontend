@@ -1,9 +1,9 @@
 package szarch.bme.hu.ibdb.ui.detail
 
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 
 interface DetailScreen {
-    fun showBookDetail(bookResponse: BookResponse)
+    fun showBookDetail(book: Book)
     fun showBookError(message: String)
     fun showSuccessfulFavouriteAdding()
     fun showSuccessfulFavouriteRemoval()

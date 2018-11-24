@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_activity_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
+import szarch.bme.hu.ibdb.network.models.review.Review
 import szarch.bme.hu.ibdb.ui.base.comparators.ReviewComparator
 
-class ActivitiesAdapter : ListAdapter<ReviewResponse, ActivitiesAdapter.ActivityItemViewHolder>(ReviewComparator) {
+class ActivitiesAdapter : ListAdapter<Review, ActivitiesAdapter.ActivityItemViewHolder>(ReviewComparator) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ActivityItemViewHolder {
         val activityItemView =

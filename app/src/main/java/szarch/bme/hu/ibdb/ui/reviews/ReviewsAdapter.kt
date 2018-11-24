@@ -7,10 +7,10 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_review_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
+import szarch.bme.hu.ibdb.network.models.review.Review
 import szarch.bme.hu.ibdb.ui.base.comparators.ReviewComparator
 
-class ReviewsAdapter : ListAdapter<ReviewResponse, ReviewsAdapter.ReviewItemViewHolder>(ReviewComparator) {
+class ReviewsAdapter : ListAdapter<Review, ReviewsAdapter.ReviewItemViewHolder>(ReviewComparator) {
 
     var listener: Listener? = null
 
@@ -39,7 +39,7 @@ class ReviewsAdapter : ListAdapter<ReviewResponse, ReviewsAdapter.ReviewItemView
 
     }
 
-    private fun showreviewInfoDialog(view: View, review: ReviewResponse) {
+    private fun showreviewInfoDialog(view: View, review: Review) {
         val popup = PopupMenu(view.context, view)
         popup.menuInflater.inflate(R.menu.review_popup_menu, popup.menu)
 

@@ -1,15 +1,15 @@
 package szarch.bme.hu.ibdb.ui.base.comparators
 
 import androidx.recyclerview.widget.DiffUtil
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
+import szarch.bme.hu.ibdb.network.models.review.Review
 
-object ReviewComparator : DiffUtil.ItemCallback<ReviewResponse>() {
+object ReviewComparator : DiffUtil.ItemCallback<Review>() {
 
-    override fun areItemsTheSame(oldItem: ReviewResponse, newItem: ReviewResponse): Boolean {
+    override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: ReviewResponse, newItem: ReviewResponse): Boolean {
+    override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean {
         return oldItem == newItem
     }
 

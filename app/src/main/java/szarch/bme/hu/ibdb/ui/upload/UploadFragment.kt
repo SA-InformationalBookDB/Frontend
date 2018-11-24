@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.content_upload.*
 import kotlinx.android.synthetic.main.fragment_upload.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
+import szarch.bme.hu.ibdb.network.models.category.Category
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import szarch.bme.hu.ibdb.util.StringUtil
 import java.util.*
@@ -24,7 +24,7 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
     @Inject
     lateinit var uploadPresenter: UploadPresenter
 
-    private var categoryList: List<CategoryResponse> = listOf()
+    private var categoryList: List<Category> = listOf()
     private val selectedCategoryIds: ArrayList<String> = ArrayList()
     private val bookPublishDate: Calendar = Calendar.getInstance()
 
@@ -135,7 +135,7 @@ class UploadFragment : androidx.fragment.app.Fragment(), UploadScreen {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
-    override fun setCategories(categories: List<CategoryResponse>) {
+    override fun setCategories(categories: List<Category>) {
         this.categoryList = categories
     }
 

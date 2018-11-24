@@ -2,14 +2,14 @@ package szarch.bme.hu.ibdb.network.api
 
 import retrofit2.Call
 import retrofit2.http.*
-import szarch.bme.hu.ibdb.network.models.book.BookResponse
+import szarch.bme.hu.ibdb.network.models.book.Book
 import szarch.bme.hu.ibdb.network.models.user.CategoriesUpdateRequest
-import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
+import szarch.bme.hu.ibdb.network.models.user.UserInfo
 
 interface UserApi {
 
     @GET("/user/favourite")
-    fun getFavourites(): Call<List<BookResponse>>
+    fun getFavourites(): Call<List<Book>>
 
     @PUT("/user/category")
     fun updateCategories(
@@ -27,7 +27,7 @@ interface UserApi {
     ): Call<Void>
 
     @GET("/user/profile")
-    fun getUserInfo(): Call<UserInfoResponse>
+    fun getUserInfo(): Call<UserInfo>
 
     @PUT("/user/profile")
     fun updateUserInfo(

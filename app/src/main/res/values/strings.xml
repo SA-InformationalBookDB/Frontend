@@ -17,7 +17,7 @@
     <string name="confirm_password_hint_text">Confirm password</string>
     <string name="loading_text">Loading ...</string>
     <string name="account_signed_out_title">Join our community!</string>
-    <string name="account_signed_in_title">Your are already part of our team community!</string>
+    <string name="account_signed_in_title">You are already part of our community!</string>
     <string name="email_address_not_valid">Email address is not valid</string>
     <string name="password_not_equals">Passwords are not equal</string>
     <string name="password_not_valid">Password is too weak</string>

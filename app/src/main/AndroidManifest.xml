@@ -27,12 +27,6 @@
                     android:value=".SearchResultsActivity"/>
         </activity>
         <activity
-                android:name=".ui.settings.SettingsActivity"
-                android:label="@string/title_activity_settings"
-                android:parentActivityName=".ui.account.AccountActivity"
-                android:screenOrientation="portrait">
-        </activity>
-        <activity
                 android:name=".ui.search.SearchActivity"
                 android:label="@string/title_activity_search"
                 android:parentActivityName=".ui.main.activity.MainActivity"

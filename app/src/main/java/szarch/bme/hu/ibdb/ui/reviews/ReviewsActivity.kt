@@ -10,7 +10,7 @@ import androidx.appcompat.widget.AppCompatRatingBar
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_reviews.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.review.ReviewResponse
+import szarch.bme.hu.ibdb.network.models.review.Review
 import szarch.bme.hu.ibdb.ui.base.BaseApplication
 import javax.inject.Inject
 
@@ -86,9 +86,9 @@ class ReviewsActivity : AppCompatActivity(), ReviewsScreen, ReviewsAdapter.Liste
         dialog.show()
     }
 
-    override fun showReviews(reviewsResponse: List<ReviewResponse>) {
-        reviewAdapter.submitList(reviewsResponse)
-        if (reviewsResponse.isEmpty()) {
+    override fun showReviews(reviews: List<Review>) {
+        reviewAdapter.submitList(reviews)
+        if (reviews.isEmpty()) {
             vf_reviews.displayedChild = 1
         } else {
             vf_reviews.displayedChild = 0

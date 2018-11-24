@@ -7,11 +7,11 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.ListAdapter
 import kotlinx.android.synthetic.main.layout_user_item.view.*
 import szarch.bme.hu.ibdb.R
-import szarch.bme.hu.ibdb.network.models.user.UserInfoResponse
+import szarch.bme.hu.ibdb.network.models.user.UserInfo
 import szarch.bme.hu.ibdb.ui.base.comparators.UserComparator
 
 
-class UsersAdapter : ListAdapter<UserInfoResponse, UsersAdapter.UsersItemViewHolder>(UserComparator) {
+class UsersAdapter : ListAdapter<UserInfo, UsersAdapter.UsersItemViewHolder>(UserComparator) {
 
     var listener: UserListener? = null
 
@@ -40,7 +40,7 @@ class UsersAdapter : ListAdapter<UserInfoResponse, UsersAdapter.UsersItemViewHol
         val ivUserMore = userItemView.iv_user_more
     }
 
-    private fun showUserInfoDialog(view: View, user: UserInfoResponse) {
+    private fun showUserInfoDialog(view: View, user: UserInfo) {
         val popup = PopupMenu(view.context, view)
         popup.menuInflater.inflate(R.menu.user_popup_menu, popup.menu)
         user.enabled?.let {

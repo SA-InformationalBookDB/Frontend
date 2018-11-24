@@ -5,7 +5,7 @@ import szarch.bme.hu.ibdb.network.api.CategoryApi
 import szarch.bme.hu.ibdb.network.exception.ForbiddenException
 import szarch.bme.hu.ibdb.network.exception.NotFoundException
 import szarch.bme.hu.ibdb.network.exception.UnauthorizedException
-import szarch.bme.hu.ibdb.network.models.category.CategoryResponse
+import szarch.bme.hu.ibdb.network.models.category.Category
 import szarch.bme.hu.ibdb.util.Contexts
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 class CategoryRepository @Inject constructor(
     private val categoryApi: CategoryApi
 ) {
-    suspend fun getCategories(): List<CategoryResponse> = withContext(Contexts.NETWORK) {
+    suspend fun getCategories(): List<Category> = withContext(Contexts.NETWORK) {
         val response = categoryApi.getCategories().execute()
         if (response.isSuccessful) {
             return@withContext response.body()!!
