@@ -27,7 +27,6 @@ class ActivitiesAdapter : ListAdapter<Review, ActivitiesAdapter.ActivityItemView
 
     inner class ActivityItemViewHolder(activityItemView: View) :
         androidx.recyclerview.widget.RecyclerView.ViewHolder(activityItemView) {
-        val ivBookImage = activityItemView.iv_activity_book_item
         val tvActivityBookTitle = activityItemView.tv_activity_book_title
         val rtActivityRating = activityItemView.rt_activity_rating
         val tv_ActivityBookComment = activityItemView.tv_activity_book_comment
