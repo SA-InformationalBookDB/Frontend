@@ -56,7 +56,8 @@ class OauthInteractor @Inject constructor(
             grantType = refreshTokenGrantType,
             client_id = sharedPreferencesProvider.getClientId(),
             redirect_uri = sharedPreferencesProvider.getClientRedirectUri(),
-            code = sharedPreferencesProvider.getClientCode()
+            code = sharedPreferencesProvider.getClientCode(),
+            refresh_token = sharedPreferencesProvider.getClientRefreshToken()
         )
         sharedPreferencesProvider.setClientAccessToken(response.accessToken)
         sharedPreferencesProvider.setClientRefreshToken(response.refreshToken)
